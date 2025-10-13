@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1259
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "Excellus_Extract File Creation", "Excellus_Extract File Creation.dtproj", "{8F69E5E1-2E49-46E8-8838-59DB4D477104}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Development|Default = Development|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8F69E5E1-2E49-46E8-8838-59DB4D477104}.Development|Default.ActiveCfg = Development
+		{8F69E5E1-2E49-46E8-8838-59DB4D477104}.Development|Default.Build.0 = Development
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7A070A16-4F36-4F6C-A62B-F8299CFD3C34}
+	EndGlobalSection
+EndGlobal
