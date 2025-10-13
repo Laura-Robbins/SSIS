@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1259
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "NDC File", "NDC File\NDC File.dtproj", "{F0B1139D-35C2-45C0-86BA-0513565B2515}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Development|Default = Development|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F0B1139D-35C2-45C0-86BA-0513565B2515}.Development|Default.ActiveCfg = Development
+		{F0B1139D-35C2-45C0-86BA-0513565B2515}.Development|Default.Build.0 = Development
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A3D8CD89-C36B-4A72-9158-A19C37DE7863}
+	EndGlobalSection
+EndGlobal
