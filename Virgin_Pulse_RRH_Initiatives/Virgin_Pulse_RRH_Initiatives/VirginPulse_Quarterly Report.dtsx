@@ -1,0 +1,1400 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="8/19/2024 10:54:57 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="K-COGN-66"
+  DTS:CreatorName="VIAHEALTH\LROBBINS2"
+  DTS:DTSID="{9F48508F-143B-438D-ACE9-BAAB1886D8DD}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.1301.433"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="VirginPulse_Quarterly Report"
+  DTS:PackageType="5"
+  DTS:VersionBuild="35"
+  DTS:VersionGUID="{EBD2A9F4-FC4F-4CFC-8248-A83D050112A7}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Excel Connection Manager]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{38F6AE06-5791-430D-91D0-98998A3C66B9}"
+      DTS:ObjectName="Excel Connection Manager">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=\\gripa-db-6\h$\Virgin Pulse Quarterly Report\VPQuarterlyReport_TEMPLATE.xlsx;Extended Properties=&quot;EXCEL 12.0 XML;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[GRIPA-DB-6.Reporting]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{0F65D08C-838C-48B7-A396-CA832149F8A5}"
+      DTS:ObjectName="GRIPA-DB-6.Reporting">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=GRIPA-DB-6;Initial Catalog=Reporting;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[SMTP Connection Manager]"
+      DTS:CreationName="SMTP"
+      DTS:DTSID="{45B21569-7D02-4CEC-9909-AF0709EF2049}"
+      DTS:ObjectName="SMTP Connection Manager">
+      <DTS:ObjectData>
+        <SmtpConnectionManager
+          ConnectionString="SmtpServer=smtp.viahealth.org;UseWindowsAuthentication=False;EnableSsl=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{471545B5-E63B-409C-9BBA-3EBA59EBC2EA}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varBlankTemplateFileName">
+      <DTS:VariableValue
+        DTS:DataType="8">VPQuarterlyReport_TEMPLATE</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{242FB04C-E896-41C5-815D-61F928736E03}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varBlankTemplateFilePath">
+      <DTS:VariableValue
+        DTS:DataType="8">\\gripa-db-6\h$\Virgin Pulse Quarterly Report</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{646421AB-16CF-411B-A1AC-29C754689162}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[User::varBlankTemplateFilePath] + &quot;\\&quot; +  @[User::varBlankTemplateFileName] + &quot;.xlsx&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varBlankTemplateFullPath">
+      <DTS:VariableValue
+        DTS:DataType="8">\\gripa-db-6\h$\Virgin Pulse Quarterly Report\VPQuarterlyReport_TEMPLATE.xlsx</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{281F51D5-F363-4320-9EC2-EC0D2DDF2494}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[User::varBlankTemplateFilePath] + &quot;\\&quot; +  @[User::varBlankTemplateFileName] + &quot;-Copy.xlsx&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varBlankTemplateFullPathCopy">
+      <DTS:VariableValue
+        DTS:DataType="8">\\gripa-db-6\h$\Virgin Pulse Quarterly Report\VPQuarterlyReport_TEMPLATE-Copy.xlsx</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{C3604A3D-5D98-4BFC-8CE9-47892750D1C2}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="(DT_WSTR, 4) YEAR(GETDATE())+RIGHT( &quot;00&quot;+ (DT_WSTR, 2) &#xA;MONTH(GETDATE()),2)+RIGHT( &quot;00&quot;+ (DT_WSTR, 2) DAY(GETDATE()),2)"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varDate">
+      <DTS:VariableValue
+        DTS:DataType="8">20250523</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{010CCFA5-D9D6-47C0-BBE7-F021CCAB9B0D}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varFileName">
+      <DTS:VariableValue
+        DTS:DataType="8">VirginPulse_QuarterlyReport</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{B48B2BAF-FD02-4573-A7F9-596499561138}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[User::varBlankTemplateFilePath] + &quot;\\&quot; +  @[User::varFileName] +  @[User::varDate] + &quot;.xlsx&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varFullPathFileName">
+      <DTS:VariableValue
+        DTS:DataType="8">\\gripa-db-6\h$\Virgin Pulse Quarterly Report\VirginPulse_QuarterlyReport20250523.xlsx</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{75E4D360-A6B4-4BC7-BD79-BA03E5FE93B2}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varProductionFilePath">
+      <DTS:VariableValue
+        DTS:DataType="8">\\humboldt73\ManagedCare\Shared\GRIPA\Clinical Integration\CI Contracts\RGHS\HVN\Virgin Pulse</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{03F41F87-F016-450C-BC1A-5348A2B601D3}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[User::varProductionFilePath] +  &quot;\\&quot; + @[User::varFileName] +  @[User::varDate] + &quot;.xlsx&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varProductionFilePathFileName">
+      <DTS:VariableValue
+        DTS:DataType="8">\\humboldt73\ManagedCare\Shared\GRIPA\Clinical Integration\CI Contracts\RGHS\HVN\Virgin Pulse\VirginPulse_QuarterlyReport20250523.xlsx</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Copy Blank Template File"
+      DTS:CreationName="Microsoft.FileSystemTask"
+      DTS:Description="File System Task"
+      DTS:DTSID="{EEDCDF5A-7790-419F-B983-7220301DEFBC}"
+      DTS:ExecutableType="Microsoft.FileSystemTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Copy Blank Template File"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <FileSystemData
+          TaskSourcePath="User::varBlankTemplateFullPath"
+          TaskIsSourceVariable="True"
+          TaskDestinationPath="User::varBlankTemplateFullPathCopy"
+          TaskIsDestinationVariable="True" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Copy File"
+      DTS:CreationName="Microsoft.FileSystemTask"
+      DTS:Description="File System Task"
+      DTS:DTSID="{d396ec9a-e5c9-4db8-86ec-2084be9f0bc4}"
+      DTS:ExecutableType="Microsoft.FileSystemTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Copy File"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <FileSystemData
+          TaskSourcePath="User::varFullPathFileName"
+          TaskIsSourceVariable="True"
+          TaskDestinationPath="User::varProductionFilePathFileName"
+          TaskIsDestinationVariable="True" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Delete file on DB6"
+      DTS:CreationName="Microsoft.FileSystemTask"
+      DTS:Description="File System Task"
+      DTS:DTSID="{9a18c408-08b0-4749-951b-c1b195e00eb9}"
+      DTS:ExecutableType="Microsoft.FileSystemTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Delete file on DB6"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <FileSystemData
+          TaskOperationType="DeleteFile"
+          TaskSourcePath="User::varFullPathFileName"
+          TaskIsSourceVariable="True"
+          TaskDestinationPath="User::varProductionFilePathFileName"
+          TaskIsDestinationVariable="True" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Get Records"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{600D8991-4D73-4D1E-A499-A30F00FEEC6B}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Get Records"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{0F65D08C-838C-48B7-A396-CA832149F8A5}"
+          SQLTask:SqlStatementSource="select FirstName,&#xA;&#x9;LastName,&#xA;&#x9;DateOfBirth,&#xA;&#x9;EventCode,&#xA;&#x9;EventDate,&#xA;&#x9;InsertDate AS &quot;DateRecordSentToVP&quot;,&#xA;&#x9;PatientID&#xA;from RRH_VirginPulse_Sent&#xA;WHERE QuarterlyReportSent = 0" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Put Data into File"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{497B2CA7-7DCF-43D2-B461-95F44FF468DE}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Put Data into File"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Put Data into File\Data Conversion"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="Data Conversion"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Put Data into File\Data Conversion.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Put Data into File\Data Conversion.Inputs[Data Conversion Input].Columns[FirstName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="FirstName"
+                      lineageId="Package\Put Data into File\Get Records.Outputs[OLE DB Source Output].Columns[FirstName]" />
+                    <inputColumn
+                      refId="Package\Put Data into File\Data Conversion.Inputs[Data Conversion Input].Columns[LastName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="LastName"
+                      lineageId="Package\Put Data into File\Get Records.Outputs[OLE DB Source Output].Columns[LastName]" />
+                    <inputColumn
+                      refId="Package\Put Data into File\Data Conversion.Inputs[Data Conversion Input].Columns[DateOfBirth]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="8"
+                      cachedName="DateOfBirth"
+                      lineageId="Package\Put Data into File\Get Records.Outputs[OLE DB Source Output].Columns[DateOfBirth]" />
+                    <inputColumn
+                      refId="Package\Put Data into File\Data Conversion.Inputs[Data Conversion Input].Columns[EventCode]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="EventCode"
+                      lineageId="Package\Put Data into File\Get Records.Outputs[OLE DB Source Output].Columns[EventCode]" />
+                    <inputColumn
+                      refId="Package\Put Data into File\Data Conversion.Inputs[Data Conversion Input].Columns[EventDate]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="EventDate"
+                      lineageId="Package\Put Data into File\Get Records.Outputs[OLE DB Source Output].Columns[EventDate]" />
+                    <inputColumn
+                      refId="Package\Put Data into File\Data Conversion.Inputs[Data Conversion Input].Columns[DateRecordSentToVP]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="DateRecordSentToVP"
+                      lineageId="Package\Put Data into File\Get Records.Outputs[OLE DB Source Output].Columns[DateRecordSentToVP]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Put Data into File\Data Conversion.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\Put Data into File\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Put Data into File\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of FirstName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="100"
+                      lineageId="Package\Put Data into File\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of FirstName]"
+                      name="Copy of FirstName"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Put Data into File\Get Records.Outputs[OLE DB Source Output].Columns[FirstName]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Put Data into File\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of LastName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="100"
+                      lineageId="Package\Put Data into File\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of LastName]"
+                      name="Copy of LastName"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Put Data into File\Get Records.Outputs[OLE DB Source Output].Columns[LastName]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Put Data into File\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of DateOfBirth]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="8"
+                      lineageId="Package\Put Data into File\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of DateOfBirth]"
+                      name="Copy of DateOfBirth"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Put Data into File\Get Records.Outputs[OLE DB Source Output].Columns[DateOfBirth]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Put Data into File\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of EventCode]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="10"
+                      lineageId="Package\Put Data into File\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of EventCode]"
+                      name="Copy of EventCode"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Put Data into File\Get Records.Outputs[OLE DB Source Output].Columns[EventCode]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Put Data into File\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of EventDate]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="10"
+                      lineageId="Package\Put Data into File\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of EventDate]"
+                      name="Copy of EventDate"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Put Data into File\Get Records.Outputs[OLE DB Source Output].Columns[EventDate]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Put Data into File\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of DateRecordSentToVP]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="50"
+                      lineageId="Package\Put Data into File\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of DateRecordSentToVP]"
+                      name="Copy of DateRecordSentToVP"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Put Data into File\Get Records.Outputs[OLE DB Source Output].Columns[DateRecordSentToVP]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Put Data into File\Data Conversion.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\Put Data into File\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Put Data into File\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Put Data into File\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Put Data into File\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Put Data into File\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Put Data into File\Excel Destination"
+              componentClassID="Microsoft.ExcelDestination"
+              contactInfo="Excel Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Excel Destination"
+              name="Excel Destination"
+              usesDispositions="true">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">Sheet1$</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Put Data into File\Excel Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Excel Connection Manager]"
+                  connectionManagerRefId="Package.ConnectionManagers[Excel Connection Manager]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Put Data into File\Excel Destination.Inputs[Excel Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Excel Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Put Data into File\Excel Destination.Inputs[Excel Destination Input].Columns[PatientID]"
+                      cachedDataType="i4"
+                      cachedName="PatientID"
+                      externalMetadataColumnId="Package\Put Data into File\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[PatientID]"
+                      lineageId="Package\Put Data into File\Get Records.Outputs[OLE DB Source Output].Columns[PatientID]" />
+                    <inputColumn
+                      refId="Package\Put Data into File\Excel Destination.Inputs[Excel Destination Input].Columns[Copy of FirstName]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="Copy of FirstName"
+                      externalMetadataColumnId="Package\Put Data into File\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[First Name]"
+                      lineageId="Package\Put Data into File\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of FirstName]" />
+                    <inputColumn
+                      refId="Package\Put Data into File\Excel Destination.Inputs[Excel Destination Input].Columns[Copy of LastName]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="Copy of LastName"
+                      externalMetadataColumnId="Package\Put Data into File\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Last Name]"
+                      lineageId="Package\Put Data into File\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of LastName]" />
+                    <inputColumn
+                      refId="Package\Put Data into File\Excel Destination.Inputs[Excel Destination Input].Columns[Copy of DateOfBirth]"
+                      cachedDataType="wstr"
+                      cachedLength="8"
+                      cachedName="Copy of DateOfBirth"
+                      externalMetadataColumnId="Package\Put Data into File\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Date of Birth]"
+                      lineageId="Package\Put Data into File\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of DateOfBirth]" />
+                    <inputColumn
+                      refId="Package\Put Data into File\Excel Destination.Inputs[Excel Destination Input].Columns[Copy of EventCode]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="Copy of EventCode"
+                      externalMetadataColumnId="Package\Put Data into File\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Event Code]"
+                      lineageId="Package\Put Data into File\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of EventCode]" />
+                    <inputColumn
+                      refId="Package\Put Data into File\Excel Destination.Inputs[Excel Destination Input].Columns[Copy of EventDate]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="Copy of EventDate"
+                      externalMetadataColumnId="Package\Put Data into File\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Event Date]"
+                      lineageId="Package\Put Data into File\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of EventDate]" />
+                    <inputColumn
+                      refId="Package\Put Data into File\Excel Destination.Inputs[Excel Destination Input].Columns[Copy of DateRecordSentToVP]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Copy of DateRecordSentToVP"
+                      externalMetadataColumnId="Package\Put Data into File\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Date Record Sent to Virgin Pulse]"
+                      lineageId="Package\Put Data into File\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of DateRecordSentToVP]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Put Data into File\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[PatientID]"
+                      dataType="wstr"
+                      length="255"
+                      name="PatientID" />
+                    <externalMetadataColumn
+                      refId="Package\Put Data into File\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[First Name]"
+                      dataType="wstr"
+                      length="255"
+                      name="First Name" />
+                    <externalMetadataColumn
+                      refId="Package\Put Data into File\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Last Name]"
+                      dataType="wstr"
+                      length="255"
+                      name="Last Name" />
+                    <externalMetadataColumn
+                      refId="Package\Put Data into File\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Date of Birth]"
+                      dataType="wstr"
+                      length="255"
+                      name="Date of Birth" />
+                    <externalMetadataColumn
+                      refId="Package\Put Data into File\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Event Code]"
+                      dataType="wstr"
+                      length="255"
+                      name="Event Code" />
+                    <externalMetadataColumn
+                      refId="Package\Put Data into File\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Event Date]"
+                      dataType="wstr"
+                      length="255"
+                      name="Event Date" />
+                    <externalMetadataColumn
+                      refId="Package\Put Data into File\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Date Record Sent to Virgin Pulse]"
+                      dataType="wstr"
+                      length="255"
+                      name="Date Record Sent to Virgin Pulse" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Put Data into File\Excel Destination.Outputs[Excel Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Excel Destination Error Output"
+                  synchronousInputId="Package\Put Data into File\Excel Destination.Inputs[Excel Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Put Data into File\Excel Destination.Outputs[Excel Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Put Data into File\Excel Destination.Outputs[Excel Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Put Data into File\Excel Destination.Outputs[Excel Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Put Data into File\Excel Destination.Outputs[Excel Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Put Data into File\Get Records"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Get Records"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select FirstName,
+	LastName,
+	DateOfBirth,
+	EventCode,
+	EventDate = substring(EventDate,5,2)+'/'+substring(EventDate,7,2)+'/'+substring(EventDate,1,4),
+	DateRecordSentToVP = CONVERT(varchar(10),InsertDate,101),
+	PatientID
+from RRH_VirginPulse_Sent
+WHERE QuarterlyReportSent = 0</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Put Data into File\Get Records.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[GRIPA-DB-6.Reporting]"
+                  connectionManagerRefId="Package.ConnectionManagers[GRIPA-DB-6.Reporting]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Put Data into File\Get Records.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Put Data into File\Get Records.Outputs[OLE DB Source Output].Columns[FirstName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Put Data into File\Get Records.Outputs[OLE DB Source Output].ExternalColumns[FirstName]"
+                      length="50"
+                      lineageId="Package\Put Data into File\Get Records.Outputs[OLE DB Source Output].Columns[FirstName]"
+                      name="FirstName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Put Data into File\Get Records.Outputs[OLE DB Source Output].Columns[LastName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Put Data into File\Get Records.Outputs[OLE DB Source Output].ExternalColumns[LastName]"
+                      length="50"
+                      lineageId="Package\Put Data into File\Get Records.Outputs[OLE DB Source Output].Columns[LastName]"
+                      name="LastName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Put Data into File\Get Records.Outputs[OLE DB Source Output].Columns[DateOfBirth]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Put Data into File\Get Records.Outputs[OLE DB Source Output].ExternalColumns[DateOfBirth]"
+                      length="8"
+                      lineageId="Package\Put Data into File\Get Records.Outputs[OLE DB Source Output].Columns[DateOfBirth]"
+                      name="DateOfBirth"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Put Data into File\Get Records.Outputs[OLE DB Source Output].Columns[EventCode]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Put Data into File\Get Records.Outputs[OLE DB Source Output].ExternalColumns[EventCode]"
+                      length="10"
+                      lineageId="Package\Put Data into File\Get Records.Outputs[OLE DB Source Output].Columns[EventCode]"
+                      name="EventCode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Put Data into File\Get Records.Outputs[OLE DB Source Output].Columns[EventDate]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Put Data into File\Get Records.Outputs[OLE DB Source Output].ExternalColumns[EventDate]"
+                      length="10"
+                      lineageId="Package\Put Data into File\Get Records.Outputs[OLE DB Source Output].Columns[EventDate]"
+                      name="EventDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Put Data into File\Get Records.Outputs[OLE DB Source Output].Columns[DateRecordSentToVP]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Put Data into File\Get Records.Outputs[OLE DB Source Output].ExternalColumns[DateRecordSentToVP]"
+                      length="10"
+                      lineageId="Package\Put Data into File\Get Records.Outputs[OLE DB Source Output].Columns[DateRecordSentToVP]"
+                      name="DateRecordSentToVP"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Put Data into File\Get Records.Outputs[OLE DB Source Output].Columns[PatientID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Put Data into File\Get Records.Outputs[OLE DB Source Output].ExternalColumns[PatientID]"
+                      lineageId="Package\Put Data into File\Get Records.Outputs[OLE DB Source Output].Columns[PatientID]"
+                      name="PatientID"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Put Data into File\Get Records.Outputs[OLE DB Source Output].ExternalColumns[FirstName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="FirstName" />
+                    <externalMetadataColumn
+                      refId="Package\Put Data into File\Get Records.Outputs[OLE DB Source Output].ExternalColumns[LastName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="LastName" />
+                    <externalMetadataColumn
+                      refId="Package\Put Data into File\Get Records.Outputs[OLE DB Source Output].ExternalColumns[DateOfBirth]"
+                      codePage="1252"
+                      dataType="str"
+                      length="8"
+                      name="DateOfBirth" />
+                    <externalMetadataColumn
+                      refId="Package\Put Data into File\Get Records.Outputs[OLE DB Source Output].ExternalColumns[EventCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="EventCode" />
+                    <externalMetadataColumn
+                      refId="Package\Put Data into File\Get Records.Outputs[OLE DB Source Output].ExternalColumns[EventDate]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="EventDate" />
+                    <externalMetadataColumn
+                      refId="Package\Put Data into File\Get Records.Outputs[OLE DB Source Output].ExternalColumns[DateRecordSentToVP]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="DateRecordSentToVP" />
+                    <externalMetadataColumn
+                      refId="Package\Put Data into File\Get Records.Outputs[OLE DB Source Output].ExternalColumns[PatientID]"
+                      dataType="i4"
+                      name="PatientID" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Put Data into File\Get Records.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Put Data into File\Get Records.Outputs[OLE DB Source Error Output].Columns[FirstName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Put Data into File\Get Records.Outputs[OLE DB Source Error Output].Columns[FirstName]"
+                      name="FirstName" />
+                    <outputColumn
+                      refId="Package\Put Data into File\Get Records.Outputs[OLE DB Source Error Output].Columns[LastName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Put Data into File\Get Records.Outputs[OLE DB Source Error Output].Columns[LastName]"
+                      name="LastName" />
+                    <outputColumn
+                      refId="Package\Put Data into File\Get Records.Outputs[OLE DB Source Error Output].Columns[DateOfBirth]"
+                      codePage="1252"
+                      dataType="str"
+                      length="8"
+                      lineageId="Package\Put Data into File\Get Records.Outputs[OLE DB Source Error Output].Columns[DateOfBirth]"
+                      name="DateOfBirth" />
+                    <outputColumn
+                      refId="Package\Put Data into File\Get Records.Outputs[OLE DB Source Error Output].Columns[EventCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\Put Data into File\Get Records.Outputs[OLE DB Source Error Output].Columns[EventCode]"
+                      name="EventCode" />
+                    <outputColumn
+                      refId="Package\Put Data into File\Get Records.Outputs[OLE DB Source Error Output].Columns[EventDate]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\Put Data into File\Get Records.Outputs[OLE DB Source Error Output].Columns[EventDate]"
+                      name="EventDate" />
+                    <outputColumn
+                      refId="Package\Put Data into File\Get Records.Outputs[OLE DB Source Error Output].Columns[DateRecordSentToVP]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\Put Data into File\Get Records.Outputs[OLE DB Source Error Output].Columns[DateRecordSentToVP]"
+                      name="DateRecordSentToVP" />
+                    <outputColumn
+                      refId="Package\Put Data into File\Get Records.Outputs[OLE DB Source Error Output].Columns[PatientID]"
+                      dataType="i4"
+                      lineageId="Package\Put Data into File\Get Records.Outputs[OLE DB Source Error Output].Columns[PatientID]"
+                      name="PatientID" />
+                    <outputColumn
+                      refId="Package\Put Data into File\Get Records.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Put Data into File\Get Records.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Put Data into File\Get Records.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Put Data into File\Get Records.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Put Data into File.Paths[Data Conversion Output]"
+              endId="Package\Put Data into File\Excel Destination.Inputs[Excel Destination Input]"
+              name="Data Conversion Output"
+              startId="Package\Put Data into File\Data Conversion.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\Put Data into File.Paths[OLE DB Source Output]"
+              endId="Package\Put Data into File\Data Conversion.Inputs[Data Conversion Input]"
+              name="OLE DB Source Output"
+              startId="Package\Put Data into File\Get Records.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Rename Template File"
+      DTS:CreationName="Microsoft.FileSystemTask"
+      DTS:Description="File System Task"
+      DTS:DTSID="{f16e5c16-96ec-4e6b-92b8-9e51c68a1812}"
+      DTS:ExecutableType="Microsoft.FileSystemTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Rename Template File"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <FileSystemData
+          TaskOperationType="RenameFile"
+          TaskSourcePath="User::varBlankTemplateFullPath"
+          TaskIsSourceVariable="True"
+          TaskDestinationPath="User::varFullPathFileName"
+          TaskIsDestinationVariable="True" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Restore Copy file"
+      DTS:CreationName="Microsoft.FileSystemTask"
+      DTS:Description="File System Task"
+      DTS:DTSID="{828588B2-5542-42C9-8C06-21985E33673C}"
+      DTS:ExecutableType="Microsoft.FileSystemTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Restore Copy file"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <FileSystemData
+          TaskOperationType="RenameFile"
+          TaskSourcePath="User::varBlankTemplateFullPathCopy"
+          TaskIsSourceVariable="True"
+          TaskDestinationPath="User::varBlankTemplateFullPath"
+          TaskIsDestinationVariable="True" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Send Mail Task"
+      DTS:CreationName="Microsoft.SendMailTask"
+      DTS:Description="Send Mail Task"
+      DTS:DTSID="{89F0970B-FEF8-47AE-BCCA-50D522350CDE}"
+      DTS:ExecutableType="Microsoft.SendMailTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Send Mail Task"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SendMailTask:SendMailTaskData
+          SendMailTask:SMTPServer="{45B21569-7D02-4CEC-9909-AF0709EF2049}"
+          SendMailTask:From="SQLGRIPA6@rochesterregional.org"
+          SendMailTask:To="Cori.Wyman@rochesterregional.org;Jennifer.Hajecki@rochesterregional.org"
+          SendMailTask:CC="SQLDBA@rochesterregional.org"
+          SendMailTask:Subject="Virgin Pulse Quarterly Report"
+          SendMailTask:MessageSource="The quarterly Virgin Pulse is ready.  The file can be found here: \\humboldt73\ManagedCare\Shared\GRIPA\Clinical Integration\CI Contracts\RGHS\HVN\Virgin Pulse.  Please remember this report only contains new records from the last time this report was run." xmlns:SendMailTask="www.microsoft.com/sqlserver/dts/tasks/sendmailtask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Update QuaterlyReportSent field"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{04A96714-0E3D-4EB2-82F4-464FF5AED1FA}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Update QuaterlyReportSent field"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{0F65D08C-838C-48B7-A396-CA832149F8A5}"
+          SQLTask:SqlStatementSource="UPDATE R&#xA;SET QuarterlyReportSent = 1&#xA;FROM RRH_VirginPulse_Sent R" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{07B06279-1B63-4F9E-A3FA-2E9F80A3EA54}"
+      DTS:From="Package\Send Mail Task"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Update QuaterlyReportSent field" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{959ED7BD-9079-4B66-94A6-F04D8AA82750}"
+      DTS:From="Package\Get Records"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Copy Blank Template File" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{1DD54B29-4720-43F7-AEA9-D7BE51F9C3C7}"
+      DTS:From="Package\Copy Blank Template File"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Put Data into File" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{A8DDBC9B-395C-4022-AF96-96D59A21F3E8}"
+      DTS:From="Package\Put Data into File"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Rename Template File" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{3F6B48C3-4B9A-492D-9F3F-7C46A1FC717B}"
+      DTS:From="Package\Restore Copy file"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\Send Mail Task" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
+      DTS:CreationName=""
+      DTS:DTSID="{CD081454-0AE8-4E5F-83D3-88A19EA62A1D}"
+      DTS:From="Package\Rename Template File"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 5"
+      DTS:To="Package\Copy File" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 6]"
+      DTS:CreationName=""
+      DTS:DTSID="{C3EA20B9-446C-4EE6-A77C-CCB2F4EC8F70}"
+      DTS:From="Package\Copy File"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 6"
+      DTS:To="Package\Delete file on DB6" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 7]"
+      DTS:CreationName=""
+      DTS:DTSID="{581F220F-4FE9-4731-A6E8-82A4C460034D}"
+      DTS:From="Package\Delete file on DB6"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 7"
+      DTS:To="Package\Restore Copy file" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="198,42"
+          Id="Package\Copy Blank Template File"
+          TopLeft="186.1875,172" />
+        <NodeLayout
+          Size="136,42"
+          Id="Package\Get Records"
+          TopLeft="217.1875,83" />
+        <NodeLayout
+          Size="122,42"
+          Id="Package\Copy File"
+          TopLeft="223.6875,429" />
+        <NodeLayout
+          Size="160,42"
+          Id="Package\Put Data into File"
+          TopLeft="205.1875,259" />
+        <NodeLayout
+          Size="184,42"
+          Id="Package\Rename Template File"
+          TopLeft="193.1875,340" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="285.1875,125">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,47"
+              Start="0,0"
+              End="0,39.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,39.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="285.1875,214">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,45"
+              Start="0,0"
+              End="0,37.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,37.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="285.1875,301">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,39"
+              Start="0,0"
+              End="0,31.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="284.9375,382">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,47"
+              Start="0,0"
+              End="0,39.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,39.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="164,42"
+          Id="Package\Delete file on DB6"
+          TopLeft="223.6875,505" />
+        <NodeLayout
+          Size="231,42"
+          Id="Package\Update QuaterlyReportSent field"
+          TopLeft="179.6875,764" />
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Send Mail Task"
+          TopLeft="220.1875,677" />
+        <NodeLayout
+          Size="159,42"
+          Id="Package\Restore Copy file"
+          TopLeft="215.6875,591" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="295.1875,719">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,45"
+              Start="0,0"
+              End="0,37.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,37.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="295.1875,633">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,44"
+              Start="0,0"
+              End="0,36.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,36.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 6]"
+          TopLeft="284.6875,471">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="21,34"
+              Start="0,0"
+              End="21,26.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,13" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,13"
+                    Point2="0,17"
+                    Point3="4,17" />
+                  <mssgle:LineSegment
+                    End="17,17" />
+                  <mssgle:CubicBezierSegment
+                    Point1="17,17"
+                    Point2="21,17"
+                    Point3="21,21" />
+                  <mssgle:LineSegment
+                    End="21,26.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 7]"
+          TopLeft="305.6875,547">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-10.5,44"
+              Start="0,0"
+              End="-10.5,36.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,18"
+                    Point2="0,22"
+                    Point3="-4,22" />
+                  <mssgle:LineSegment
+                    End="-6.5,22" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-6.5,22"
+                    Point2="-10.5,22"
+                    Point3="-10.5,26" />
+                  <mssgle:LineSegment
+                    End="-10.5,36.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Put Data into File">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="136,42"
+          Id="Package\Put Data into File\Get Records"
+          TopLeft="192,89" />
+        <NodeLayout
+          Size="159,42"
+          Id="Package\Put Data into File\Excel Destination"
+          TopLeft="226,297" />
+        <NodeLayout
+          Size="156,42"
+          Id="Package\Put Data into File\Data Conversion"
+          TopLeft="208,222" />
+        <EdgeLayout
+          Id="Package\Put Data into File.Paths[Data Conversion Output]"
+          TopLeft="286,264">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="19.5,33"
+              Start="0,0"
+              End="19.5,25.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,12.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,12.5"
+                    Point2="0,16.5"
+                    Point3="4,16.5" />
+                  <mssgle:LineSegment
+                    End="15.5,16.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="15.5,16.5"
+                    Point2="19.5,16.5"
+                    Point3="19.5,20.5" />
+                  <mssgle:LineSegment
+                    End="19.5,25.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Put Data into File.Paths[OLE DB Source Output]"
+          TopLeft="260,131">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="26,91"
+              Start="0,0"
+              End="26,83.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,41.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,41.5"
+                    Point2="0,45.5"
+                    Point3="4,45.5" />
+                  <mssgle:LineSegment
+                    End="22,45.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="22,45.5"
+                    Point2="26,45.5"
+                    Point3="26,49.5" />
+                  <mssgle:LineSegment
+                    End="26,83.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Put Data into File\Get Records">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Put Data into File\Excel Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

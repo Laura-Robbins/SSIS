@@ -1,0 +1,757 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="2/29/2024 9:25:46 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="K-COGN-66"
+  DTS:CreatorName="VIAHEALTH\LROBBINS2"
+  DTS:DTSID="{11CC1D00-C489-43E5-A6DD-628EFFB636E9}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.1301.433"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="VirginPulseFile"
+  DTS:PackageType="5"
+  DTS:VersionBuild="19"
+  DTS:VersionGUID="{8A2CAC8F-7834-4B76-8A18-C3FB367F440C}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[GRIPA-DB-6.Reporting]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{B5E08739-7CDE-4EE7-8672-69E2A0FCDB7A}"
+      DTS:ObjectName="GRIPA-DB-6.Reporting">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=GRIPA-DB-6;Initial Catalog=Reporting;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Virgin Pulse]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{194056A6-E054-4428-BC14-E6F9B67536F0}"
+      DTS:ObjectName="Virgin Pulse">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[User::ProductionFullFileName]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="\\humboldt73\ManagedCare\Shared\GRIPA\IT Operations\Virgin Pulse\9451.RRH.GRIPA.Rewards.20240819.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="4"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="SponsorID"
+              DTS:DTSID="{8057A1CE-7176-4C01-BDA4-EACE9DF6A904}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="FirstName"
+              DTS:DTSID="{EFB7CE96-A41A-4EC8-B3EF-754206718D16}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="LastName"
+              DTS:DTSID="{3F6ACF4D-96D6-4510-8D95-EE24CDE0A607}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="DateOfBirth"
+              DTS:DTSID="{593651ED-E61F-437B-BEE3-C5FA6B82CE03}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="EventCode"
+              DTS:DTSID="{D409ADAF-F41D-4FFB-8A43-1D0017E79266}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="EventDate"
+              DTS:DTSID="{081C98E9-A427-4339-BED1-13EE183A84DA}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{32D10026-57C3-430A-A127-2BF247B3CAB1}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="(DT_STR, 4, 1252) DATEPART(&quot;yyyy&quot; , GETDATE())&#xA;+ RIGHT(&quot;0&quot; + (DT_STR, 2, 1252) DATEPART(&quot;mm&quot; , GETDATE()), 2)&#xA;+ RIGHT(&quot;0&quot; + (DT_STR, 2, 1252) DATEPART(&quot;dd&quot; , GETDATE()), 2)"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="FileDate">
+      <DTS:VariableValue
+        DTS:DataType="8">20240819</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{E6A823F6-29C8-46AB-8CDE-2492E0419C5D}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="FileExtension">
+      <DTS:VariableValue
+        DTS:DataType="8">.csv</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{B9763560-15A1-44B6-B5E5-B4E85B868166}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="FilePath">
+      <DTS:VariableValue
+        DTS:DataType="8">\\humboldt73\ManagedCare\Shared\GRIPA\IT Operations\Virgin Pulse\</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{C5F0EC24-E9CF-40CF-8ED5-68136C650686}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ProductionFileName">
+      <DTS:VariableValue
+        DTS:DataType="8">9451.RRH.GRIPA.Rewards.</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{C2C1D1A4-B877-4F18-9E58-D9A840157FA8}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[User::FilePath] +  @[User::ProductionFileName] +  @[User::FileDate] +  @[User::FileExtension]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ProductionFullFileName">
+      <DTS:VariableValue
+        DTS:DataType="8">\\humboldt73\ManagedCare\Shared\GRIPA\IT Operations\Virgin Pulse\9451.RRH.GRIPA.Rewards.20240819.csv</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{F9D71E6E-B463-49CA-B80D-9761B69507C5}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="TestFileName">
+      <DTS:VariableValue
+        DTS:DataType="8">TEST.9451.RRH.GRIPA.Rewards.</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{1077FF45-428F-40C9-A866-119E04F1F6A9}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[User::FilePath] +  @[User::TestFileName]  +  @[User::FileDate] +  @[User::FileExtension]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="TestFullFileName">
+      <DTS:VariableValue
+        DTS:DataType="8">\\humboldt73\ManagedCare\Shared\GRIPA\IT Operations\Virgin Pulse\TEST.9451.RRH.GRIPA.Rewards.20240819.csv</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Exec SP"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{48D191A7-0E03-4456-99A6-0C8BBC149CFF}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Exec SP"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{B5E08739-7CDE-4EE7-8672-69E2A0FCDB7A}"
+          SQLTask:SqlStatementSource="exec [dbo].[VirginPulseIncentive] " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Virgin Pulse Montly File"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{B739A78B-5645-44BF-9D3E-CDB163811C43}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Virgin Pulse Montly File"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Virgin Pulse Montly File\Flat File Destination"
+              componentClassID="Microsoft.FlatFileDestination"
+              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Flat File Destination"
+              localeId="1033"
+              name="Flat File Destination">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the data will overwrite or append to the destination file."
+                  name="Overwrite">true</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the text to write to the destination file before any data is written."
+                  expressionType="Notify"
+                  name="Header" />
+                <property
+                  dataType="System.Boolean"
+                  description="When text qualifier is enabled, specifies whether the text qualifier in the data written to the destination file will be escaped or not."
+                  name="EscapeQualifier">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Virgin Pulse Montly File\Flat File Destination.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Virgin Pulse]"
+                  connectionManagerRefId="Package.ConnectionManagers[Virgin Pulse]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Virgin Pulse Montly File\Flat File Destination.Inputs[Flat File Destination Input]"
+                  hasSideEffects="true"
+                  name="Flat File Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Virgin Pulse Montly File\Flat File Destination.Inputs[Flat File Destination Input].Columns[FirstName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="FirstName"
+                      externalMetadataColumnId="Package\Virgin Pulse Montly File\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[FirstName]"
+                      lineageId="Package\Virgin Pulse Montly File\Virgin Pulse.Outputs[OLE DB Source Output].Columns[FirstName]" />
+                    <inputColumn
+                      refId="Package\Virgin Pulse Montly File\Flat File Destination.Inputs[Flat File Destination Input].Columns[LastName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="LastName"
+                      externalMetadataColumnId="Package\Virgin Pulse Montly File\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[LastName]"
+                      lineageId="Package\Virgin Pulse Montly File\Virgin Pulse.Outputs[OLE DB Source Output].Columns[LastName]" />
+                    <inputColumn
+                      refId="Package\Virgin Pulse Montly File\Flat File Destination.Inputs[Flat File Destination Input].Columns[DateOfBirth]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="8"
+                      cachedName="DateOfBirth"
+                      externalMetadataColumnId="Package\Virgin Pulse Montly File\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[DateOfBirth]"
+                      lineageId="Package\Virgin Pulse Montly File\Virgin Pulse.Outputs[OLE DB Source Output].Columns[DateOfBirth]" />
+                    <inputColumn
+                      refId="Package\Virgin Pulse Montly File\Flat File Destination.Inputs[Flat File Destination Input].Columns[EventCode]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="EventCode"
+                      externalMetadataColumnId="Package\Virgin Pulse Montly File\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[EventCode]"
+                      lineageId="Package\Virgin Pulse Montly File\Virgin Pulse.Outputs[OLE DB Source Output].Columns[EventCode]" />
+                    <inputColumn
+                      refId="Package\Virgin Pulse Montly File\Flat File Destination.Inputs[Flat File Destination Input].Columns[EventDate]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="8"
+                      cachedName="EventDate"
+                      externalMetadataColumnId="Package\Virgin Pulse Montly File\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[EventDate]"
+                      lineageId="Package\Virgin Pulse Montly File\Virgin Pulse.Outputs[OLE DB Source Output].Columns[EventDate]" />
+                    <inputColumn
+                      refId="Package\Virgin Pulse Montly File\Flat File Destination.Inputs[Flat File Destination Input].Columns[SponsorID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="4"
+                      cachedName="SponsorID"
+                      externalMetadataColumnId="Package\Virgin Pulse Montly File\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[SponsorID]"
+                      lineageId="Package\Virgin Pulse Montly File\Virgin Pulse.Outputs[OLE DB Source Output].Columns[SponsorID]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Virgin Pulse Montly File\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[SponsorID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      name="SponsorID" />
+                    <externalMetadataColumn
+                      refId="Package\Virgin Pulse Montly File\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[FirstName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="FirstName" />
+                    <externalMetadataColumn
+                      refId="Package\Virgin Pulse Montly File\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[LastName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="LastName" />
+                    <externalMetadataColumn
+                      refId="Package\Virgin Pulse Montly File\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[DateOfBirth]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="DateOfBirth" />
+                    <externalMetadataColumn
+                      refId="Package\Virgin Pulse Montly File\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[EventCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="EventCode" />
+                    <externalMetadataColumn
+                      refId="Package\Virgin Pulse Montly File\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[EventDate]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="EventDate" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+            <component
+              refId="Package\Virgin Pulse Montly File\Virgin Pulse"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Virgin Pulse"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[RRH_VirginPulse]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Virgin Pulse Montly File\Virgin Pulse.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[GRIPA-DB-6.Reporting]"
+                  connectionManagerRefId="Package.ConnectionManagers[GRIPA-DB-6.Reporting]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Virgin Pulse Montly File\Virgin Pulse.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Virgin Pulse Montly File\Virgin Pulse.Outputs[OLE DB Source Output].Columns[RecID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Virgin Pulse Montly File\Virgin Pulse.Outputs[OLE DB Source Output].ExternalColumns[RecID]"
+                      lineageId="Package\Virgin Pulse Montly File\Virgin Pulse.Outputs[OLE DB Source Output].Columns[RecID]"
+                      name="RecID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Virgin Pulse Montly File\Virgin Pulse.Outputs[OLE DB Source Output].Columns[FirstName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Virgin Pulse Montly File\Virgin Pulse.Outputs[OLE DB Source Output].ExternalColumns[FirstName]"
+                      length="50"
+                      lineageId="Package\Virgin Pulse Montly File\Virgin Pulse.Outputs[OLE DB Source Output].Columns[FirstName]"
+                      name="FirstName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Virgin Pulse Montly File\Virgin Pulse.Outputs[OLE DB Source Output].Columns[LastName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Virgin Pulse Montly File\Virgin Pulse.Outputs[OLE DB Source Output].ExternalColumns[LastName]"
+                      length="50"
+                      lineageId="Package\Virgin Pulse Montly File\Virgin Pulse.Outputs[OLE DB Source Output].Columns[LastName]"
+                      name="LastName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Virgin Pulse Montly File\Virgin Pulse.Outputs[OLE DB Source Output].Columns[DateOfBirth]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Virgin Pulse Montly File\Virgin Pulse.Outputs[OLE DB Source Output].ExternalColumns[DateOfBirth]"
+                      length="8"
+                      lineageId="Package\Virgin Pulse Montly File\Virgin Pulse.Outputs[OLE DB Source Output].Columns[DateOfBirth]"
+                      name="DateOfBirth"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Virgin Pulse Montly File\Virgin Pulse.Outputs[OLE DB Source Output].Columns[EventCode]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Virgin Pulse Montly File\Virgin Pulse.Outputs[OLE DB Source Output].ExternalColumns[EventCode]"
+                      length="10"
+                      lineageId="Package\Virgin Pulse Montly File\Virgin Pulse.Outputs[OLE DB Source Output].Columns[EventCode]"
+                      name="EventCode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Virgin Pulse Montly File\Virgin Pulse.Outputs[OLE DB Source Output].Columns[EventDate]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Virgin Pulse Montly File\Virgin Pulse.Outputs[OLE DB Source Output].ExternalColumns[EventDate]"
+                      length="8"
+                      lineageId="Package\Virgin Pulse Montly File\Virgin Pulse.Outputs[OLE DB Source Output].Columns[EventDate]"
+                      name="EventDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Virgin Pulse Montly File\Virgin Pulse.Outputs[OLE DB Source Output].Columns[SponsorID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Virgin Pulse Montly File\Virgin Pulse.Outputs[OLE DB Source Output].ExternalColumns[SponsorID]"
+                      length="4"
+                      lineageId="Package\Virgin Pulse Montly File\Virgin Pulse.Outputs[OLE DB Source Output].Columns[SponsorID]"
+                      name="SponsorID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Virgin Pulse Montly File\Virgin Pulse.Outputs[OLE DB Source Output].Columns[InsertDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Virgin Pulse Montly File\Virgin Pulse.Outputs[OLE DB Source Output].ExternalColumns[InsertDate]"
+                      lineageId="Package\Virgin Pulse Montly File\Virgin Pulse.Outputs[OLE DB Source Output].Columns[InsertDate]"
+                      name="InsertDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Virgin Pulse Montly File\Virgin Pulse.Outputs[OLE DB Source Output].Columns[PatientID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Virgin Pulse Montly File\Virgin Pulse.Outputs[OLE DB Source Output].ExternalColumns[PatientID]"
+                      lineageId="Package\Virgin Pulse Montly File\Virgin Pulse.Outputs[OLE DB Source Output].Columns[PatientID]"
+                      name="PatientID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Virgin Pulse Montly File\Virgin Pulse.Outputs[OLE DB Source Output].Columns[RRH_VirginPulse_RecID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Virgin Pulse Montly File\Virgin Pulse.Outputs[OLE DB Source Output].ExternalColumns[RRH_VirginPulse_RecID]"
+                      lineageId="Package\Virgin Pulse Montly File\Virgin Pulse.Outputs[OLE DB Source Output].Columns[RRH_VirginPulse_RecID]"
+                      name="RRH_VirginPulse_RecID"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Virgin Pulse Montly File\Virgin Pulse.Outputs[OLE DB Source Output].ExternalColumns[RecID]"
+                      dataType="i4"
+                      name="RecID" />
+                    <externalMetadataColumn
+                      refId="Package\Virgin Pulse Montly File\Virgin Pulse.Outputs[OLE DB Source Output].ExternalColumns[FirstName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="FirstName" />
+                    <externalMetadataColumn
+                      refId="Package\Virgin Pulse Montly File\Virgin Pulse.Outputs[OLE DB Source Output].ExternalColumns[LastName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="LastName" />
+                    <externalMetadataColumn
+                      refId="Package\Virgin Pulse Montly File\Virgin Pulse.Outputs[OLE DB Source Output].ExternalColumns[DateOfBirth]"
+                      codePage="1252"
+                      dataType="str"
+                      length="8"
+                      name="DateOfBirth" />
+                    <externalMetadataColumn
+                      refId="Package\Virgin Pulse Montly File\Virgin Pulse.Outputs[OLE DB Source Output].ExternalColumns[EventCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="EventCode" />
+                    <externalMetadataColumn
+                      refId="Package\Virgin Pulse Montly File\Virgin Pulse.Outputs[OLE DB Source Output].ExternalColumns[EventDate]"
+                      codePage="1252"
+                      dataType="str"
+                      length="8"
+                      name="EventDate" />
+                    <externalMetadataColumn
+                      refId="Package\Virgin Pulse Montly File\Virgin Pulse.Outputs[OLE DB Source Output].ExternalColumns[SponsorID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      name="SponsorID" />
+                    <externalMetadataColumn
+                      refId="Package\Virgin Pulse Montly File\Virgin Pulse.Outputs[OLE DB Source Output].ExternalColumns[InsertDate]"
+                      dataType="dbTimeStamp"
+                      name="InsertDate" />
+                    <externalMetadataColumn
+                      refId="Package\Virgin Pulse Montly File\Virgin Pulse.Outputs[OLE DB Source Output].ExternalColumns[PatientID]"
+                      dataType="i4"
+                      name="PatientID" />
+                    <externalMetadataColumn
+                      refId="Package\Virgin Pulse Montly File\Virgin Pulse.Outputs[OLE DB Source Output].ExternalColumns[RRH_VirginPulse_RecID]"
+                      dataType="i4"
+                      name="RRH_VirginPulse_RecID" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Virgin Pulse Montly File\Virgin Pulse.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Virgin Pulse Montly File\Virgin Pulse.Outputs[OLE DB Source Error Output].Columns[RecID]"
+                      dataType="i4"
+                      lineageId="Package\Virgin Pulse Montly File\Virgin Pulse.Outputs[OLE DB Source Error Output].Columns[RecID]"
+                      name="RecID" />
+                    <outputColumn
+                      refId="Package\Virgin Pulse Montly File\Virgin Pulse.Outputs[OLE DB Source Error Output].Columns[RRH_VirginPulse_RecID]"
+                      dataType="i4"
+                      lineageId="Package\Virgin Pulse Montly File\Virgin Pulse.Outputs[OLE DB Source Error Output].Columns[RRH_VirginPulse_RecID]"
+                      name="RRH_VirginPulse_RecID" />
+                    <outputColumn
+                      refId="Package\Virgin Pulse Montly File\Virgin Pulse.Outputs[OLE DB Source Error Output].Columns[SponsorID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      lineageId="Package\Virgin Pulse Montly File\Virgin Pulse.Outputs[OLE DB Source Error Output].Columns[SponsorID]"
+                      name="SponsorID" />
+                    <outputColumn
+                      refId="Package\Virgin Pulse Montly File\Virgin Pulse.Outputs[OLE DB Source Error Output].Columns[FirstName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Virgin Pulse Montly File\Virgin Pulse.Outputs[OLE DB Source Error Output].Columns[FirstName]"
+                      name="FirstName" />
+                    <outputColumn
+                      refId="Package\Virgin Pulse Montly File\Virgin Pulse.Outputs[OLE DB Source Error Output].Columns[LastName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Virgin Pulse Montly File\Virgin Pulse.Outputs[OLE DB Source Error Output].Columns[LastName]"
+                      name="LastName" />
+                    <outputColumn
+                      refId="Package\Virgin Pulse Montly File\Virgin Pulse.Outputs[OLE DB Source Error Output].Columns[DateOfBirth]"
+                      codePage="1252"
+                      dataType="str"
+                      length="8"
+                      lineageId="Package\Virgin Pulse Montly File\Virgin Pulse.Outputs[OLE DB Source Error Output].Columns[DateOfBirth]"
+                      name="DateOfBirth" />
+                    <outputColumn
+                      refId="Package\Virgin Pulse Montly File\Virgin Pulse.Outputs[OLE DB Source Error Output].Columns[EventCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\Virgin Pulse Montly File\Virgin Pulse.Outputs[OLE DB Source Error Output].Columns[EventCode]"
+                      name="EventCode" />
+                    <outputColumn
+                      refId="Package\Virgin Pulse Montly File\Virgin Pulse.Outputs[OLE DB Source Error Output].Columns[EventDate]"
+                      codePage="1252"
+                      dataType="str"
+                      length="8"
+                      lineageId="Package\Virgin Pulse Montly File\Virgin Pulse.Outputs[OLE DB Source Error Output].Columns[EventDate]"
+                      name="EventDate" />
+                    <outputColumn
+                      refId="Package\Virgin Pulse Montly File\Virgin Pulse.Outputs[OLE DB Source Error Output].Columns[InsertDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Virgin Pulse Montly File\Virgin Pulse.Outputs[OLE DB Source Error Output].Columns[InsertDate]"
+                      name="InsertDate" />
+                    <outputColumn
+                      refId="Package\Virgin Pulse Montly File\Virgin Pulse.Outputs[OLE DB Source Error Output].Columns[PatientID]"
+                      dataType="i4"
+                      lineageId="Package\Virgin Pulse Montly File\Virgin Pulse.Outputs[OLE DB Source Error Output].Columns[PatientID]"
+                      name="PatientID" />
+                    <outputColumn
+                      refId="Package\Virgin Pulse Montly File\Virgin Pulse.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Virgin Pulse Montly File\Virgin Pulse.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Virgin Pulse Montly File\Virgin Pulse.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Virgin Pulse Montly File\Virgin Pulse.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Virgin Pulse Montly File.Paths[OLE DB Source Output]"
+              endId="Package\Virgin Pulse Montly File\Flat File Destination.Inputs[Flat File Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Virgin Pulse Montly File\Virgin Pulse.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{9C444FB7-C8DE-48F6-B5B3-031A9B824E80}"
+      DTS:From="Package\Exec SP"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Virgin Pulse Montly File" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="116,42"
+          Id="Package\Exec SP"
+          TopLeft="144,107" />
+        <NodeLayout
+          Size="188,42"
+          Id="Package\Virgin Pulse Montly File"
+          TopLeft="383,107" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="260,128">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="123,0"
+              Start="0,0"
+              End="115.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="115.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Virgin Pulse Montly File">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="134,42"
+          Id="Package\Virgin Pulse Montly File\Virgin Pulse"
+          TopLeft="367,121" />
+        <NodeLayout
+          Size="172,42"
+          Id="Package\Virgin Pulse Montly File\Flat File Destination"
+          TopLeft="355,212" />
+        <EdgeLayout
+          Id="Package\Virgin Pulse Montly File.Paths[OLE DB Source Output]"
+          TopLeft="437.5,163">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,49"
+              Start="0,0"
+              End="0,41.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,41.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Virgin Pulse Montly File\Virgin Pulse">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
