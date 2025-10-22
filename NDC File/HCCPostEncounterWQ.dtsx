@@ -1,0 +1,2130 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="10/9/2024 10:25:26 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="K-COGN-66"
+  DTS:CreatorName="VIAHEALTH\LROBBINS2"
+  DTS:Description="SSIS Package Description"
+  DTS:DTSID="{9D32CF8D-B0DE-4C5A-80E4-1E78458CE8AA}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.1301.433"
+  DTS:LocaleID="1033"
+  DTS:MaxErrorCount="0"
+  DTS:ObjectName="HCCPostEncounterWQ"
+  DTS:VersionBuild="124"
+  DTS:VersionGUID="{E5AF6340-A306-461D-950E-9DFA5F049DEB}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Excel Connection Manager]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{0B123513-9B1A-4C69-B92A-A7C9FE872D33}"
+      DTS:ObjectName="Excel Connection Manager">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=\\gripa-db-6\d$\HCC_Post_Encounter_WQ_ SpreadsheetReview_Template.xlsx;Extended Properties=&quot;EXCEL 12.0 XML;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Flat File Connection Manager - Results File]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{55585910-F9DD-44A1-8226-6C8C8A83F886}"
+      DTS:ObjectName="Flat File Connection Manager - Results File">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[User::varResultFileNameFolderPath]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x0022_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="\\humboldt73\ManagedCare\Shared\GRIPA\Clinical Integration\CI Contracts\RGHS\HVN\HCC\Post Encounter Reports Completed\ SpreadsheetReview20250206.xlsx">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="PAT_ENC_CSN_ID"
+              DTS:DTSID="{E0B61604-E6D4-42E2-AC44-55F3A8200253}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="TAR_ID"
+              DTS:DTSID="{095544D0-7898-43B3-B997-079BBF5A6E77}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="PAT_MRN_ID"
+              DTS:DTSID="{E82444C6-D56A-4F55-A634-68E7824E56B8}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="PAT_NAME"
+              DTS:DTSID="{BFB6B1BA-0662-44A1-A7F1-7728E84F9D6F}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="DATE_OF_BIRTH"
+              DTS:DTSID="{C0D954C0-EA86-4D21-94CA-D8840DC30D0F}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="WORKQUEUE_NAME"
+              DTS:DTSID="{C5049D34-BBA0-403B-8604-51A8853ADD99}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="WQ_ENTRY_DATE"
+              DTS:DTSID="{7CD010FB-9895-4023-BD0A-52C263783F59}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="WQ_EXIT_DATE"
+              DTS:DTSID="{DE631FF8-0D04-4A77-A688-F85FADEF2ED3}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CHARGE_MESSAGES"
+              DTS:DTSID="{463B69E4-2F66-4085-B7C8-DC5BB95C2BBA}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ENTRY_ACT_HX"
+              DTS:DTSID="{018A96FB-3188-4550-9D99-D692E7538814}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ENTRY_ACT_USER"
+              DTS:DTSID="{8D82F241-B8E4-4D06-9379-745394FC6854}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="REVIEW_ACT_HX"
+              DTS:DTSID="{1D84BC57-1089-49D8-B5B9-B0C0AB68E8A9}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="REVIEW_ACT_USER"
+              DTS:DTSID="{E077EE4A-4391-4AA7-AB57-C3954EF0BB87}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="DEFER_ACT_HX"
+              DTS:DTSID="{28871A03-5D79-478E-89C2-54C53C651569}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="DEFER_ACT_USER"
+              DTS:DTSID="{D30A238A-F921-4399-B16F-3AA5C975EA17}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="REENTRY_ACT_HX"
+              DTS:DTSID="{B9CA0130-5741-4681-BEA4-BAD0186917C8}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="REENTRY_ACT_USER"
+              DTS:DTSID="{8AEA7953-9662-492C-AB54-232F05C83C80}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="RESUBMIT_ACT_HX"
+              DTS:DTSID="{5F70BCEA-B3A7-470D-9C67-68F824C5ADBC}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="RESUBMIT_ACT_USER"
+              DTS:DTSID="{E9C98B96-0913-4D6F-AE5F-56EA06B299DE}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="DX_COMMENT_1"
+              DTS:DTSID="{30FC0C65-717C-45C3-9F77-09BF77BCCF68}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ChangeType"
+              DTS:DTSID="{90541889-FCB7-4951-B1F4-F75FC375E30F}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="255"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ChangeValue"
+              DTS:DTSID="{79E506B5-A372-4FF0-A80B-F9C7F6054F7D}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[HCC_Post_Encounter_WQ]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{88DCB3D7-216E-40D1-AA23-81F9576A2A7D}"
+      DTS:ObjectName="HCC_Post_Encounter_WQ">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[User::varFileName]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x0022_"
+          DTS:CodePage="1252">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="500"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="PAT_ENC_CSN_ID"
+              DTS:DTSID="{AE5E05EB-A0A9-4D3A-8801-328D8E7F0B2D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="500"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="TAR_ID"
+              DTS:DTSID="{2F5175AD-2E0E-4DF3-AAD0-8C41A5E913BE}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="500"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="PAT_MRN_ID"
+              DTS:DTSID="{8B146229-53A2-41D3-9A88-886C110FB7C6}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="500"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="PAT_NAME"
+              DTS:DTSID="{67C8D221-C7B1-4C2E-995C-C7853559B3C4}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="500"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="DOB"
+              DTS:DTSID="{33F811F0-CFC7-4A8E-86BA-549A2AA49D06}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="500"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="WORKQUEUE_NAME"
+              DTS:DTSID="{EE9E1024-3DD4-4D57-B3A7-517C2AEFFD8B}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="500"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="PAYOR_NAME"
+              DTS:DTSID="{A0CB43A6-17A4-44A7-BBCC-7C3525BD4928}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="500"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ENTRY_DATE"
+              DTS:DTSID="{DEE6B3C8-F677-42A5-97C0-AEDD28DB7DD2}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="500"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="EXIT_DATE"
+              DTS:DTSID="{3F4D4575-CE9B-40CA-AAAB-1F00CD95DE40}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="500"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CHG_MESSAGES"
+              DTS:DTSID="{A8C4035D-A6FF-4374-A0B8-B8A34DD6ED14}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="500"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ENTRY_ACT_HX"
+              DTS:DTSID="{35059703-D79E-43B4-8D0D-135E81F2C4BB}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="500"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ENTRY_ACT_USER"
+              DTS:DTSID="{DCE28D88-D7EC-4C2E-B6FD-21E07F3A5834}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="302"
+              DTS:TextQualified="True"
+              DTS:ObjectName="REVIEW_ACT_HX"
+              DTS:DTSID="{9AE88B88-82A7-4DDF-9DC7-59E01D81BAAA}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="4000"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="REVIEW_ACT_USER"
+              DTS:DTSID="{C8AD296A-31F1-49B4-8554-205AFE83B244}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="302"
+              DTS:TextQualified="True"
+              DTS:ObjectName="DEFER_ACT_HX"
+              DTS:DTSID="{D0B4FDEE-FF89-4B83-BE76-A46C22C458A8}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="500"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="DEFER_ACT_USER"
+              DTS:DTSID="{95A20C39-FFFC-48AB-8285-88E3D6F07441}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="302"
+              DTS:TextQualified="True"
+              DTS:ObjectName="REENTRY_ACT_HX"
+              DTS:DTSID="{89F51536-C133-4297-B281-49B11648D082}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="4000"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="REENTRY_ACT_USER"
+              DTS:DTSID="{4E6C720E-BE02-4979-9B6D-5B631C9C5EC4}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="302"
+              DTS:TextQualified="True"
+              DTS:ObjectName="RESUBMIT_ACT_HX"
+              DTS:DTSID="{C20F667F-242B-4317-8FEF-4C1DC2BF52ED}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="4000"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="RESUBMIT_ACT_USER"
+              DTS:DTSID="{EAF3EA63-2319-4A79-9B79-801CE69BF0BB}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:DataType="302"
+              DTS:TextQualified="True"
+              DTS:ObjectName="DX_COMMENT_1"
+              DTS:DTSID="{6BD1C934-09A1-4CD3-8333-B4D99911D1E6}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Reporting]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{01D3DF87-CFFD-47AA-8972-B799AE3A3EAE}"
+      DTS:ObjectName="Reporting">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=gripa-db-6;Initial Catalog=Reporting;Provider=SQLNCLI11;Integrated Security=SSPI;Auto Translate=false;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{CCC177DE-0E39-42F6-936B-88835156DF8A}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[User::varFolderPath] + &quot;\\Archive&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varArchiveFolderPath">
+      <DTS:VariableValue
+        DTS:DataType="8">\\humboldt73\ManagedCare\Shared\GRIPA\Clinical Integration\CI Contracts\RGHS\HVN\HCC\Post Encounter Reports\Archive</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{C4F04A5E-0FB5-4F2F-9ACD-4D44714B5F41}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varBlankTemplateFileName">
+      <DTS:VariableValue
+        DTS:DataType="8">Post_Encounter_WQ_ SpreadsheetReview_Template</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{123E80E1-DBAE-4936-BC25-BF95F663BA80}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[User::varBlankTemplateFilePath] + &quot;\\Archive\\&quot; +  @[User::varBlankTemplateFileName] + &quot;.xlsx&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varBlankTemplateFileNameArchiveFilePath">
+      <DTS:VariableValue
+        DTS:DataType="8">\\humboldt73\ManagedCare\Shared\GRIPA\Clinical Integration\CI Contracts\RGHS\HVN\HCC\Post Encounter Reports Completed\Archive\Post_Encounter_WQ_ SpreadsheetReview_Template.xlsx</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{BEE01EEB-044D-4C0E-81D3-2528A029F7ED}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[User::varBlankTemplateFilePath] + &quot;\\&quot; +  @[User::varBlankTemplateFileName] + &quot;-Copy.xlsx&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varBlankTemplateFileNameCopy">
+      <DTS:VariableValue
+        DTS:DataType="8">\\humboldt73\ManagedCare\Shared\GRIPA\Clinical Integration\CI Contracts\RGHS\HVN\HCC\Post Encounter Reports Completed\Post_Encounter_WQ_ SpreadsheetReview_Template-Copy.xlsx</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{1BFD6662-C790-4B17-9428-BD5994CE21DA}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varBlankTemplateFilePath">
+      <DTS:VariableValue
+        DTS:DataType="8">\\humboldt73\ManagedCare\Shared\GRIPA\Clinical Integration\CI Contracts\RGHS\HVN\HCC\Post Encounter Reports Completed</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{FAE460A5-B589-4BC4-A673-6C2256F2CA71}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[User::varFolderPath] + &quot;\\&quot; +  @[User::varFileName] +  @[User::varFileDate] + &quot;.csv&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varCareConnectExportFileNamePath">
+      <DTS:VariableValue
+        DTS:DataType="8">\\humboldt73\ManagedCare\Shared\GRIPA\Clinical Integration\CI Contracts\RGHS\HVN\HCC\Post Encounter Reports\20250206.csv</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{557ED82A-221B-4E49-889C-8218D2D90148}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="(DT_STR,4,1252)DATEPART( &quot;yyyy&quot; , getdate() ) + &#xA;RIGHT(&quot;0&quot; + (DT_STR,4,1252)DATEPART( &quot;mm&quot; , getdate() ), 2) + &#xA;RIGHT(&quot;0&quot; + (DT_STR,4,1252)DATEPART( &quot;dd&quot; , getdate() ), 2)"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varFileDate">
+      <DTS:VariableValue
+        DTS:DataType="8">20250206</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{BE6514AA-6002-4FC5-8028-FCABAB913DE2}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varFileName">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{932D9E8E-250A-480C-9533-C7D74CCAFFB5}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varFilePattern">
+      <DTS:VariableValue
+        DTS:DataType="8">Post_Encounter_WQ_ SpreadsheetReview_*.xlsx</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{9C1F1F30-E7B6-430E-A70C-842900580833}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varFolderPath">
+      <DTS:VariableValue
+        DTS:DataType="8">\\humboldt73\ManagedCare\Shared\GRIPA\Clinical Integration\CI Contracts\RGHS\HVN\HCC\Post Encounter Reports</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{93927D5E-84CA-46DF-A594-BED70E07B12E}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[User::varBlankTemplateFilePath] + &quot;\\&quot; +  @[User::varFileName] + &quot;_&quot; +  @[User::varFileDate] + &quot;.xlsx&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varRenameFile">
+      <DTS:VariableValue
+        DTS:DataType="8">\\humboldt73\ManagedCare\Shared\GRIPA\Clinical Integration\CI Contracts\RGHS\HVN\HCC\Post Encounter Reports Completed\_20250206.xlsx</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{D710C856-F1F2-434E-9523-3DAA11DEA22B}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[User::varResultsFolderPath] + &quot;\\&quot; + @[User::varResultsFileName]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varResultFileNameFolderPath">
+      <DTS:VariableValue
+        DTS:DataType="8">\\humboldt73\ManagedCare\Shared\GRIPA\Clinical Integration\CI Contracts\RGHS\HVN\HCC\Post Encounter Reports Completed\ SpreadsheetReview20250206.xlsx</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{0BD4A971-8BEB-4C1D-BE8C-75C6180A4D88}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[User::varFileName] + &quot; SpreadsheetReview&quot; +  @[User::varFileDate] +&quot;.xlsx&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varResultsFileName">
+      <DTS:VariableValue
+        DTS:DataType="8"> SpreadsheetReview20250206.xlsx</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{760A4544-F5DF-473D-9472-32112B383187}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varResultsFolderPath">
+      <DTS:VariableValue
+        DTS:DataType="8">\\humboldt73\ManagedCare\Shared\GRIPA\Clinical Integration\CI Contracts\RGHS\HVN\HCC\Post Encounter Reports Completed</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{B7EA34AD-B6D8-4F57-AA98-3F44C288FCDF}"
+      DTS:Expression="@[User::varResultsFolderPath] + &quot;\\Archive&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varResultsFolderPathArchive">
+      <DTS:VariableValue
+        DTS:DataType="8">\\humboldt73\ManagedCare\Shared\GRIPA\Clinical Integration\CI Contracts\RGHS\HVN\HCC\Post Encounter Reports Completed\Archive</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{75B57C71-49B5-4DEB-A731-A25C30E5215F}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[User::varFileName] + &quot; SpreadsheetReview&quot; +  @[User::varFileDate] +&quot;.xlsx&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varResultsPreviousFileName">
+      <DTS:VariableValue
+        DTS:DataType="8"> SpreadsheetReview20250206.xlsx</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{6DA2A744-AE5A-48F6-96A0-2772C4BE3CD2}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[User::varResultsFolderPath] + &quot;\\&quot; +   @[User::varFileName]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varResultsPreviousFileNameFolderPath">
+      <DTS:VariableValue
+        DTS:DataType="8">\\humboldt73\ManagedCare\Shared\GRIPA\Clinical Integration\CI Contracts\RGHS\HVN\HCC\Post Encounter Reports Completed\</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Execute SQL Task"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{A37AB25A-26DE-4AFC-B139-FA69B711E62F}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:FailPackageOnFailure="True"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute SQL Task"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{01D3DF87-CFFD-47AA-8972-B799AE3A3EAE}"
+          SQLTask:SqlStatementSource="EXEC DBO.HCCPostEncounterWQ" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Foreach Loop Container"
+      DTS:CreationName="STOCK:FOREACHLOOP"
+      DTS:Description="Foreach Loop Container"
+      DTS:DTSID="{5C071AC5-CA39-42CA-B5F9-5A8371A62EFD}"
+      DTS:ExecutableType="STOCK:FOREACHLOOP"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Foreach Loop Container">
+      <DTS:ForEachEnumerator
+        DTS:CreationName="Microsoft.ForEachFileEnumerator"
+        DTS:DTSID="{9751E103-CACD-47F6-BDA6-DAD2760FEC32}"
+        DTS:ObjectName="{9751E103-CACD-47F6-BDA6-DAD2760FEC32}">
+        <DTS:PropertyExpression
+          DTS:Name="Directory">@[User::varResultsFolderPath]</DTS:PropertyExpression>
+        <DTS:PropertyExpression
+          DTS:Name="FileSpec">@[User::varFilePattern]</DTS:PropertyExpression>
+        <DTS:ObjectData>
+          <ForEachFileEnumeratorProperties>
+            <FEFEProperty
+              Folder="\\humboldt73\ManagedCare\Shared\GRIPA\Clinical Integration\CI Contracts\RGHS\HVN\HCC\Post Encounter Reports Completed" />
+            <FEFEProperty
+              FileSpec="Post_Encounter_WQ_ SpreadsheetReview_*.xlsx" />
+            <FEFEProperty
+              FileNameRetrievalType="1" />
+            <FEFEProperty
+              Recurse="0" />
+          </ForEachFileEnumeratorProperties>
+        </DTS:ObjectData>
+      </DTS:ForEachEnumerator>
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Foreach Loop Container\Move last month's review file to archive"
+          DTS:CreationName="Microsoft.FileSystemTask"
+          DTS:Description="File System Task"
+          DTS:DTSID="{B42FA6CA-3F39-429F-8268-9D800B13EC0A}"
+          DTS:ExecutableType="Microsoft.FileSystemTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Move last month's review file to archive"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <FileSystemData
+              TaskOperationType="MoveFile"
+              TaskOverwriteDestFile="True"
+              TaskSourcePath="User::varResultsPreviousFileNameFolderPath"
+              TaskIsSourceVariable="True"
+              TaskDestinationPath="User::varResultsFolderPathArchive"
+              TaskIsDestinationVariable="True" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:ForEachVariableMappings>
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{72358F6E-29DE-4124-8463-7C996C7747D6}"
+          DTS:ObjectName="{72358F6E-29DE-4124-8463-7C996C7747D6}"
+          DTS:ValueIndex="0"
+          DTS:VariableName="User::varFileName" />
+      </DTS:ForEachVariableMappings>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Loop Through Files"
+      DTS:CreationName="STOCK:FOREACHLOOP"
+      DTS:Description="Foreach Loop Container"
+      DTS:DTSID="{CD1A7E9D-20E2-4B7B-BCA7-3D52534FCB9F}"
+      DTS:ExecutableType="STOCK:FOREACHLOOP"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Loop Through Files">
+      <DTS:ForEachEnumerator
+        DTS:CreationName="Microsoft.ForEachFileEnumerator"
+        DTS:DTSID="{5230BF18-6238-4E9C-8591-ACD78BCCD6CB}"
+        DTS:ObjectName="{5230BF18-6238-4E9C-8591-ACD78BCCD6CB}">
+        <DTS:PropertyExpression
+          DTS:Name="Directory">@[User::varFolderPath]</DTS:PropertyExpression>
+        <DTS:ObjectData>
+          <ForEachFileEnumeratorProperties>
+            <FEFEProperty
+              Folder="\\humboldt73\ManagedCare\Shared\GRIPA\Clinical Integration\CI Contracts\RGHS\HVN\HCC\Post Encounter Reports" />
+            <FEFEProperty
+              FileSpec="Post_Encounter_WQ_*.csv" />
+            <FEFEProperty
+              FileNameRetrievalType="0" />
+            <FEFEProperty
+              Recurse="0" />
+          </ForEachFileEnumeratorProperties>
+        </DTS:ObjectData>
+      </DTS:ForEachEnumerator>
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Loop Through Files\Import File"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:DTSID="{E445BC34-C465-4151-A915-D2A06D684A03}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:FailPackageOnFailure="True"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Import File"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              defaultBufferSize="3145728"
+              version="1">
+              <components>
+                <component
+                  refId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="Destination - HCC_Post_Encounter_WQ_Ticket18413"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[HCC_Post_Encounter_WQ_CareConnectExport]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[Reporting]"
+                      connectionManagerRefId="Package.ConnectionManagers[Reporting]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413.Inputs[Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413.Inputs[Destination Input].Columns[PAT_ENC_CSN_ID]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="500"
+                          cachedName="PAT_ENC_CSN_ID"
+                          externalMetadataColumnId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413.Inputs[Destination Input].ExternalColumns[PAT_ENC_CSN_ID]"
+                          lineageId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].Columns[PAT_ENC_CSN_ID]" />
+                        <inputColumn
+                          refId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413.Inputs[Destination Input].Columns[TAR_ID]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="500"
+                          cachedName="TAR_ID"
+                          externalMetadataColumnId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413.Inputs[Destination Input].ExternalColumns[TAR_ID]"
+                          lineageId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].Columns[TAR_ID]" />
+                        <inputColumn
+                          refId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413.Inputs[Destination Input].Columns[PAT_MRN_ID]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="500"
+                          cachedName="PAT_MRN_ID"
+                          externalMetadataColumnId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413.Inputs[Destination Input].ExternalColumns[PAT_MRN_ID]"
+                          lineageId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].Columns[PAT_MRN_ID]" />
+                        <inputColumn
+                          refId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413.Inputs[Destination Input].Columns[PAT_NAME]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="500"
+                          cachedName="PAT_NAME"
+                          externalMetadataColumnId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413.Inputs[Destination Input].ExternalColumns[PAT_NAME]"
+                          lineageId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].Columns[PAT_NAME]" />
+                        <inputColumn
+                          refId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413.Inputs[Destination Input].Columns[WORKQUEUE_NAME]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="500"
+                          cachedName="WORKQUEUE_NAME"
+                          externalMetadataColumnId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413.Inputs[Destination Input].ExternalColumns[WORKQUEUE_NAME]"
+                          lineageId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].Columns[WORKQUEUE_NAME]" />
+                        <inputColumn
+                          refId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413.Inputs[Destination Input].Columns[ENTRY_ACT_HX]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="500"
+                          cachedName="ENTRY_ACT_HX"
+                          externalMetadataColumnId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413.Inputs[Destination Input].ExternalColumns[ENTRY_ACT_HX]"
+                          lineageId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].Columns[ENTRY_ACT_HX]" />
+                        <inputColumn
+                          refId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413.Inputs[Destination Input].Columns[ENTRY_ACT_USER]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="500"
+                          cachedName="ENTRY_ACT_USER"
+                          externalMetadataColumnId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413.Inputs[Destination Input].ExternalColumns[ENTRY_ACT_USER]"
+                          lineageId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].Columns[ENTRY_ACT_USER]" />
+                        <inputColumn
+                          refId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413.Inputs[Destination Input].Columns[REVIEW_ACT_HX]"
+                          cachedCodepage="1252"
+                          cachedDataType="text"
+                          cachedName="REVIEW_ACT_HX"
+                          externalMetadataColumnId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413.Inputs[Destination Input].ExternalColumns[REVIEW_ACT_HX]"
+                          lineageId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].Columns[REVIEW_ACT_HX]" />
+                        <inputColumn
+                          refId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413.Inputs[Destination Input].Columns[REVIEW_ACT_USER]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="4000"
+                          cachedName="REVIEW_ACT_USER"
+                          externalMetadataColumnId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413.Inputs[Destination Input].ExternalColumns[REVIEW_ACT_USER]"
+                          lineageId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].Columns[REVIEW_ACT_USER]" />
+                        <inputColumn
+                          refId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413.Inputs[Destination Input].Columns[DEFER_ACT_HX]"
+                          cachedCodepage="1252"
+                          cachedDataType="text"
+                          cachedName="DEFER_ACT_HX"
+                          externalMetadataColumnId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413.Inputs[Destination Input].ExternalColumns[DEFER_ACT_HX]"
+                          lineageId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].Columns[DEFER_ACT_HX]" />
+                        <inputColumn
+                          refId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413.Inputs[Destination Input].Columns[DEFER_ACT_USER]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="500"
+                          cachedName="DEFER_ACT_USER"
+                          externalMetadataColumnId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413.Inputs[Destination Input].ExternalColumns[DEFER_ACT_USER]"
+                          lineageId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].Columns[DEFER_ACT_USER]" />
+                        <inputColumn
+                          refId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413.Inputs[Destination Input].Columns[REENTRY_ACT_USER]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="4000"
+                          cachedName="REENTRY_ACT_USER"
+                          externalMetadataColumnId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413.Inputs[Destination Input].ExternalColumns[REENTRY_ACT_USER]"
+                          lineageId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].Columns[REENTRY_ACT_USER]" />
+                        <inputColumn
+                          refId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413.Inputs[Destination Input].Columns[RESUBMIT_ACT_HX]"
+                          cachedCodepage="1252"
+                          cachedDataType="text"
+                          cachedName="RESUBMIT_ACT_HX"
+                          externalMetadataColumnId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413.Inputs[Destination Input].ExternalColumns[RESUBMIT_ACT_HX]"
+                          lineageId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].Columns[RESUBMIT_ACT_HX]" />
+                        <inputColumn
+                          refId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413.Inputs[Destination Input].Columns[RESUBMIT_ACT_USER]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="4000"
+                          cachedName="RESUBMIT_ACT_USER"
+                          externalMetadataColumnId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413.Inputs[Destination Input].ExternalColumns[RESUBMIT_ACT_USER]"
+                          lineageId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].Columns[RESUBMIT_ACT_USER]" />
+                        <inputColumn
+                          refId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413.Inputs[Destination Input].Columns[DX_COMMENT_1]"
+                          cachedCodepage="1252"
+                          cachedDataType="text"
+                          cachedName="DX_COMMENT_1"
+                          externalMetadataColumnId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413.Inputs[Destination Input].ExternalColumns[DX_COMMENT_1]"
+                          lineageId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].Columns[DX_COMMENT_1]" />
+                        <inputColumn
+                          refId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413.Inputs[Destination Input].Columns[REENTRY_ACT_HX]"
+                          cachedCodepage="1252"
+                          cachedDataType="text"
+                          cachedName="REENTRY_ACT_HX"
+                          externalMetadataColumnId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413.Inputs[Destination Input].ExternalColumns[REENTRY_ACT_HX]"
+                          lineageId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].Columns[REENTRY_ACT_HX]" />
+                        <inputColumn
+                          refId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413.Inputs[Destination Input].Columns[PAYOR_NAME]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="500"
+                          cachedName="PAYOR_NAME"
+                          externalMetadataColumnId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413.Inputs[Destination Input].ExternalColumns[PAYOR_NAME]"
+                          lineageId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].Columns[PAYOR_NAME]" />
+                        <inputColumn
+                          refId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413.Inputs[Destination Input].Columns[ENTRY_DATE]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="500"
+                          cachedName="ENTRY_DATE"
+                          externalMetadataColumnId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413.Inputs[Destination Input].ExternalColumns[WQ_ENTRY_DATE]"
+                          lineageId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].Columns[ENTRY_DATE]" />
+                        <inputColumn
+                          refId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413.Inputs[Destination Input].Columns[DOB]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="500"
+                          cachedName="DOB"
+                          externalMetadataColumnId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413.Inputs[Destination Input].ExternalColumns[DATE_OF_BIRTH]"
+                          lineageId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].Columns[DOB]" />
+                        <inputColumn
+                          refId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413.Inputs[Destination Input].Columns[EXIT_DATE]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="500"
+                          cachedName="EXIT_DATE"
+                          externalMetadataColumnId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413.Inputs[Destination Input].ExternalColumns[WQ_EXIT_DATE]"
+                          lineageId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].Columns[EXIT_DATE]" />
+                        <inputColumn
+                          refId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413.Inputs[Destination Input].Columns[CHG_MESSAGES]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="500"
+                          cachedName="CHG_MESSAGES"
+                          externalMetadataColumnId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413.Inputs[Destination Input].ExternalColumns[CHARGE_MESSAGES]"
+                          lineageId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].Columns[CHG_MESSAGES]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413.Inputs[Destination Input].ExternalColumns[PAT_ENC_CSN_ID]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="PAT_ENC_CSN_ID" />
+                        <externalMetadataColumn
+                          refId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413.Inputs[Destination Input].ExternalColumns[TAR_ID]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="TAR_ID" />
+                        <externalMetadataColumn
+                          refId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413.Inputs[Destination Input].ExternalColumns[PAT_MRN_ID]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="PAT_MRN_ID" />
+                        <externalMetadataColumn
+                          refId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413.Inputs[Destination Input].ExternalColumns[PAT_NAME]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="PAT_NAME" />
+                        <externalMetadataColumn
+                          refId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413.Inputs[Destination Input].ExternalColumns[DATE_OF_BIRTH]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="DATE_OF_BIRTH" />
+                        <externalMetadataColumn
+                          refId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413.Inputs[Destination Input].ExternalColumns[WORKQUEUE_NAME]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="WORKQUEUE_NAME" />
+                        <externalMetadataColumn
+                          refId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413.Inputs[Destination Input].ExternalColumns[WQ_ENTRY_DATE]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="WQ_ENTRY_DATE" />
+                        <externalMetadataColumn
+                          refId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413.Inputs[Destination Input].ExternalColumns[WQ_EXIT_DATE]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="WQ_EXIT_DATE" />
+                        <externalMetadataColumn
+                          refId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413.Inputs[Destination Input].ExternalColumns[CHARGE_MESSAGES]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="CHARGE_MESSAGES" />
+                        <externalMetadataColumn
+                          refId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413.Inputs[Destination Input].ExternalColumns[ENTRY_ACT_HX]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="ENTRY_ACT_HX" />
+                        <externalMetadataColumn
+                          refId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413.Inputs[Destination Input].ExternalColumns[ENTRY_ACT_USER]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="ENTRY_ACT_USER" />
+                        <externalMetadataColumn
+                          refId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413.Inputs[Destination Input].ExternalColumns[REVIEW_ACT_HX]"
+                          codePage="1252"
+                          dataType="text"
+                          name="REVIEW_ACT_HX" />
+                        <externalMetadataColumn
+                          refId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413.Inputs[Destination Input].ExternalColumns[REVIEW_ACT_USER]"
+                          codePage="1252"
+                          dataType="text"
+                          name="REVIEW_ACT_USER" />
+                        <externalMetadataColumn
+                          refId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413.Inputs[Destination Input].ExternalColumns[DEFER_ACT_HX]"
+                          codePage="1252"
+                          dataType="text"
+                          name="DEFER_ACT_HX" />
+                        <externalMetadataColumn
+                          refId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413.Inputs[Destination Input].ExternalColumns[DEFER_ACT_USER]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="DEFER_ACT_USER" />
+                        <externalMetadataColumn
+                          refId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413.Inputs[Destination Input].ExternalColumns[REENTRY_ACT_HX]"
+                          codePage="1252"
+                          dataType="text"
+                          name="REENTRY_ACT_HX" />
+                        <externalMetadataColumn
+                          refId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413.Inputs[Destination Input].ExternalColumns[REENTRY_ACT_USER]"
+                          codePage="1252"
+                          dataType="str"
+                          length="4000"
+                          name="REENTRY_ACT_USER" />
+                        <externalMetadataColumn
+                          refId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413.Inputs[Destination Input].ExternalColumns[RESUBMIT_ACT_HX]"
+                          codePage="1252"
+                          dataType="text"
+                          name="RESUBMIT_ACT_HX" />
+                        <externalMetadataColumn
+                          refId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413.Inputs[Destination Input].ExternalColumns[RESUBMIT_ACT_USER]"
+                          codePage="1252"
+                          dataType="str"
+                          length="4000"
+                          name="RESUBMIT_ACT_USER" />
+                        <externalMetadataColumn
+                          refId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413.Inputs[Destination Input].ExternalColumns[DX_COMMENT_1]"
+                          codePage="1252"
+                          dataType="text"
+                          name="DX_COMMENT_1" />
+                        <externalMetadataColumn
+                          refId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413.Inputs[Destination Input].ExternalColumns[InsertDate]"
+                          dataType="dbTimeStamp"
+                          name="InsertDate" />
+                        <externalMetadataColumn
+                          refId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413.Inputs[Destination Input].ExternalColumns[PAYOR_NAME]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="PAYOR_NAME" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413.Inputs[Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv"
+                  componentClassID="Microsoft.FlatFileSource"
+                  contactInfo="Flat File Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+                  description="Flat File Source"
+                  localeId="1033"
+                  name="Source - HCC_Post_Encounter_WQ__csv"
+                  usesDispositions="true"
+                  version="1">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      description="Specifies whether zero-length columns are treated as null."
+                      name="RetainNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of an output column containing the file name. If no name is specified, no output column containing the file name will be generated."
+                      name="FileNameColumnName"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Connections[FlatFileConnection]"
+                      connectionManagerID="Package.ConnectionManagers[HCC_Post_Encounter_WQ]"
+                      connectionManagerRefId="Package.ConnectionManagers[HCC_Post_Encounter_WQ]"
+                      name="FlatFileConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output]"
+                      name="Flat File Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].Columns[PAT_ENC_CSN_ID]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].ExternalColumns[PAT_ENC_CSN_ID]"
+                          length="500"
+                          lineageId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].Columns[PAT_ENC_CSN_ID]"
+                          name="PAT_ENC_CSN_ID"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].Columns[TAR_ID]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].ExternalColumns[TAR_ID]"
+                          length="500"
+                          lineageId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].Columns[TAR_ID]"
+                          name="TAR_ID"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].Columns[PAT_MRN_ID]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].ExternalColumns[PAT_MRN_ID]"
+                          length="500"
+                          lineageId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].Columns[PAT_MRN_ID]"
+                          name="PAT_MRN_ID"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].Columns[PAT_NAME]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].ExternalColumns[PAT_NAME]"
+                          length="500"
+                          lineageId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].Columns[PAT_NAME]"
+                          name="PAT_NAME"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].Columns[DOB]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].ExternalColumns[DOB]"
+                          length="500"
+                          lineageId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].Columns[DOB]"
+                          name="DOB"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].Columns[WORKQUEUE_NAME]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].ExternalColumns[WORKQUEUE_NAME]"
+                          length="500"
+                          lineageId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].Columns[WORKQUEUE_NAME]"
+                          name="WORKQUEUE_NAME"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].Columns[PAYOR_NAME]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].ExternalColumns[PAYOR_NAME]"
+                          length="500"
+                          lineageId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].Columns[PAYOR_NAME]"
+                          name="PAYOR_NAME"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].Columns[ENTRY_DATE]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].ExternalColumns[ENTRY_DATE]"
+                          length="500"
+                          lineageId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].Columns[ENTRY_DATE]"
+                          name="ENTRY_DATE"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].Columns[EXIT_DATE]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].ExternalColumns[EXIT_DATE]"
+                          length="500"
+                          lineageId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].Columns[EXIT_DATE]"
+                          name="EXIT_DATE"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].Columns[CHG_MESSAGES]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].ExternalColumns[CHG_MESSAGES]"
+                          length="500"
+                          lineageId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].Columns[CHG_MESSAGES]"
+                          name="CHG_MESSAGES"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].Columns[ENTRY_ACT_HX]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].ExternalColumns[ENTRY_ACT_HX]"
+                          length="500"
+                          lineageId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].Columns[ENTRY_ACT_HX]"
+                          name="ENTRY_ACT_HX"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].Columns[ENTRY_ACT_USER]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].ExternalColumns[ENTRY_ACT_USER]"
+                          length="500"
+                          lineageId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].Columns[ENTRY_ACT_USER]"
+                          name="ENTRY_ACT_USER"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].Columns[REVIEW_ACT_HX]"
+                          codePage="1252"
+                          dataType="text"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].ExternalColumns[REVIEW_ACT_HX]"
+                          lineageId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].Columns[REVIEW_ACT_HX]"
+                          name="REVIEW_ACT_HX"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].Columns[REVIEW_ACT_USER]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].ExternalColumns[REVIEW_ACT_USER]"
+                          length="4000"
+                          lineageId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].Columns[REVIEW_ACT_USER]"
+                          name="REVIEW_ACT_USER"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].Columns[DEFER_ACT_HX]"
+                          codePage="1252"
+                          dataType="text"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].ExternalColumns[DEFER_ACT_HX]"
+                          lineageId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].Columns[DEFER_ACT_HX]"
+                          name="DEFER_ACT_HX"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].Columns[DEFER_ACT_USER]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].ExternalColumns[DEFER_ACT_USER]"
+                          length="500"
+                          lineageId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].Columns[DEFER_ACT_USER]"
+                          name="DEFER_ACT_USER"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].Columns[REENTRY_ACT_HX]"
+                          codePage="1252"
+                          dataType="text"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].ExternalColumns[REENTRY_ACT_HX]"
+                          lineageId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].Columns[REENTRY_ACT_HX]"
+                          name="REENTRY_ACT_HX"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].Columns[REENTRY_ACT_USER]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].ExternalColumns[REENTRY_ACT_USER]"
+                          length="4000"
+                          lineageId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].Columns[REENTRY_ACT_USER]"
+                          name="REENTRY_ACT_USER"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].Columns[RESUBMIT_ACT_HX]"
+                          codePage="1252"
+                          dataType="text"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].ExternalColumns[RESUBMIT_ACT_HX]"
+                          lineageId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].Columns[RESUBMIT_ACT_HX]"
+                          name="RESUBMIT_ACT_HX"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].Columns[RESUBMIT_ACT_USER]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].ExternalColumns[RESUBMIT_ACT_USER]"
+                          length="4000"
+                          lineageId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].Columns[RESUBMIT_ACT_USER]"
+                          name="RESUBMIT_ACT_USER"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].Columns[DX_COMMENT_1]"
+                          codePage="1252"
+                          dataType="text"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].ExternalColumns[DX_COMMENT_1]"
+                          lineageId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].Columns[DX_COMMENT_1]"
+                          name="DX_COMMENT_1"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].ExternalColumns[PAT_ENC_CSN_ID]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="PAT_ENC_CSN_ID" />
+                        <externalMetadataColumn
+                          refId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].ExternalColumns[TAR_ID]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="TAR_ID" />
+                        <externalMetadataColumn
+                          refId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].ExternalColumns[PAT_MRN_ID]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="PAT_MRN_ID" />
+                        <externalMetadataColumn
+                          refId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].ExternalColumns[PAT_NAME]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="PAT_NAME" />
+                        <externalMetadataColumn
+                          refId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].ExternalColumns[DOB]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="DOB" />
+                        <externalMetadataColumn
+                          refId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].ExternalColumns[WORKQUEUE_NAME]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="WORKQUEUE_NAME" />
+                        <externalMetadataColumn
+                          refId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].ExternalColumns[PAYOR_NAME]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="PAYOR_NAME" />
+                        <externalMetadataColumn
+                          refId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].ExternalColumns[ENTRY_DATE]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="ENTRY_DATE" />
+                        <externalMetadataColumn
+                          refId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].ExternalColumns[EXIT_DATE]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="EXIT_DATE" />
+                        <externalMetadataColumn
+                          refId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].ExternalColumns[CHG_MESSAGES]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="CHG_MESSAGES" />
+                        <externalMetadataColumn
+                          refId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].ExternalColumns[ENTRY_ACT_HX]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="ENTRY_ACT_HX" />
+                        <externalMetadataColumn
+                          refId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].ExternalColumns[ENTRY_ACT_USER]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="ENTRY_ACT_USER" />
+                        <externalMetadataColumn
+                          refId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].ExternalColumns[REVIEW_ACT_HX]"
+                          codePage="1252"
+                          dataType="text"
+                          name="REVIEW_ACT_HX" />
+                        <externalMetadataColumn
+                          refId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].ExternalColumns[REVIEW_ACT_USER]"
+                          codePage="1252"
+                          dataType="str"
+                          length="4000"
+                          name="REVIEW_ACT_USER" />
+                        <externalMetadataColumn
+                          refId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].ExternalColumns[DEFER_ACT_HX]"
+                          codePage="1252"
+                          dataType="text"
+                          name="DEFER_ACT_HX" />
+                        <externalMetadataColumn
+                          refId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].ExternalColumns[DEFER_ACT_USER]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="DEFER_ACT_USER" />
+                        <externalMetadataColumn
+                          refId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].ExternalColumns[REENTRY_ACT_HX]"
+                          codePage="1252"
+                          dataType="text"
+                          name="REENTRY_ACT_HX" />
+                        <externalMetadataColumn
+                          refId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].ExternalColumns[REENTRY_ACT_USER]"
+                          codePage="1252"
+                          dataType="str"
+                          length="4000"
+                          name="REENTRY_ACT_USER" />
+                        <externalMetadataColumn
+                          refId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].ExternalColumns[RESUBMIT_ACT_HX]"
+                          codePage="1252"
+                          dataType="text"
+                          name="RESUBMIT_ACT_HX" />
+                        <externalMetadataColumn
+                          refId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].ExternalColumns[RESUBMIT_ACT_USER]"
+                          codePage="1252"
+                          dataType="str"
+                          length="4000"
+                          name="RESUBMIT_ACT_USER" />
+                        <externalMetadataColumn
+                          refId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output].ExternalColumns[DX_COMMENT_1]"
+                          codePage="1252"
+                          dataType="text"
+                          name="DX_COMMENT_1" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Error Output]"
+                      isErrorOut="true"
+                      name="Flat File Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                          codePage="1252"
+                          dataType="text"
+                          description="Flat File Source Error Output Column"
+                          lineageId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                          name="Flat File Source Error Output Column" />
+                        <outputColumn
+                          refId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Loop Through Files\Import File.Paths[Flat File Source Output]"
+                  endId="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413.Inputs[Destination Input]"
+                  name="Flat File Source Output"
+                  startId="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv.Outputs[Flat File Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:ForEachVariableMappings>
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{34E53308-2C78-47D3-BA27-75577C704279}"
+          DTS:ObjectName="{34E53308-2C78-47D3-BA27-75577C704279}"
+          DTS:ValueIndex="0"
+          DTS:VariableName="User::varFileName" />
+      </DTS:ForEachVariableMappings>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Move Template file back to Completed Folder"
+      DTS:CreationName="Microsoft.FileSystemTask"
+      DTS:Description="File System Task"
+      DTS:DTSID="{6fa51460-b5b9-449c-9172-aac8c5a6e1c1}"
+      DTS:ExecutableType="Microsoft.FileSystemTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Move Template file back to Completed Folder"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <FileSystemData
+          TaskOperationType="MoveFile"
+          TaskOverwriteDestFile="True"
+          TaskSourcePath="User::varBlankTemplateFileNameArchiveFilePath"
+          TaskIsSourceVariable="True"
+          TaskDestinationPath="User::varResultsFolderPath"
+          TaskIsDestinationVariable="True" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate Table"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{4A420BF3-090C-4EE4-9E16-6C45141E0F24}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate Table"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{01D3DF87-CFFD-47AA-8972-B799AE3A3EAE}"
+          SQLTask:SqlStatementSource="truncate table  [dbo].[HCC_Post_Encounter_WQ_CareConnectExport]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{04D7493E-6A01-46BF-B525-4601B821DD0C}"
+      DTS:From="Package\Truncate Table"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Loop Through Files" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{D0C5E353-3D34-48F5-A118-867CDBADC5F7}"
+      DTS:From="Package\Loop Through Files"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Execute SQL Task" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{54D0DF2E-81BF-4479-97E5-96D83996A67B}"
+      DTS:From="Package\Execute SQL Task"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Foreach Loop Container" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{5C40D592-0E85-4CE9-A88B-803359AA2D03}"
+      DTS:From="Package\Foreach Loop Container"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Move Template file back to Completed Folder" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="163,42"
+          Id="Package\Execute SQL Task"
+          TopLeft="207,393" />
+        <NodeLayout
+          Size="265,42"
+          Id="Package\Foreach Loop Container\Move last month's review file to archive"
+          TopLeft="18.5,41" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="299,138"
+          Size="299,181"
+          Id="Package\Foreach Loop Container"
+          TopLeft="151,513" />
+        <NodeLayout
+          Size="130,42"
+          Id="Package\Loop Through Files\Import File"
+          TopLeft="5.5,5.5" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="219,67"
+          Size="219,110"
+          Id="Package\Loop Through Files"
+          TopLeft="188,230" />
+        <NodeLayout
+          Size="292,42"
+          Id="Package\Move Template file back to Completed Folder"
+          TopLeft="183,721" />
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Truncate Table"
+          TopLeft="208,144" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="283,186">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="14.5,44"
+              Start="0,0"
+              End="14.5,36.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,18"
+                    Point2="0,22"
+                    Point3="4,22" />
+                  <mssgle:LineSegment
+                    End="10.5,22" />
+                  <mssgle:CubicBezierSegment
+                    Point1="10.5,22"
+                    Point2="14.5,22"
+                    Point3="14.5,26" />
+                  <mssgle:LineSegment
+                    End="14.5,36.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="297.5,340">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-9,53"
+              Start="0,0"
+              End="-9,45.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,22.5"
+                    Point2="0,26.5"
+                    Point3="-4,26.5" />
+                  <mssgle:LineSegment
+                    End="-5,26.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-5,26.5"
+                    Point2="-9,26.5"
+                    Point3="-9,30.5" />
+                  <mssgle:LineSegment
+                    End="-9,45.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="288.5,435">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="12,78"
+              Start="0,0"
+              End="12,70.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,35" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,35"
+                    Point2="0,39"
+                    Point3="4,39" />
+                  <mssgle:LineSegment
+                    End="8,39" />
+                  <mssgle:CubicBezierSegment
+                    Point1="8,39"
+                    Point2="12,39"
+                    Point3="12,43" />
+                  <mssgle:LineSegment
+                    End="12,70.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="300.5,694">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="28.5,27"
+              Start="0,0"
+              End="28.5,19.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,9.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,9.5"
+                    Point2="0,13.5"
+                    Point3="4,13.5" />
+                  <mssgle:LineSegment
+                    End="24.5,13.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="24.5,13.5"
+                    Point2="28.5,13.5"
+                    Point3="28.5,17.5" />
+                  <mssgle:LineSegment
+                    End="28.5,19.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Loop Through Files\Import File">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="270,42"
+          Id="Package\Loop Through Files\Import File\Source - HCC_Post_Encounter_WQ__csv"
+          TopLeft="34.5,5.5" />
+        <NodeLayout
+          Size="328,42"
+          Id="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413"
+          TopLeft="5.50000000000003,107.5" />
+        <EdgeLayout
+          Id="Package\Loop Through Files\Import File.Paths[Flat File Source Output]"
+          TopLeft="169.5,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Loop Through Files\Import File\Destination - HCC_Post_Encounter_WQ_Ticket18413">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

@@ -1,0 +1,843 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/3/2022 2:45:49 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="K-COGN-169L"
+  DTS:CreatorName="VIAHEALTH\LROBBINS2"
+  DTS:Description="SSIS Package Description"
+  DTS:DTSID="{A572E90B-25E4-4843-8D56-54F6CAEDDB06}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="14.0.3026.27"
+  DTS:LocaleID="1033"
+  DTS:MaxErrorCount="0"
+  DTS:ObjectName="Low_Acuity_ED_Rpt_Com_Clm_Dtl"
+  DTS:VersionGUID="{49BF544A-780E-41FB-BC60-5C9EC9474CC8}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DestinationConnectionOLEDB]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{18B95A55-5C4B-4062-8BD5-C5087953B03E}"
+      DTS:ObjectName="DestinationConnectionOLEDB">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=gripa-db-6;Initial Catalog=Reporting;Provider=SQLNCLI11;Integrated Security=SSPI;Auto Translate=false;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[SourceConnectionExcel]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{44336CF6-F15E-4BAF-979E-36DBEF33F31A}"
+      DTS:ObjectName="SourceConnectionExcel">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=Q:\Shared\Care Management\Information Requests\IT_2022_7771_Low_Acuity_ED_Rpt\202112 Low Acuity ED Report.xlsx;Extended Properties=&quot;Excel 12.0 XML;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Data Flow Task 1"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:DelayValidation="True"
+      DTS:DTSID="{D9B19F74-67CF-42CF-B6FC-CA66F259C5A3}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:FailPackageOnFailure="True"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data Flow Task 1"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          defaultBufferSize="3145728"
+          version="1">
+          <components>
+            <component
+              refId="Package\Data Flow Task 1\Destination - Low_Acuity_ED_Rp"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Destination - Low_Acuity_ED_Rp"
+              usesDispositions="true"
+              validateExternalMetadata="False"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Low_Acuity_ED_Rp]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task 1\Destination - Low_Acuity_ED_Rp.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DestinationConnectionOLEDB]"
+                  connectionManagerRefId="Package.ConnectionManagers[DestinationConnectionOLEDB]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task 1\Destination - Low_Acuity_ED_Rp.Inputs[Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - Low_Acuity_ED_Rp.Inputs[Destination Input].Columns[Group]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Group"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - Low_Acuity_ED_Rp.Inputs[Destination Input].ExternalColumns[Group]"
+                      lineageId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].Columns[Group]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - Low_Acuity_ED_Rp.Inputs[Destination Input].Columns[Claim ID]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Claim ID"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - Low_Acuity_ED_Rp.Inputs[Destination Input].ExternalColumns[Claim ID]"
+                      lineageId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].Columns[Claim ID]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - Low_Acuity_ED_Rp.Inputs[Destination Input].Columns[Effective Date]"
+                      cachedDataType="r8"
+                      cachedName="Effective Date"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - Low_Acuity_ED_Rp.Inputs[Destination Input].ExternalColumns[Effective Date]"
+                      lineageId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].Columns[Effective Date]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - Low_Acuity_ED_Rp.Inputs[Destination Input].Columns[Day of Week]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Day of Week"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - Low_Acuity_ED_Rp.Inputs[Destination Input].ExternalColumns[Day of Week]"
+                      lineageId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].Columns[Day of Week]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - Low_Acuity_ED_Rp.Inputs[Destination Input].Columns[Paid Date]"
+                      cachedDataType="r8"
+                      cachedName="Paid Date"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - Low_Acuity_ED_Rp.Inputs[Destination Input].ExternalColumns[Paid Date]"
+                      lineageId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].Columns[Paid Date]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - Low_Acuity_ED_Rp.Inputs[Destination Input].Columns[Unique ID]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Unique ID"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - Low_Acuity_ED_Rp.Inputs[Destination Input].ExternalColumns[Unique ID]"
+                      lineageId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].Columns[Unique ID]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - Low_Acuity_ED_Rp.Inputs[Destination Input].Columns[Name]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Name"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - Low_Acuity_ED_Rp.Inputs[Destination Input].ExternalColumns[Name]"
+                      lineageId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].Columns[Name]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - Low_Acuity_ED_Rp.Inputs[Destination Input].Columns[Birth Date]"
+                      cachedDataType="r8"
+                      cachedName="Birth Date"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - Low_Acuity_ED_Rp.Inputs[Destination Input].ExternalColumns[Birth Date]"
+                      lineageId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].Columns[Birth Date]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - Low_Acuity_ED_Rp.Inputs[Destination Input].Columns[Practice]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Practice"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - Low_Acuity_ED_Rp.Inputs[Destination Input].ExternalColumns[Practice]"
+                      lineageId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].Columns[Practice]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - Low_Acuity_ED_Rp.Inputs[Destination Input].Columns[PCP]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="PCP"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - Low_Acuity_ED_Rp.Inputs[Destination Input].ExternalColumns[PCP]"
+                      lineageId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].Columns[PCP]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - Low_Acuity_ED_Rp.Inputs[Destination Input].Columns[Low Acuity]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Low Acuity"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - Low_Acuity_ED_Rp.Inputs[Destination Input].ExternalColumns[Low Acuity]"
+                      lineageId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].Columns[Low Acuity]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - Low_Acuity_ED_Rp.Inputs[Destination Input].Columns[Primary Diag]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Primary Diag"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - Low_Acuity_ED_Rp.Inputs[Destination Input].ExternalColumns[Primary Diag]"
+                      lineageId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].Columns[Primary Diag]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - Low_Acuity_ED_Rp.Inputs[Destination Input].Columns[Primary Diag Description]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Primary Diag Description"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - Low_Acuity_ED_Rp.Inputs[Destination Input].ExternalColumns[Primary Diag Description]"
+                      lineageId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].Columns[Primary Diag Description]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - Low_Acuity_ED_Rp.Inputs[Destination Input].Columns[Procedure Code]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Procedure Code"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - Low_Acuity_ED_Rp.Inputs[Destination Input].ExternalColumns[Procedure Code]"
+                      lineageId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].Columns[Procedure Code]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - Low_Acuity_ED_Rp.Inputs[Destination Input].Columns[Procedure Code Description]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Procedure Code Description"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - Low_Acuity_ED_Rp.Inputs[Destination Input].ExternalColumns[Procedure Code Description]"
+                      lineageId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].Columns[Procedure Code Description]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - Low_Acuity_ED_Rp.Inputs[Destination Input].Columns[Facility]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Facility"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - Low_Acuity_ED_Rp.Inputs[Destination Input].ExternalColumns[Facility]"
+                      lineageId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].Columns[Facility]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - Low_Acuity_ED_Rp.Inputs[Destination Input].Columns[Case Count]"
+                      cachedDataType="r8"
+                      cachedName="Case Count"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - Low_Acuity_ED_Rp.Inputs[Destination Input].ExternalColumns[Case Count]"
+                      lineageId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].Columns[Case Count]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - Low_Acuity_ED_Rp.Inputs[Destination Input].ExternalColumns[Group]"
+                      dataType="wstr"
+                      length="255"
+                      name="Group" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - Low_Acuity_ED_Rp.Inputs[Destination Input].ExternalColumns[Claim ID]"
+                      dataType="wstr"
+                      length="255"
+                      name="Claim ID" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - Low_Acuity_ED_Rp.Inputs[Destination Input].ExternalColumns[Effective Date]"
+                      dataType="r8"
+                      name="Effective Date" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - Low_Acuity_ED_Rp.Inputs[Destination Input].ExternalColumns[Day of Week]"
+                      dataType="wstr"
+                      length="255"
+                      name="Day of Week" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - Low_Acuity_ED_Rp.Inputs[Destination Input].ExternalColumns[Paid Date]"
+                      dataType="r8"
+                      name="Paid Date" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - Low_Acuity_ED_Rp.Inputs[Destination Input].ExternalColumns[Unique ID]"
+                      dataType="wstr"
+                      length="255"
+                      name="Unique ID" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - Low_Acuity_ED_Rp.Inputs[Destination Input].ExternalColumns[Name]"
+                      dataType="wstr"
+                      length="255"
+                      name="Name" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - Low_Acuity_ED_Rp.Inputs[Destination Input].ExternalColumns[Birth Date]"
+                      dataType="r8"
+                      name="Birth Date" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - Low_Acuity_ED_Rp.Inputs[Destination Input].ExternalColumns[Practice]"
+                      dataType="wstr"
+                      length="255"
+                      name="Practice" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - Low_Acuity_ED_Rp.Inputs[Destination Input].ExternalColumns[PCP]"
+                      dataType="wstr"
+                      length="255"
+                      name="PCP" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - Low_Acuity_ED_Rp.Inputs[Destination Input].ExternalColumns[Low Acuity]"
+                      dataType="wstr"
+                      length="255"
+                      name="Low Acuity" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - Low_Acuity_ED_Rp.Inputs[Destination Input].ExternalColumns[Primary Diag]"
+                      dataType="wstr"
+                      length="255"
+                      name="Primary Diag" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - Low_Acuity_ED_Rp.Inputs[Destination Input].ExternalColumns[Primary Diag Description]"
+                      dataType="wstr"
+                      length="255"
+                      name="Primary Diag Description" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - Low_Acuity_ED_Rp.Inputs[Destination Input].ExternalColumns[Procedure Code]"
+                      dataType="wstr"
+                      length="255"
+                      name="Procedure Code" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - Low_Acuity_ED_Rp.Inputs[Destination Input].ExternalColumns[Procedure Code Description]"
+                      dataType="wstr"
+                      length="255"
+                      name="Procedure Code Description" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - Low_Acuity_ED_Rp.Inputs[Destination Input].ExternalColumns[Facility]"
+                      dataType="wstr"
+                      length="255"
+                      name="Facility" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - Low_Acuity_ED_Rp.Inputs[Destination Input].ExternalColumns[Case Count]"
+                      dataType="r8"
+                      name="Case Count" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task 1\Destination - Low_Acuity_ED_Rp.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Data Flow Task 1\Destination - Low_Acuity_ED_Rp.Inputs[Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Destination - Low_Acuity_ED_Rp.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task 1\Destination - Low_Acuity_ED_Rp.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Destination - Low_Acuity_ED_Rp.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task 1\Destination - Low_Acuity_ED_Rp.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'"
+              componentClassID="Microsoft.ExcelSource"
+              contactInfo="Excel Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Excel Source"
+              name="Source - 'COM Clm Dtl$'"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">'COM Clm Dtl$'</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mapping from parameters in the SQL command to variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[SourceConnectionExcel]"
+                  connectionManagerRefId="Package.ConnectionManagers[SourceConnectionExcel]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output]"
+                  name="Excel Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].Columns[Group]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].ExternalColumns[Group]"
+                      length="255"
+                      lineageId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].Columns[Group]"
+                      name="Group"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].Columns[Claim ID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].ExternalColumns[Claim ID]"
+                      length="255"
+                      lineageId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].Columns[Claim ID]"
+                      name="Claim ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].Columns[Effective Date]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].ExternalColumns[Effective Date]"
+                      lineageId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].Columns[Effective Date]"
+                      name="Effective Date"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].Columns[Day of Week]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].ExternalColumns[Day of Week]"
+                      length="255"
+                      lineageId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].Columns[Day of Week]"
+                      name="Day of Week"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].Columns[Paid Date]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].ExternalColumns[Paid Date]"
+                      lineageId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].Columns[Paid Date]"
+                      name="Paid Date"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].Columns[Unique ID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].ExternalColumns[Unique ID]"
+                      length="255"
+                      lineageId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].Columns[Unique ID]"
+                      name="Unique ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].Columns[Name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].ExternalColumns[Name]"
+                      length="255"
+                      lineageId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].Columns[Name]"
+                      name="Name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].Columns[Birth Date]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].ExternalColumns[Birth Date]"
+                      lineageId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].Columns[Birth Date]"
+                      name="Birth Date"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].Columns[Practice]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].ExternalColumns[Practice]"
+                      length="255"
+                      lineageId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].Columns[Practice]"
+                      name="Practice"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].Columns[PCP]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].ExternalColumns[PCP]"
+                      length="255"
+                      lineageId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].Columns[PCP]"
+                      name="PCP"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].Columns[Low Acuity]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].ExternalColumns[Low Acuity]"
+                      length="255"
+                      lineageId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].Columns[Low Acuity]"
+                      name="Low Acuity"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].Columns[Primary Diag]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].ExternalColumns[Primary Diag]"
+                      length="255"
+                      lineageId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].Columns[Primary Diag]"
+                      name="Primary Diag"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].Columns[Primary Diag Description]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].ExternalColumns[Primary Diag Description]"
+                      length="255"
+                      lineageId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].Columns[Primary Diag Description]"
+                      name="Primary Diag Description"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].Columns[Procedure Code]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].ExternalColumns[Procedure Code]"
+                      length="255"
+                      lineageId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].Columns[Procedure Code]"
+                      name="Procedure Code"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].Columns[Procedure Code Description]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].ExternalColumns[Procedure Code Description]"
+                      length="255"
+                      lineageId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].Columns[Procedure Code Description]"
+                      name="Procedure Code Description"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].Columns[Facility]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].ExternalColumns[Facility]"
+                      length="255"
+                      lineageId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].Columns[Facility]"
+                      name="Facility"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].Columns[Case Count]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].ExternalColumns[Case Count]"
+                      lineageId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].Columns[Case Count]"
+                      name="Case Count"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].Columns[F18]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].ExternalColumns[F18]"
+                      length="255"
+                      lineageId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].Columns[F18]"
+                      name="F18"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].ExternalColumns[Group]"
+                      dataType="wstr"
+                      length="255"
+                      name="Group" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].ExternalColumns[Claim ID]"
+                      dataType="wstr"
+                      length="255"
+                      name="Claim ID" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].ExternalColumns[Effective Date]"
+                      dataType="r8"
+                      name="Effective Date" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].ExternalColumns[Day of Week]"
+                      dataType="wstr"
+                      length="255"
+                      name="Day of Week" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].ExternalColumns[Paid Date]"
+                      dataType="r8"
+                      name="Paid Date" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].ExternalColumns[Unique ID]"
+                      dataType="wstr"
+                      length="255"
+                      name="Unique ID" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].ExternalColumns[Name]"
+                      dataType="wstr"
+                      length="255"
+                      name="Name" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].ExternalColumns[Birth Date]"
+                      dataType="r8"
+                      name="Birth Date" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].ExternalColumns[Practice]"
+                      dataType="wstr"
+                      length="255"
+                      name="Practice" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].ExternalColumns[PCP]"
+                      dataType="wstr"
+                      length="255"
+                      name="PCP" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].ExternalColumns[Low Acuity]"
+                      dataType="wstr"
+                      length="255"
+                      name="Low Acuity" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].ExternalColumns[Primary Diag]"
+                      dataType="wstr"
+                      length="255"
+                      name="Primary Diag" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].ExternalColumns[Primary Diag Description]"
+                      dataType="wstr"
+                      length="255"
+                      name="Primary Diag Description" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].ExternalColumns[Procedure Code]"
+                      dataType="wstr"
+                      length="255"
+                      name="Procedure Code" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].ExternalColumns[Procedure Code Description]"
+                      dataType="wstr"
+                      length="255"
+                      name="Procedure Code Description" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].ExternalColumns[Facility]"
+                      dataType="wstr"
+                      length="255"
+                      name="Facility" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].ExternalColumns[Case Count]"
+                      dataType="r8"
+                      name="Case Count" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output].ExternalColumns[F18]"
+                      dataType="wstr"
+                      length="255"
+                      name="F18" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Error Output]"
+                  isErrorOut="true"
+                  name="Excel Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Error Output].Columns[Group]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Error Output].Columns[Group]"
+                      name="Group" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Error Output].Columns[Claim ID]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Error Output].Columns[Claim ID]"
+                      name="Claim ID" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Error Output].Columns[Effective Date]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Error Output].Columns[Effective Date]"
+                      name="Effective Date" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Error Output].Columns[Day of Week]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Error Output].Columns[Day of Week]"
+                      name="Day of Week" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Error Output].Columns[Paid Date]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Error Output].Columns[Paid Date]"
+                      name="Paid Date" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Error Output].Columns[Unique ID]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Error Output].Columns[Unique ID]"
+                      name="Unique ID" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Error Output].Columns[Name]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Error Output].Columns[Name]"
+                      name="Name" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Error Output].Columns[Birth Date]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Error Output].Columns[Birth Date]"
+                      name="Birth Date" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Error Output].Columns[Practice]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Error Output].Columns[Practice]"
+                      name="Practice" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Error Output].Columns[PCP]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Error Output].Columns[PCP]"
+                      name="PCP" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Error Output].Columns[Low Acuity]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Error Output].Columns[Low Acuity]"
+                      name="Low Acuity" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Error Output].Columns[Primary Diag]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Error Output].Columns[Primary Diag]"
+                      name="Primary Diag" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Error Output].Columns[Primary Diag Description]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Error Output].Columns[Primary Diag Description]"
+                      name="Primary Diag Description" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Error Output].Columns[Procedure Code]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Error Output].Columns[Procedure Code]"
+                      name="Procedure Code" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Error Output].Columns[Procedure Code Description]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Error Output].Columns[Procedure Code Description]"
+                      name="Procedure Code Description" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Error Output].Columns[Facility]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Error Output].Columns[Facility]"
+                      name="Facility" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Error Output].Columns[Case Count]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Error Output].Columns[Case Count]"
+                      name="Case Count" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Error Output].Columns[F18]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Error Output].Columns[F18]"
+                      name="F18" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Data Flow Task 1.Paths[Excel Source Output]"
+              endId="Package\Data Flow Task 1\Destination - Low_Acuity_ED_Rp.Inputs[Destination Input]"
+              name="Excel Source Output"
+              startId="Package\Data Flow Task 1\Source - 'COM Clm Dtl$'.Outputs[Excel Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Preparation SQL Task 1"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{DBA08706-2175-40F3-A0EC-FEEF946F539A}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:FailPackageOnFailure="True"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Preparation SQL Task 1"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{18B95A55-5C4B-4062-8BD5-C5087953B03E}"
+          SQLTask:SqlStatementSource="CREATE TABLE [dbo].[Low_Acuity_ED_Rp] (&#xA;[Group] nvarchar(255),&#xA;[Claim ID] nvarchar(255),&#xA;[Effective Date] float,&#xA;[Day of Week] nvarchar(255),&#xA;[Paid Date] float,&#xA;[Unique ID] nvarchar(255),&#xA;[Name] nvarchar(255),&#xA;[Birth Date] float,&#xA;[Practice] nvarchar(255),&#xA;[PCP] nvarchar(255),&#xA;[Low Acuity] nvarchar(255),&#xA;[Primary Diag] nvarchar(255),&#xA;[Primary Diag Description] nvarchar(255),&#xA;[Procedure Code] nvarchar(255),&#xA;[Procedure Code Description] nvarchar(255),&#xA;[Facility] nvarchar(255),&#xA;[Case Count] float&#xA;)&#xA;GO&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[{8CEE41DA-D85A-497B-BCD0-102E0708BA01\}]"
+      DTS:CreationName=""
+      DTS:DTSID="{8CEE41DA-D85A-497B-BCD0-102E0708BA01}"
+      DTS:From="Package\Preparation SQL Task 1"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="{8CEE41DA-D85A-497B-BCD0-102E0708BA01}"
+      DTS:To="Package\Data Flow Task 1" />
+  </DTS:PrecedenceConstraints>
+</DTS:Executable>

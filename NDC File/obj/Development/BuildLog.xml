@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<BuildLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ProjectInfo>
+    <Name>NDC File</Name>
+    <LastWriteTime>2025-10-20T12:25:31.2430528Z</LastWriteTime>
+    <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+  </ProjectInfo>
+  <LastBuildInfos>
+    <ProjectBuildItemInfo>
+      <Name>CaretegraNDC.dtsx</Name>
+      <LastWriteTime>2023-12-21T18:02:58.9499293Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>Low_Acuity_ED_Rpt.dtsx</Name>
+      <LastWriteTime>2024-10-09T14:03:12.8158029Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>Low_Acuity_ED_Rpt_Com_Clm_Dtl (1).dtsx</Name>
+      <LastWriteTime>2022-06-30T14:51:42.5385967Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>ACQA Flag To Care Connect.dtsx</Name>
+      <LastWriteTime>2025-04-08T12:09:55.4402482Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>CaretegraExtracts.dtsx</Name>
+      <LastWriteTime>2025-10-20T17:38:19.7109401Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>HCCPostEncounterWQ.dtsx</Name>
+      <LastWriteTime>2025-02-06T14:34:30.1302367Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>RGHS Flag to Care Connect.dtsx</Name>
+      <LastWriteTime>2025-06-11T13:56:45.7991246Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+  </LastBuildInfos>
+</BuildLog>

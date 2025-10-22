@@ -1,0 +1,1415 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="6/2/2022 1:53:13 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="K-COGN-169L"
+  DTS:CreatorName="VIAHEALTH\LROBBINS2"
+  DTS:Description="SSIS Package Description"
+  DTS:DTSID="{C88C818B-B3DC-4F4A-A3D3-ACDED2D93C81}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.1301.433"
+  DTS:LocaleID="1033"
+  DTS:MaxErrorCount="0"
+  DTS:ObjectName="ACQA Flag To Care Connect"
+  DTS:VersionBuild="25"
+  DTS:VersionGUID="{96EEB235-2F45-4D31-94CC-19F217A33A0F}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[ACQA Members Flat File]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{C81F4887-53A4-4160-B2D7-849C612ACF8E}"
+      DTS:ObjectName="ACQA Members Flat File">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[User::FullFileName]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="\\rhaps-app-1\GRIPA_In\Gripa_Membership_20240801.txt">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="11"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="PatientID"
+              DTS:DTSID="{B91214B5-D1E9-4A7D-AFED-B3D556336F1A}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="FirstName"
+              DTS:DTSID="{B3A7D14F-E0F8-47BA-BB49-EC7B50580BC6}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="MiddleName"
+              DTS:DTSID="{3C307D05-0A31-44FE-8537-43382EA7B7EF}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="LastName"
+              DTS:DTSID="{2866963C-1DB9-4FD6-B53D-E5A98EB76394}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="8"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="DOB"
+              DTS:DTSID="{16D9F39F-B35A-44A6-B603-2FDF385E5590}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="18"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Gender"
+              DTS:DTSID="{F5290659-2A06-452B-86D1-0A5A1B549C24}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="10"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="SSN"
+              DTS:DTSID="{2D291987-4482-4810-8948-F928250F8761}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Address_Line1"
+              DTS:DTSID="{27D952E7-72AB-4C66-A252-117D31C61E89}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Address_Line2"
+              DTS:DTSID="{FEFFE4B9-6CA7-41EF-BFE8-A912CDA3AEC9}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="60"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="City"
+              DTS:DTSID="{4D8D6EE6-8C36-4179-8B8B-3AAF7002B192}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="3"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="State"
+              DTS:DTSID="{3CAB935D-F86E-48E0-9361-8DACB267A4E1}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="12"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="PostalCode"
+              DTS:DTSID="{D3B1D8B5-AB93-40CC-87A6-8B8EDB6FE531}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="3"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Country"
+              DTS:DTSID="{E9CC24B1-BE15-481B-9F55-5BD362B64BFD}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="25"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Phone_Primary"
+              DTS:DTSID="{E4C47B56-DB1E-46E2-99E6-B05F12D67600}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="25"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Phone_Work"
+              DTS:DTSID="{A0D1EF1C-DE93-4663-9A53-A3ADD9343F17}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="25"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Phone_Wireless"
+              DTS:DTSID="{A6CCA0A7-4B4C-4042-8200-30BAD35B4D6A}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="10"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="RRH_MRN"
+              DTS:DTSID="{CBB19D99-98A7-482C-BEC4-129104F4BF71}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="250"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ACQA_Contract"
+              DTS:DTSID="{48725E9F-268A-4DC5-B7CC-063D586E9051}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Medicare_Contract"
+              DTS:DTSID="{57D5C62A-4AC3-4DDF-AD38-AB2CFB0B15A4}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="GRIPA_Status"
+              DTS:DTSID="{2217857C-ADDA-40BE-AEAB-793B49EB47A7}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[GRIPA-DB-6_QOC_Staging]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{0915878D-F3ED-4E2E-86C6-4653F041C046}"
+      DTS:ObjectName="GRIPA-DB-6_QOC_Staging">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=gripa-db-6;Initial Catalog=QUALITY_OF_CARE_Staging;Provider=SQLNCLI11;Integrated Security=SSPI;Auto Translate=false;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[SMTP Connection Manager]"
+      DTS:CreationName="SMTP"
+      DTS:DTSID="{F19E78DC-582D-4898-9111-DFAD609460FC}"
+      DTS:ObjectName="SMTP Connection Manager">
+      <DTS:ObjectData>
+        <SmtpConnectionManager
+          ConnectionString="SmtpServer=smtp.viahealth.org;UseWindowsAuthentication=False;EnableSsl=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{964C9D51-0253-4F07-942E-41D76B8E9A52}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="(DT_STR, 4, 1252) DATEPART(&quot;yyyy&quot; , GETDATE())&#xA;+ RIGHT(&quot;0&quot; + (DT_STR, 2, 1252) DATEPART(&quot;mm&quot; , GETDATE()), 2)&#xA;+ RIGHT(&quot;0&quot; + (DT_STR, 2, 1252) DATEPART(&quot;dd&quot; , GETDATE()), 2)"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="FileDateName">
+      <DTS:VariableValue
+        DTS:DataType="8">20240801</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{C33E3E66-E322-4985-9805-52D32CA93306}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="FileLocation">
+      <DTS:VariableValue
+        DTS:DataType="8">\\rhaps-app-1\GRIPA_In\</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{6BBD84CD-9441-4538-9A1E-B8262096E6C8}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="FileName">
+      <DTS:VariableValue
+        DTS:DataType="8">Gripa_Membership_</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{E4A9CD3D-F341-4D7E-BA08-E758941894DE}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[User::FileLocation] +  @[User::FileName] +  @[User::FileDateName] + &quot;.txt&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="FullFileName">
+      <DTS:VariableValue
+        DTS:DataType="8">\\rhaps-app-1\GRIPA_In\Gripa_Membership_20240801.txt</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Data Flow Task"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:DelayValidation="True"
+      DTS:DTSID="{D8EB54CC-B833-4769-93D0-C873A0500907}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:FailPackageOnFailure="True"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data Flow Task"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          defaultBufferSize="3145728"
+          version="1">
+          <components>
+            <component
+              refId="Package\Data Flow Task\CareConnect File To RRH"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="CareConnect File To RRH"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[CareConnect_ContractMembers_FileToRRH]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">EXEC QUALITY_OF_CARE_Staging.dbo.usp_Export_CareConnect_ContractMembers</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\CareConnect File To RRH.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[GRIPA-DB-6_QOC_Staging]"
+                  connectionManagerRefId="Package.ConnectionManagers[GRIPA-DB-6_QOC_Staging]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].Columns[PatientID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].ExternalColumns[PatientID]"
+                      lineageId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].Columns[PatientID]"
+                      name="PatientID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].Columns[FirstName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].ExternalColumns[FirstName]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].Columns[FirstName]"
+                      name="FirstName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].Columns[MiddleName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].ExternalColumns[MiddleName]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].Columns[MiddleName]"
+                      name="MiddleName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].Columns[LastName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].ExternalColumns[LastName]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].Columns[LastName]"
+                      name="LastName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].Columns[DOB]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].ExternalColumns[DOB]"
+                      length="8"
+                      lineageId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].Columns[DOB]"
+                      name="DOB"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].Columns[RRH_MRN]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].ExternalColumns[RRH_MRN]"
+                      length="10"
+                      lineageId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].Columns[RRH_MRN]"
+                      name="RRH_MRN"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].Columns[ACQA_Contract]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].ExternalColumns[ACQA_Contract]"
+                      length="250"
+                      lineageId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].Columns[ACQA_Contract]"
+                      name="ACQA_Contract"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].Columns[Medicare_Contract]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].ExternalColumns[Medicare_Contract]"
+                      length="1"
+                      lineageId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].Columns[Medicare_Contract]"
+                      name="Medicare_Contract"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].Columns[GRIPA_Status]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].ExternalColumns[GRIPA_Status]"
+                      length="20"
+                      lineageId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].Columns[GRIPA_Status]"
+                      name="GRIPA_Status"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].Columns[InsertDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].ExternalColumns[InsertDate]"
+                      lineageId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].Columns[InsertDate]"
+                      name="InsertDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].Columns[Gender]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].ExternalColumns[Gender]"
+                      length="18"
+                      lineageId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].Columns[Gender]"
+                      name="Gender"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].Columns[SSN]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].ExternalColumns[SSN]"
+                      length="10"
+                      lineageId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].Columns[SSN]"
+                      name="SSN"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].Columns[Address_Line1]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].ExternalColumns[Address_Line1]"
+                      length="100"
+                      lineageId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].Columns[Address_Line1]"
+                      name="Address_Line1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].Columns[Address_Line2]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].ExternalColumns[Address_Line2]"
+                      length="100"
+                      lineageId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].Columns[Address_Line2]"
+                      name="Address_Line2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].Columns[City]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].ExternalColumns[City]"
+                      length="60"
+                      lineageId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].Columns[City]"
+                      name="City"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].Columns[State]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].ExternalColumns[State]"
+                      length="3"
+                      lineageId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].Columns[State]"
+                      name="State"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].Columns[PostalCode]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].ExternalColumns[PostalCode]"
+                      length="12"
+                      lineageId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].Columns[PostalCode]"
+                      name="PostalCode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].Columns[Country]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].ExternalColumns[Country]"
+                      length="3"
+                      lineageId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].Columns[Country]"
+                      name="Country"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].Columns[Phone_Primary]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].ExternalColumns[Phone_Primary]"
+                      length="25"
+                      lineageId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].Columns[Phone_Primary]"
+                      name="Phone_Primary"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].Columns[Phone_Work]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].ExternalColumns[Phone_Work]"
+                      length="25"
+                      lineageId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].Columns[Phone_Work]"
+                      name="Phone_Work"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].Columns[Phone_Wireless]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].ExternalColumns[Phone_Wireless]"
+                      length="25"
+                      lineageId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].Columns[Phone_Wireless]"
+                      name="Phone_Wireless"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].ExternalColumns[PatientID]"
+                      dataType="i4"
+                      name="PatientID" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].ExternalColumns[FirstName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="FirstName" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].ExternalColumns[MiddleName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="MiddleName" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].ExternalColumns[LastName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="LastName" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].ExternalColumns[DOB]"
+                      codePage="1252"
+                      dataType="str"
+                      length="8"
+                      name="DOB" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].ExternalColumns[RRH_MRN]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="RRH_MRN" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].ExternalColumns[ACQA_Contract]"
+                      codePage="1252"
+                      dataType="str"
+                      length="250"
+                      name="ACQA_Contract" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].ExternalColumns[Medicare_Contract]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Medicare_Contract" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].ExternalColumns[GRIPA_Status]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="GRIPA_Status" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].ExternalColumns[InsertDate]"
+                      dataType="dbTimeStamp"
+                      name="InsertDate" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].ExternalColumns[Gender]"
+                      codePage="1252"
+                      dataType="str"
+                      length="18"
+                      name="Gender" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].ExternalColumns[SSN]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="SSN" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].ExternalColumns[Address_Line1]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="Address_Line1" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].ExternalColumns[Address_Line2]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="Address_Line2" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].ExternalColumns[City]"
+                      codePage="1252"
+                      dataType="str"
+                      length="60"
+                      name="City" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].ExternalColumns[State]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="State" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].ExternalColumns[PostalCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="12"
+                      name="PostalCode" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].ExternalColumns[Country]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="Country" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].ExternalColumns[Phone_Primary]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="Phone_Primary" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].ExternalColumns[Phone_Work]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="Phone_Work" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].ExternalColumns[Phone_Wireless]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="Phone_Wireless" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Error Output].Columns[PatientID]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Error Output].Columns[PatientID]"
+                      name="PatientID" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Error Output].Columns[FirstName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      lineageId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Error Output].Columns[FirstName]"
+                      name="FirstName" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Error Output].Columns[MiddleName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Error Output].Columns[MiddleName]"
+                      name="MiddleName" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Error Output].Columns[LastName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      lineageId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Error Output].Columns[LastName]"
+                      name="LastName" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Error Output].Columns[DOB]"
+                      codePage="1252"
+                      dataType="str"
+                      length="8"
+                      lineageId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Error Output].Columns[DOB]"
+                      name="DOB" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Error Output].Columns[RRH_MRN]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Error Output].Columns[RRH_MRN]"
+                      name="RRH_MRN" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Error Output].Columns[ACQA_Contract]"
+                      codePage="1252"
+                      dataType="str"
+                      length="250"
+                      lineageId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Error Output].Columns[ACQA_Contract]"
+                      name="ACQA_Contract" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Error Output].Columns[Medicare_Contract]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Error Output].Columns[Medicare_Contract]"
+                      name="Medicare_Contract" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Error Output].Columns[InsertDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Error Output].Columns[InsertDate]"
+                      name="InsertDate" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Error Output].Columns[GRIPA_Status]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      lineageId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Error Output].Columns[GRIPA_Status]"
+                      name="GRIPA_Status" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Error Output].Columns[Gender]"
+                      codePage="1252"
+                      dataType="str"
+                      length="18"
+                      lineageId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Error Output].Columns[Gender]"
+                      name="Gender" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Error Output].Columns[SSN]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Error Output].Columns[SSN]"
+                      name="SSN" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Error Output].Columns[Address_Line1]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      lineageId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Error Output].Columns[Address_Line1]"
+                      name="Address_Line1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Error Output].Columns[Address_Line2]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      lineageId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Error Output].Columns[Address_Line2]"
+                      name="Address_Line2" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Error Output].Columns[City]"
+                      codePage="1252"
+                      dataType="str"
+                      length="60"
+                      lineageId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Error Output].Columns[City]"
+                      name="City" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Error Output].Columns[State]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      lineageId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Error Output].Columns[State]"
+                      name="State" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Error Output].Columns[PostalCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="12"
+                      lineageId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Error Output].Columns[PostalCode]"
+                      name="PostalCode" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Error Output].Columns[Country]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      lineageId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Error Output].Columns[Country]"
+                      name="Country" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Error Output].Columns[Phone_Primary]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      lineageId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Error Output].Columns[Phone_Primary]"
+                      name="Phone_Primary" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Error Output].Columns[Phone_Work]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      lineageId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Error Output].Columns[Phone_Work]"
+                      name="Phone_Work" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Error Output].Columns[Phone_Wireless]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      lineageId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Error Output].Columns[Phone_Wireless]"
+                      name="Phone_Wireless" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\Destination - Gripa_Membership File"
+              componentClassID="Microsoft.FlatFileDestination"
+              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Flat File Destination"
+              localeId="1033"
+              name="Destination - Gripa_Membership File"
+              validateExternalMetadata="False">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the data will overwrite or append to the destination file."
+                  name="Overwrite">true</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the text to write to the destination file before any data is written."
+                  expressionType="Notify"
+                  name="Header" />
+                <property
+                  dataType="System.Boolean"
+                  description="When text qualifier is enabled, specifies whether the text qualifier in the data written to the destination file will be escaped or not."
+                  name="EscapeQualifier">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\Destination - Gripa_Membership File.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[ACQA Members Flat File]"
+                  connectionManagerRefId="Package.ConnectionManagers[ACQA Members Flat File]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\Destination - Gripa_Membership File.Inputs[Flat File Destination Input]"
+                  hasSideEffects="true"
+                  name="Flat File Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Destination - Gripa_Membership File.Inputs[Flat File Destination Input].Columns[PatientID]"
+                      cachedDataType="i4"
+                      cachedName="PatientID"
+                      externalMetadataColumnId="Package\Data Flow Task\Destination - Gripa_Membership File.Inputs[Flat File Destination Input].ExternalColumns[PatientID]"
+                      lineageId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].Columns[PatientID]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Destination - Gripa_Membership File.Inputs[Flat File Destination Input].Columns[FirstName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="FirstName"
+                      externalMetadataColumnId="Package\Data Flow Task\Destination - Gripa_Membership File.Inputs[Flat File Destination Input].ExternalColumns[FirstName]"
+                      lineageId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].Columns[FirstName]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Destination - Gripa_Membership File.Inputs[Flat File Destination Input].Columns[MiddleName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="MiddleName"
+                      externalMetadataColumnId="Package\Data Flow Task\Destination - Gripa_Membership File.Inputs[Flat File Destination Input].ExternalColumns[MiddleName]"
+                      lineageId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].Columns[MiddleName]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Destination - Gripa_Membership File.Inputs[Flat File Destination Input].Columns[LastName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="LastName"
+                      externalMetadataColumnId="Package\Data Flow Task\Destination - Gripa_Membership File.Inputs[Flat File Destination Input].ExternalColumns[LastName]"
+                      lineageId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].Columns[LastName]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Destination - Gripa_Membership File.Inputs[Flat File Destination Input].Columns[DOB]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="8"
+                      cachedName="DOB"
+                      externalMetadataColumnId="Package\Data Flow Task\Destination - Gripa_Membership File.Inputs[Flat File Destination Input].ExternalColumns[DOB]"
+                      lineageId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].Columns[DOB]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Destination - Gripa_Membership File.Inputs[Flat File Destination Input].Columns[RRH_MRN]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="RRH_MRN"
+                      externalMetadataColumnId="Package\Data Flow Task\Destination - Gripa_Membership File.Inputs[Flat File Destination Input].ExternalColumns[RRH_MRN]"
+                      lineageId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].Columns[RRH_MRN]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Destination - Gripa_Membership File.Inputs[Flat File Destination Input].Columns[ACQA_Contract]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="250"
+                      cachedName="ACQA_Contract"
+                      externalMetadataColumnId="Package\Data Flow Task\Destination - Gripa_Membership File.Inputs[Flat File Destination Input].ExternalColumns[ACQA_Contract]"
+                      lineageId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].Columns[ACQA_Contract]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Destination - Gripa_Membership File.Inputs[Flat File Destination Input].Columns[Medicare_Contract]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="Medicare_Contract"
+                      externalMetadataColumnId="Package\Data Flow Task\Destination - Gripa_Membership File.Inputs[Flat File Destination Input].ExternalColumns[Medicare_Contract]"
+                      lineageId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].Columns[Medicare_Contract]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Destination - Gripa_Membership File.Inputs[Flat File Destination Input].Columns[GRIPA_Status]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="GRIPA_Status"
+                      externalMetadataColumnId="Package\Data Flow Task\Destination - Gripa_Membership File.Inputs[Flat File Destination Input].ExternalColumns[GRIPA_Status]"
+                      lineageId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].Columns[GRIPA_Status]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Destination - Gripa_Membership File.Inputs[Flat File Destination Input].Columns[SSN]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="SSN"
+                      externalMetadataColumnId="Package\Data Flow Task\Destination - Gripa_Membership File.Inputs[Flat File Destination Input].ExternalColumns[SSN]"
+                      lineageId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].Columns[SSN]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Destination - Gripa_Membership File.Inputs[Flat File Destination Input].Columns[Address_Line1]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="Address_Line1"
+                      externalMetadataColumnId="Package\Data Flow Task\Destination - Gripa_Membership File.Inputs[Flat File Destination Input].ExternalColumns[Address_Line1]"
+                      lineageId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].Columns[Address_Line1]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Destination - Gripa_Membership File.Inputs[Flat File Destination Input].Columns[Address_Line2]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="Address_Line2"
+                      externalMetadataColumnId="Package\Data Flow Task\Destination - Gripa_Membership File.Inputs[Flat File Destination Input].ExternalColumns[Address_Line2]"
+                      lineageId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].Columns[Address_Line2]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Destination - Gripa_Membership File.Inputs[Flat File Destination Input].Columns[City]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="60"
+                      cachedName="City"
+                      externalMetadataColumnId="Package\Data Flow Task\Destination - Gripa_Membership File.Inputs[Flat File Destination Input].ExternalColumns[City]"
+                      lineageId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].Columns[City]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Destination - Gripa_Membership File.Inputs[Flat File Destination Input].Columns[State]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="State"
+                      externalMetadataColumnId="Package\Data Flow Task\Destination - Gripa_Membership File.Inputs[Flat File Destination Input].ExternalColumns[State]"
+                      lineageId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].Columns[State]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Destination - Gripa_Membership File.Inputs[Flat File Destination Input].Columns[PostalCode]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="12"
+                      cachedName="PostalCode"
+                      externalMetadataColumnId="Package\Data Flow Task\Destination - Gripa_Membership File.Inputs[Flat File Destination Input].ExternalColumns[PostalCode]"
+                      lineageId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].Columns[PostalCode]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Destination - Gripa_Membership File.Inputs[Flat File Destination Input].Columns[Country]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="Country"
+                      externalMetadataColumnId="Package\Data Flow Task\Destination - Gripa_Membership File.Inputs[Flat File Destination Input].ExternalColumns[Country]"
+                      lineageId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].Columns[Country]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Destination - Gripa_Membership File.Inputs[Flat File Destination Input].Columns[Phone_Primary]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="Phone_Primary"
+                      externalMetadataColumnId="Package\Data Flow Task\Destination - Gripa_Membership File.Inputs[Flat File Destination Input].ExternalColumns[Phone_Primary]"
+                      lineageId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].Columns[Phone_Primary]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Destination - Gripa_Membership File.Inputs[Flat File Destination Input].Columns[Phone_Work]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="Phone_Work"
+                      externalMetadataColumnId="Package\Data Flow Task\Destination - Gripa_Membership File.Inputs[Flat File Destination Input].ExternalColumns[Phone_Work]"
+                      lineageId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].Columns[Phone_Work]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Destination - Gripa_Membership File.Inputs[Flat File Destination Input].Columns[Phone_Wireless]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="Phone_Wireless"
+                      externalMetadataColumnId="Package\Data Flow Task\Destination - Gripa_Membership File.Inputs[Flat File Destination Input].ExternalColumns[Phone_Wireless]"
+                      lineageId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].Columns[Phone_Wireless]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Destination - Gripa_Membership File.Inputs[Flat File Destination Input].Columns[Gender]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="18"
+                      cachedName="Gender"
+                      externalMetadataColumnId="Package\Data Flow Task\Destination - Gripa_Membership File.Inputs[Flat File Destination Input].ExternalColumns[Gender]"
+                      lineageId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output].Columns[Gender]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Destination - Gripa_Membership File.Inputs[Flat File Destination Input].ExternalColumns[PatientID]"
+                      dataType="i4"
+                      name="PatientID" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Destination - Gripa_Membership File.Inputs[Flat File Destination Input].ExternalColumns[FirstName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="FirstName" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Destination - Gripa_Membership File.Inputs[Flat File Destination Input].ExternalColumns[MiddleName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="MiddleName" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Destination - Gripa_Membership File.Inputs[Flat File Destination Input].ExternalColumns[LastName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="LastName" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Destination - Gripa_Membership File.Inputs[Flat File Destination Input].ExternalColumns[DOB]"
+                      codePage="1252"
+                      dataType="str"
+                      length="8"
+                      name="DOB" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Destination - Gripa_Membership File.Inputs[Flat File Destination Input].ExternalColumns[RRH_MRN]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="RRH_MRN" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Destination - Gripa_Membership File.Inputs[Flat File Destination Input].ExternalColumns[ACQA_Contract]"
+                      codePage="1252"
+                      dataType="str"
+                      length="250"
+                      name="ACQA_Contract" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Destination - Gripa_Membership File.Inputs[Flat File Destination Input].ExternalColumns[Medicare_Contract]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Medicare_Contract" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Destination - Gripa_Membership File.Inputs[Flat File Destination Input].ExternalColumns[GRIPA_Status]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="GRIPA_Status" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Destination - Gripa_Membership File.Inputs[Flat File Destination Input].ExternalColumns[SSN]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="SSN" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Destination - Gripa_Membership File.Inputs[Flat File Destination Input].ExternalColumns[Address_Line1]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="Address_Line1" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Destination - Gripa_Membership File.Inputs[Flat File Destination Input].ExternalColumns[Address_Line2]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="Address_Line2" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Destination - Gripa_Membership File.Inputs[Flat File Destination Input].ExternalColumns[City]"
+                      codePage="1252"
+                      dataType="str"
+                      length="60"
+                      name="City" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Destination - Gripa_Membership File.Inputs[Flat File Destination Input].ExternalColumns[State]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="State" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Destination - Gripa_Membership File.Inputs[Flat File Destination Input].ExternalColumns[PostalCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="12"
+                      name="PostalCode" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Destination - Gripa_Membership File.Inputs[Flat File Destination Input].ExternalColumns[Country]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="Country" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Destination - Gripa_Membership File.Inputs[Flat File Destination Input].ExternalColumns[Phone_Primary]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="Phone_Primary" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Destination - Gripa_Membership File.Inputs[Flat File Destination Input].ExternalColumns[Phone_Work]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="Phone_Work" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Destination - Gripa_Membership File.Inputs[Flat File Destination Input].ExternalColumns[Phone_Wireless]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="Phone_Wireless" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Destination - Gripa_Membership File.Inputs[Flat File Destination Input].ExternalColumns[Gender]"
+                      codePage="1252"
+                      dataType="str"
+                      length="18"
+                      name="Gender" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Data Flow Task.Paths[OLE DB Source Output]"
+              endId="Package\Data Flow Task\Destination - Gripa_Membership File.Inputs[Flat File Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Data Flow Task\CareConnect File To RRH.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Exec SP"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{30A535FD-9A76-4BC0-9B80-667E9A3E0F84}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Exec SP"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{0915878D-F3ED-4E2E-86C6-4653F041C046}"
+          SQLTask:SqlStatementSource="EXEC QUALITY_OF_CARE_Staging.dbo.usp_Export_CareConnect_ContractMembers" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Send Mail Task"
+      DTS:CreationName="Microsoft.SendMailTask"
+      DTS:Description="Send Mail Task"
+      DTS:DTSID="{62D38853-A105-4692-AD84-8C1ED438D007}"
+      DTS:ExecutableType="Microsoft.SendMailTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Send Mail Task"
+      DTS:TaskContact="Send Mail Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SendMailTask:SendMailTaskData
+          SendMailTask:SMTPServer="{F19E78DC-582D-4898-9111-DFAD609460FC}"
+          SendMailTask:From="SQLGRIPA6@rochesterregional.org"
+          SendMailTask:To="Interface_Operations@rochesterregional.org;Jamie.Conrow@rochesterregional.org"
+          SendMailTask:CC="GRIPAIT@rochesterregional.org;Cori.Wyman@rochesterregional.org"
+          SendMailTask:Subject="ACQA flag to CareConnect feed"
+          SendMailTask:MessageSource="The latest file is copied to the folder.   Please process the current file." xmlns:SendMailTask="www.microsoft.com/sqlserver/dts/tasks/sendmailtask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{502258E7-44EE-44DC-9159-A9B4C7727D8E}"
+      DTS:From="Package\Data Flow Task"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Send Mail Task" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{F4CD4E25-CFA9-4361-8324-7E2F7F579791}"
+      DTS:From="Package\Exec SP"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Data Flow Task" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="152,43"
+          Id="Package\Data Flow Task"
+          TopLeft="230.083329986781,160.199997233749" />
+        <NodeLayout
+          Size="116,43"
+          Id="Package\Exec SP"
+          TopLeft="30.416666213423,84.4999984890223" />
+        <NodeLayout
+          Size="151,43"
+          Id="Package\Send Mail Task"
+          TopLeft="254.583329539746,249.16666221122" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="306.083329986781,202.866663900416">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="23.8333328862983,46.2999983108043"
+              Start="0,0"
+              End="23.8333328862983,38.7999983108043">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.1499991554022" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,19.1499991554022"
+                    Point2="0,23.1499991554022"
+                    Point3="4,23.1499991554022" />
+                  <mssgle:LineSegment
+                    End="19.8333328862983,23.1499991554022" />
+                  <mssgle:CubicBezierSegment
+                    Point1="19.8333328862983,23.1499991554022"
+                    Point2="23.8333328862983,23.1499991554022"
+                    Point3="23.8333328862983,27.1499991554022" />
+                  <mssgle:LineSegment
+                    End="23.8333328862983,38.7999983108043" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="88.416666213423,127.499998489022">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="217.666663773358,32.6999987447267"
+              Start="0,0"
+              End="217.666663773358,25.1999987447267">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,12.3499993723633" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,12.3499993723633"
+                    Point2="0,16.3499993723633"
+                    Point3="4,16.3499993723633" />
+                  <mssgle:LineSegment
+                    End="213.666663773358,16.3499993723633" />
+                  <mssgle:CubicBezierSegment
+                    Point1="213.666663773358,16.3499993723633"
+                    Point2="217.666663773358,16.3499993723633"
+                    Point3="217.666663773358,20.3499993723633" />
+                  <mssgle:LineSegment
+                    End="217.666663773358,25.1999987447267" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Data Flow Task">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="251,43"
+          Id="Package\Data Flow Task\Destination - Gripa_Membership File"
+          TopLeft="50.0833326689898,222.99999794662" />
+        <NodeLayout
+          Size="197,43"
+          Id="Package\Data Flow Task\CareConnect File To RRH"
+          TopLeft="80.8333333333333,7.23333330233896" />
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[OLE DB Source Output]"
+          TopLeft="177.458333001162,49.8999999690056">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,173.099997977614"
+              Start="0,0"
+              End="0,165.599997977614">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,165.599997977614" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\CareConnect File To RRH">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
