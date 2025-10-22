@@ -1,0 +1,2356 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="1/4/2024 9:34:59 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="K-COGN-66"
+  DTS:CreatorName="VIAHEALTH\LROBBINS2"
+  DTS:DTSID="{999C0084-26DB-4CB0-B66E-EFAABDC7B6F8}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.1301.433"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="RRHLeakage_OutpatientSurgery"
+  DTS:PackageType="5"
+  DTS:VersionBuild="179"
+  DTS:VersionGUID="{DADA319C-3537-481B-975D-7D37EE9D7BE6}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Excel Connection Manager]"
+      DTS:CreationName="EXCEL"
+      DTS:DelayValidation="True"
+      DTS:DTSID="{B1A859EA-FBBB-4985-9A66-B57FA4EFB6FB}"
+      DTS:ObjectName="Excel Connection Manager">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=\\humboldt73.viahealth.org\ManagedCare\Shared\Care Management\Information Requests\RRH Leakage Report\Outpatient Surgery\Employed_PCP_Paid_Claims_Outpatient Procedures _TEMPLATE.xlsx;Extended Properties=&quot;EXCEL 12.0 XML;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[GRIPA-DB-10.CDS_STaging]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{48C3C0DF-C40A-4FD2-8359-DA0D50AF9E29}"
+      DTS:ObjectName="GRIPA-DB-10.CDS_STaging">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=GRIPA-DB-10;Initial Catalog=CDS_STAGING;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[GRIPA-DB-6.Reporting]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{DF0A83F4-9071-4A5B-B95F-C0CF40842962}"
+      DTS:ObjectName="GRIPA-DB-6.Reporting">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Retain="True"
+          DTS:ConnectionString="Data Source=GRIPA-DB-6;Initial Catalog=Reporting;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{CBB7A9B7-7803-4691-8329-35335D032D8D}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[User::varReportPath] +  &quot;Employed_PCP_Paid_Claims_Outpatient Procedures _TEMPLATE.xlsx&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varBlankTemplateFile">
+      <DTS:VariableValue
+        DTS:DataType="8">\\humboldt73.viahealth.org\ManagedCare\Shared\Care Management\Information Requests\RRH Leakage Report\Outpatient Surgery\Employed_PCP_Paid_Claims_Outpatient Procedures _TEMPLATE.xlsx</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{9618FDBE-FDDF-4BFC-9D5C-C7AF03D5A650}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[User::varReportPath] + &quot;Employed_PCP_Paid_Claims_Outpatient Procedures _TEMPLATE - Copy.xlsx&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varBlankTemplateFileCopy">
+      <DTS:VariableValue
+        DTS:DataType="8">\\humboldt73.viahealth.org\ManagedCare\Shared\Care Management\Information Requests\RRH Leakage Report\Outpatient Surgery\Employed_PCP_Paid_Claims_Outpatient Procedures _TEMPLATE - Copy.xlsx</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{10DB216E-17B2-4DCD-9860-84A73F6D11D9}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="(MONTH(getdate()) == 1 ? &quot;Jan&quot; :&#xA;MONTH(getdate()) == 2 ? &quot;Feb&quot; :&#xA;MONTH(getdate()) == 3 ? &quot;Mar&quot; :&#xA;MONTH(getdate()) == 4 ? &quot;Apr&quot; :&#xA;MONTH(getdate()) == 5 ? &quot;May&quot; :&#xA;MONTH(getdate()) == 6 ? &quot;Jun&quot; :&#xA;MONTH(getdate()) == 7 ? &quot;Jul&quot; :&#xA;MONTH(getdate()) == 8 ? &quot;Aug&quot; :&#xA;MONTH(getdate()) == 9 ? &quot;Sep&quot; :&#xA;MONTH(getdate()) == 10 ? &quot;Oct&quot; :&#xA;MONTH(getdate()) == 11 ? &quot;Nov&quot; :&#xA;MONTH(getdate()) == 12? &quot;Dec&quot;:&quot;&quot;)"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varCurrentMonth">
+      <DTS:VariableValue
+        DTS:DataType="8">Aug</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{69097272-0239-4C96-97FD-59CAEA571EA1}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="(DT_WSTR,8) DATEPART(&quot;yyyy&quot;,DATEADD(&quot;dd&quot;,-1,getdate()))"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varCurrentYear">
+      <DTS:VariableValue
+        DTS:DataType="8">2025</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{7087933E-A6CC-45BF-AF4D-2A5C79E288AA}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varFileNameDate">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{399B390B-386B-4D59-85A7-DB83C5929786}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varLocalPath">
+      <DTS:VariableValue
+        DTS:DataType="8">\\gripa-db-10\h$\Employed PCP Specialty Visit Usage Report\</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{DEFE53A0-9D07-4B29-BE72-92485FC06ACA}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;Employed_PCP_Outpatient Procedures_&quot;+ @[User::varFileNameDate]  + &quot;_Paid_Claims.xlsx&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varReportFileName">
+      <DTS:VariableValue
+        DTS:DataType="8">Employed_PCP_Outpatient Procedures__Paid_Claims.xlsx</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{E43CCA66-C545-44C7-9662-EB1A86CD9EAE}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[User::varReportPath] +  @[User::varReportFileName]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varReportFileNameFullPath">
+      <DTS:VariableValue
+        DTS:DataType="8">\\humboldt73.viahealth.org\ManagedCare\Shared\Care Management\Information Requests\RRH Leakage Report\Outpatient Surgery\Employed_PCP_Outpatient Procedures__Paid_Claims.xlsx</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{84A75263-444A-4AA8-ABC1-1973827D3E68}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varReportPath">
+      <DTS:VariableValue
+        DTS:DataType="8">\\humboldt73.viahealth.org\ManagedCare\Shared\Care Management\Information Requests\RRH Leakage Report\Outpatient Surgery\</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Copy Export File"
+      DTS:CreationName="Microsoft.FileSystemTask"
+      DTS:Description="File System Task"
+      DTS:DTSID="{C9231445-4B09-4FA0-83C4-00EAF1AB5357}"
+      DTS:ExecutableType="Microsoft.FileSystemTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Copy Export File"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <FileSystemData
+          TaskOverwriteDestFile="True"
+          TaskSourcePath="User::varBlankTemplateFile"
+          TaskIsSourceVariable="True"
+          TaskDestinationPath="User::varBlankTemplateFileCopy"
+          TaskIsDestinationVariable="True" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Create ##Facilities table"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:Disabled="True"
+      DTS:DTSID="{23B85EFF-C0B3-44DA-9DFF-8938124DFCBB}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Create ##Facilities table"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{DF0A83F4-9071-4A5B-B95F-C0CF40842962}"
+          SQLTask:SqlStatementSource="if object_id('tempdb..##Facilities') is not null&#xA;DROP TABLE ##Facilities&#xA;&#xA;CREATE TABLE ##Facilities(&#xA;Facility VARCHAR(500)&#xA;)&#xA;&#xA;INSERT INTO ##Facilities&#xA;SELECT 'A.O. FOX MEMORIAL HOSPITAL' UNION ALL&#xA;SELECT 'ABBUHL FREDERICK BRYANT' UNION ALL&#xA;SELECT 'ACS PRIMARY CARE PHYSICIANS - SOUTHEAST PC' UNION ALL&#xA;SELECT 'ADIRONDACK MEDICAL CENTER' UNION ALL&#xA;SELECT 'ADVENTHEALTH POLK NORTH INC' UNION ALL&#xA;SELECT 'ADVENTIST HEALTH SYSTEM-SUNBELT INC' UNION ALL&#xA;SELECT 'AGH LAVEEN LLC' UNION ALL&#xA;SELECT 'AHS HOSPITAL CORP.' UNION ALL&#xA;SELECT 'ALASKA EMERGENCY MEDICINE ASSOCIATES' UNION ALL&#xA;SELECT 'ALBANY MEDICAL CENTER HOSPITAL' UNION ALL&#xA;SELECT 'ALEXANDRIA SPRINGFIELD EMERGENCY PHYSICIANS PC' UNION ALL&#xA;SELECT 'ALICE HYDE MEDICAL CENTER' UNION ALL&#xA;SELECT 'ARNOT OGDEN MEDICAL CENTER' UNION ALL&#xA;SELECT 'ASCENSION SETON HAYS' UNION ALL&#xA;SELECT 'ASCENSION ST JOHN HOSPITAL' UNION ALL&#xA;SELECT 'AUBURN COMMUNITY HOSPITAL' UNION ALL&#xA;SELECT 'BANNER BAYWOOD MEDICAL CENTER' UNION ALL&#xA;SELECT 'BAPTIST HOSPITAL' UNION ALL&#xA;SELECT 'BAPTIST MEMORIAL HOSPITAL' UNION ALL&#xA;SELECT 'BASSETT HOSPITAL OF SCHOHARIE COUNTY' UNION ALL&#xA;SELECT 'BAYFRONT HEALTH ST PETERSBURG' UNION ALL&#xA;SELECT 'BELLE CHASSE EMERGENCY GROUP LLC' UNION ALL&#xA;SELECT 'BLAKE MEDICAL CENTER' UNION ALL&#xA;SELECT 'BON SECOURS COMMUNITY HOSPITAL' UNION ALL&#xA;SELECT 'BRISTOL HOSPITAL INCORPORATED' UNION ALL&#xA;SELECT 'BRONSON BATTLE CREEK HOSPITAL' UNION ALL&#xA;SELECT 'BROOKS - TLC HOSPITAL SYSTEM INC.' UNION ALL&#xA;SELECT 'BROWARD HEALTH MEDICAL CENTER' UNION ALL&#xA;SELECT 'BUENA VISTA REGIONAL MEDICAL CENTER' UNION ALL&#xA;SELECT 'BUFFALO EMERGENCY ASSOCIATES LLP' UNION ALL&#xA;SELECT 'BUTLER HEALTHCARE PROVIDERS' UNION ALL&#xA;SELECT 'CANTON-POTSDAM HOSPITAL' UNION ALL&#xA;SELECT 'CAPE CORAL HOSPITAL' UNION ALL&#xA;SELECT 'CARILION FRANKLIN MEMORIAL HOSPITAL' UNION ALL&#xA;SELECT 'CARTHAGE AREA HOSPITAL INC.' UNION ALL&#xA;SELECT 'CATHOLIC HEALTH INITIATIVES COLORADO' UNION ALL&#xA;SELECT 'CATHOLIC MEDICAL CENTER' UNION ALL&#xA;SELECT 'CAYUGA MEDICAL CENTER AT ITHACA' UNION ALL&#xA;SELECT 'CENTRA MEDICAL GROUP LLC' UNION ALL&#xA;SELECT 'CEP AMERICA LLC' UNION ALL&#xA;SELECT 'CEP AMERICA LLC' UNION ALL&#xA;SELECT 'CHAMPLAIN VALLEY PHYSICIANS HOSPITAL MEDICAL CENTER' UNION ALL&#xA;SELECT 'CHARLESTON AREA MEDICAL CENTER INC' UNION ALL&#xA;SELECT 'CHENANGO MEMORIAL HOSPITAL INC' UNION ALL&#xA;SELECT 'CHILDRENS HOSPITAL' UNION ALL&#xA;SELECT 'CLAXTON-HEPBURN MEDICAL CENTER' UNION ALL&#xA;SELECT 'CLEVELAND CLINIC HOSPITAL' UNION ALL&#xA;SELECT 'CLIFTON FINE HOSPITAL' UNION ALL&#xA;SELECT 'CLIFTON SPRINGS HOSPITAL AND CLINIC' UNION ALL&#xA;SELECT 'CLIFTON SPRINGS SANITARIUM CO' UNION ALL&#xA;SELECT 'COLUMBIA MEDICAL CENTER OF MCKINNEY SUBSIDIARY LP' UNION ALL&#xA;SELECT 'COMMUNITY MEMORIAL HOSPITAL' UNION ALL&#xA;SELECT 'CONNECTICUT CHILDRENS SPECIALTY GROUP INC.' UNION ALL&#xA;SELECT 'CONROE REGIONAL MEDICAL CENTER' UNION ALL&#xA;SELECT 'CONWAY HOSPITAL INC' UNION ALL&#xA;SELECT 'CORNING HOSPITAL' UNION ALL&#xA;SELECT 'CRAWFORD LONG HOSPITAL' UNION ALL&#xA;SELECT 'CROUSE HEALTH HOSPITAL INC.' UNION ALL&#xA;SELECT 'DEKALB MEDICAL CENTER INC.' UNION ALL&#xA;SELECT 'DELRAY MEDICAL CENTER INC.' UNION ALL&#xA;SELECT 'ELIZABETHTOWN COMMUNITY HOSPITAL' UNION ALL&#xA;SELECT 'ELLIOT HOSPITAL OF THE CITY OF MANCHESTER' UNION ALL&#xA;SELECT 'ELLIS HOSPITAL' UNION ALL&#xA;SELECT 'EMERGENCY COVERAGE CORP' UNION ALL&#xA;SELECT 'EMERGENCY MEDICINE ASSOCIATES P.A. P.C.' UNION ALL&#xA;SELECT 'EMERGENCY MEDICINE PHYSICIANS OF CUYAHOGA COUNTY LTD' UNION ALL&#xA;SELECT 'EMERGENCY MEDICINE PHYSICIANS OF LAKE COUNTY LTD' UNION ALL&#xA;SELECT 'EMERGENCY MEDICINE SERVICES OF FL LLC' UNION ALL&#xA;SELECT 'EMERGENCY SERVICES INC.' UNION ALL&#xA;SELECT 'ERIE COUNTY MEDICAL CENTER CORPORATION' UNION ALL&#xA;SELECT 'FAXTON-ST. LUKES HEALTHCARE' UNION ALL&#xA;SELECT 'FERNANDEZ FERNANDEZ JUAN RAFAEL' UNION ALL&#xA;SELECT 'FLORIDA HOSPITAL OCALA INC' UNION ALL&#xA;SELECT 'FLORIDA HOSPITAL WATERMAN INC' UNION ALL&#xA;SELECT 'FRANCISCAN HEALTH - INDIANAPOLIS' UNION ALL&#xA;SELECT 'FREDERICK FERRIS THOMPSON HOSPITAL' UNION ALL&#xA;SELECT 'GENEVA GENERAL HOSPITAL INC' UNION ALL&#xA;SELECT 'GILA REGIONAL MEDICAL CENTER' UNION ALL&#xA;SELECT 'GOUVERNEUR HOSPITAL' UNION ALL&#xA;SELECT 'GRAND STRAND REGIONAL MEDICAL CENTER LLC' UNION ALL&#xA;SELECT 'GULF COAST MEDICAL CENTER' UNION ALL&#xA;SELECT 'GUTHRIE CORTLAND MEDICAL CENTER' UNION ALL&#xA;SELECT 'HALIFAX HOSPITAL MEDICAL CENTER' UNION ALL&#xA;SELECT 'HARTFORD HOSPITAL PROFESSIONAL SERVICES' UNION ALL&#xA;SELECT 'HCA HEALTH SERVICES OF FLORIDA INC.' UNION ALL&#xA;SELECT 'HCA HEALTH SERVICES OF TENNESSEE INC.' UNION ALL&#xA;SELECT 'HIGHLAND HOSPITAL OF ROCHESTER' UNION ALL&#xA;SELECT 'HILTON HEAD MEDICAL CENTER LLC' UNION ALL&#xA;SELECT 'HMH HOSPITALS CORPORATION' UNION ALL&#xA;SELECT 'HOLMES REGIONAL MEDICAL CENTER INC' UNION ALL&#xA;SELECT 'HOLMES REGIONAL MEDICAL CENTER INC.' UNION ALL&#xA;SELECT 'HOUSTON METHODIST THE WOODLANDS HOSPITAL' UNION ALL&#xA;SELECT 'INDEPENDENCE EMERGENCY GROUP LLC' UNION ALL&#xA;SELECT 'INOVA HEALTH CARE SERVICES' UNION ALL&#xA;SELECT 'IRA DAVENPORT MEMORIAL HOSPITAL INC.' UNION ALL&#xA;SELECT 'JFK MEDICAL CENTER' UNION ALL&#xA;SELECT 'JUPITER MEDICAL CENTER INC.' UNION ALL&#xA;SELECT 'KALEIDA HEALTH' UNION ALL&#xA;SELECT 'KAWEAH HEALTH MEDICAL CENTER' UNION ALL&#xA;SELECT 'KENMORE MERCY HOSPITAL' UNION ALL&#xA;SELECT 'KENNESTONE HOSPITAL INC.' UNION ALL&#xA;SELECT 'KEY WEST HMA LLC' UNION ALL&#xA;SELECT 'KREMMLING MEMORIAL HOSPITAL DISTRICT' UNION ALL&#xA;SELECT 'LAKELAND REGIONAL MEDICAL CENTER INC.' UNION ALL&#xA;SELECT 'LEE MEMORIAL HEALTH SYSTEM' UNION ALL&#xA;SELECT 'LEHIGH VALLEY HOSPITAL' UNION ALL&#xA;SELECT 'LEWIS COUNTY GENERAL HOSPITAL' UNION ALL&#xA;SELECT 'LITTLE FALLS HOSPITAL' UNION ALL&#xA;SELECT 'LOS ALAMOS MEDICAL CENTER' UNION ALL&#xA;SELECT 'LSU ED BILLING' UNION ALL&#xA;SELECT 'MACNEAL HOSPITAL' UNION ALL&#xA;SELECT 'MAINE COAST REGIONAL HEALTH FACILITIES' UNION ALL&#xA;SELECT 'MANATEE MEMORIAL HOSPITAL L P' UNION ALL&#xA;SELECT 'MARIN GENERAL HOSPITAL' UNION ALL&#xA;SELECT 'MARION COMMUNITY HOSPITAL INC.' UNION ALL&#xA;SELECT 'MARTHA JEFFERSON HOSPITAL' UNION ALL&#xA;SELECT 'MARTIN MEDICAL CENTER' UNION ALL&#xA;SELECT 'MARY GREELEY MEDICAL CENTER' UNION ALL&#xA;SELECT 'MARY IMOGENE BASSETT HOSPITAL' UNION ALL&#xA;SELECT 'MASSENA HOSPITAL INC' UNION ALL&#xA;SELECT 'MAT-SU EMERGENCY MEDICINE PHYSICIANS CORP' UNION ALL&#xA;SELECT 'MAURY REGIONAL MEDICAL CENTER' UNION ALL&#xA;SELECT 'MAYO CLINIC FLORIDA' UNION ALL&#xA;SELECT 'MCLEOD LORIS SEACOAST HOSPITAL' UNION ALL&#xA;SELECT 'MEASE COUNTRYSIDE HOSPITAL' UNION ALL&#xA;SELECT 'MEASE DUNEDIN HOSPITAL' UNION ALL&#xA;SELECT 'MEDICAL CENTER OF THE ROCKIES' UNION ALL&#xA;SELECT 'MEMORIAL HEALTH SYSTEMS INC' UNION ALL&#xA;SELECT 'MEMORIAL HOSPITAL AT GULFPORT' UNION ALL&#xA;SELECT 'MEMORIAL HOSPITAL WEST' UNION ALL&#xA;SELECT 'MERCY HEALTH - ST VINCENT MEDICAL CENTER LLC' UNION ALL&#xA;SELECT 'MERCY HOSPITAL OF BUFFALO' UNION ALL&#xA;SELECT 'METHODIST HEALTH CENTERS' UNION ALL&#xA;SELECT 'METHODIST HOSPITAL' UNION ALL&#xA;SELECT 'MetroPlus Health Plan  Inc' UNION ALL&#xA;SELECT 'MIAMI VALLEY HOSPITAL' UNION ALL&#xA;SELECT 'MID COAST HOSPITAL' UNION ALL&#xA;SELECT 'MILFORD REGIONAL MEDICAL CENTER INC' UNION ALL&#xA;SELECT 'MONTEFIORE MEDICAL CENTER' UNION ALL&#xA;SELECT 'MOORESVILLE HOSPITAL MANAGEMENT ASSOCIATES LLC' UNION ALL&#xA;SELECT 'MORTON PLANT NORTH BAY HOSPITAL' UNION ALL&#xA;SELECT 'MOUNT ST. MARYS HOSPITAL OF NIAGARA FALLS' UNION ALL&#xA;SELECT 'MUNSON MEDICAL CENTER' UNION ALL&#xA;SELECT 'NATHAN LITTAUER HOSPITAL ASSOCIATION' UNION ALL&#xA;SELECT 'NCH HEALTHCARE SYSTEM INC' UNION ALL&#xA;SELECT 'NEWARK WAYNE COMMUNITY HOSPITAL' UNION ALL&#xA;SELECT 'NIAGARA FALLS MEMORIAL MEDICAL CENTER' UNION ALL&#xA;SELECT 'NICHOLAS H. NOYES MEMORIAL HOSPITAL' UNION ALL&#xA;SELECT 'NORTH BROWARD HOSPITAL DISTRICT' UNION ALL&#xA;SELECT 'NORTHEAST GEORGIA MEDICAL CENTER HABERSHAM LLC' UNION ALL&#xA;SELECT 'NORTHEAST HOSPITAL CORPORATION' UNION ALL&#xA;SELECT 'NORTHWESTERN MEDICAL CENTER' UNION ALL&#xA;SELECT 'NORTHWESTERN MEMORIAL HEALTHCARE' UNION ALL&#xA;SELECT 'NOVANT HEALTH MINT HILL MEDICAL CENTER' UNION ALL&#xA;SELECT 'OLEAN GENERAL HOSPITAL' UNION ALL&#xA;SELECT 'ONEIDA HEALTHCARE CENTER' UNION ALL&#xA;SELECT 'ORANGE REGIONAL MEDICAL CENTER' UNION ALL&#xA;SELECT 'ORLANDO HEALTH INC.' UNION ALL&#xA;SELECT 'ORLEANS COMMUNITY HEALTH' UNION ALL&#xA;SELECT 'OSCEOLA REGIONAL HOSPITAL INC.' UNION ALL&#xA;SELECT 'OTERO COUNTY HOSPITAL ASSOCIATION' UNION ALL&#xA;SELECT 'OUR LADY OF LOURDES MEMORIAL HOSPITAL INC.' UNION ALL&#xA;SELECT 'PALOMAR MEDICAL CENTER ESCONDIDO' UNION ALL&#xA;SELECT 'PARAGON CONTRACTING SERVICES LLC' UNION ALL&#xA;SELECT 'PARAGON EMERGENCY SERVICES LLC' UNION ALL&#xA;SELECT 'PARK HOSPITAL DISTRICT' UNION ALL&#xA;SELECT 'PASCO-PINELLAS HILLSBOROUGH COMMUNITY HEALTH SYSTEM INC' UNION ALL&#xA;SELECT 'PENINSULA REGIONAL MEDICAL CENTER' UNION ALL&#xA;SELECT 'PLAINS ER MANAGEMENT HARCO LTD' UNION ALL&#xA;SELECT 'POINCIANA MEDICAL CENTER INC.' UNION ALL&#xA;SELECT 'POMONA VALLEY HOSPITAL MEDICAL CENTER' UNION ALL&#xA;SELECT 'PONTIAC OSTEOPATHIC HOSPITAL' UNION ALL&#xA;SELECT 'PROSPECT MANCHESTER HOSPITAL INC.' UNION ALL&#xA;SELECT 'PROVIDENCE HEALTH &amp; SERVICES WASHINGTON' UNION ALL&#xA;SELECT 'PUNTA GORDA HMA LLC' UNION ALL&#xA;SELECT 'RIVER HOSPITAL INC.' UNION ALL&#xA;SELECT 'RIVERSIDE EMERGENCY PHYSICIANS' UNION ALL&#xA;SELECT 'RMH EMERGENCY SERVICES LLC' UNION ALL&#xA;SELECT 'ROBERT PACKER HOSPITAL' UNION ALL&#xA;SELECT 'ROCHESTER GENERAL HOSPITAL' UNION ALL&#xA;SELECT 'ROME MEMORIAL HOSPITAL INC.' UNION ALL&#xA;SELECT 'RUTLAND REGIONAL MEDICAL CENTER' UNION ALL&#xA;SELECT 'RYDER MEMORIAL HOSPITAL INC' UNION ALL&#xA;SELECT 'S E EMERGENCY PHYS MEMPHIS' UNION ALL&#xA;SELECT 'SAINT JOSEPH HOSPITAL' UNION ALL&#xA;SELECT 'SAMARITAN HOSPITAL OF TROY NEW YORK' UNION ALL&#xA;SELECT 'SAMARITAN MEDICAL CENTER' UNION ALL&#xA;SELECT 'SAMUEL MAHELONA MEMORIAL HOSPITAL' UNION ALL&#xA;SELECT 'SAN RAMON REGIONAL MEDICAL CENTER LLC' UNION ALL&#xA;SELECT 'Sarasota County Public Hospital' UNION ALL&#xA;SELECT 'SARASOTA DOCTORS HOSPITAL INC' UNION ALL&#xA;SELECT 'SARASOTA MEMORIAL HOSPITAL' UNION ALL&#xA;SELECT 'SARATOGA HOSPITAL' UNION ALL&#xA;SELECT 'SAVANNAH HEALTH SERVICES LLC' UNION ALL&#xA;SELECT 'SCHUYLER HOSPITAL INC' UNION ALL&#xA;SELECT 'SHENANDOAH EMERGENCY MEDICINE SPECIALISTS LLC' UNION ALL&#xA;SELECT 'SHERWOOD MOLLY HATHOWAY' UNION ALL&#xA;SELECT 'SISTERS OF CHARITY HOSPITAL OF BUFFALO NEW YORK' UNION ALL&#xA;SELECT 'SOLDIERS &amp; SAILORS MEMORIAL HOSPITAL' UNION ALL&#xA;SELECT 'SOUTH BROWARD HOSPITAL DISTRICT' UNION ALL&#xA;SELECT 'SOUTH LAKE HOSPITAL INC.' UNION ALL&#xA;SELECT 'SOUTH SHORE UNIVERSITY HOSPITAL' UNION ALL&#xA;SELECT 'SOUTHEAST VOLUSIA HEALTHCARE CORPORATION' UNION ALL&#xA;SELECT 'SOUTHEASTERN EMERGENCY SERVICES OF MEMPHIS P.C.' UNION ALL&#xA;SELECT 'SOUTHERN BAPTIST HOSPITAL OF FLORIDA INC' UNION ALL&#xA;SELECT 'SRH - OUTPATIENT SERVICES' UNION ALL&#xA;SELECT 'ST ELIZABETH FLORENCE' UNION ALL&#xA;SELECT 'ST JAMES HOSPITAL' UNION ALL&#xA;SELECT 'ST JOSEPHS HOSPITAL HEALTH CENTER' UNION ALL&#xA;SELECT 'ST. CLAIR HOSPITAL' UNION ALL&#xA;SELECT 'ST. JOSEPH CAMPUS' UNION ALL&#xA;SELECT 'ST. JOSEPHS HOSPITAL' UNION ALL&#xA;SELECT 'ST. MARYS HEALTHCARE' UNION ALL&#xA;SELECT 'ST. MARYS MEDICAL CENTER' UNION ALL&#xA;SELECT 'ST. PETERS HOSPITAL OF THE CITY OF ALBANY' UNION ALL&#xA;SELECT 'ST.JAMES ERIKA' UNION ALL&#xA;SELECT 'STATEN ISLAND UNIVERSITY HOSPITAL' UNION ALL&#xA;SELECT 'STEWARD EMERGENCY PHYSICIANS OHIO INC' UNION ALL&#xA;SELECT 'STEWARD SEBASTIAN RIVER MEDICAL CENTER INC.' UNION ALL&#xA;SELECT 'STONY BROOK UNIVERSITY HOSPITAL' UNION ALL&#xA;SELECT 'SUNY HEALTH SCIENCE CENTER AT SYRACUSE' UNION ALL&#xA;SELECT 'TAMPA GENERAL HOSPITAL CRYSTAL RIVER' UNION ALL&#xA;SELECT 'TANNER HEALTH SYSTEM' UNION ALL&#xA;SELECT 'TEMPLE UNIVERSITY HOSPITAL INC' UNION ALL&#xA;SELECT 'TEXAS HEALTH PRESBYTERIAN HOSPITAL ALLEN' UNION ALL&#xA;SELECT 'THE CHARLOTTE-MECKLENBURG HOSPITAL AUTHORITY' UNION ALL&#xA;SELECT 'THE DCH HEALTHCARE AUTHORITY' UNION ALL&#xA;SELECT 'THE FREDERICK FERRIS THOMPSON HOSPITAL' UNION ALL&#xA;SELECT 'THE MEMORIAL HOSPITAL OF WILLIAM F. AND GERTRUDE F. JONES INC.' UNION ALL&#xA;SELECT 'THE METROHEALTH SYSTEM' UNION ALL&#xA;SELECT 'THE MILTON S HERSHEY MEDICAL CENTER' UNION ALL&#xA;SELECT 'THE OUTER BANKS HOSPITAL INC' UNION ALL&#xA;SELECT 'THE UNITY HOSPITAL OF ROCHESTER' UNION ALL&#xA;SELECT 'TPL NYS OMIG' UNION ALL&#xA;SELECT 'TRIDENT MEDICAL CENTER' UNION ALL&#xA;SELECT 'TRINITY HEALTH OF NEW ENGLAND MEDICAL GROUP' UNION ALL&#xA;SELECT 'UHCMC' UNION ALL&#xA;SELECT 'UMASS MEMORIAL HEALTHALLIANCE CLINTON HOSPITAL INC' UNION ALL&#xA;SELECT 'UNITED HEALTH SERVICES HOSPITALS INC.' UNION ALL&#xA;SELECT 'UNITED MEMORIAL MEDICAL CENTER' UNION ALL&#xA;SELECT 'UNIVERSITY OF ROCHESTER' UNION ALL&#xA;SELECT 'UNIVERSITY OF VERMONT MEDICAL CENTER INC' UNION ALL&#xA;SELECT 'UPMC PRESBYTERIAN SHADYSIDE' UNION ALL&#xA;SELECT 'UPMC WELLSBORO' UNION ALL&#xA;SELECT 'URGENT CARE NOW MEDICAL P L L C' UNION ALL&#xA;SELECT 'VANDERBILT UNIVERSITY MEDICAL CENTER' UNION ALL&#xA;SELECT 'VHS SAN ANTONIO PARTNERS LLC' UNION ALL&#xA;SELECT 'VI GOVERNMENT HOSPITAL AND HEALTH FACILITIES CORP' UNION ALL&#xA;SELECT 'VILLAGES TRI-COUNTY MEDICAL CENTER INC.' UNION ALL&#xA;SELECT 'VINCENT EMERGENCY GROUP LLC' UNION ALL&#xA;SELECT 'VIRTUA - WEST JERSEY HEALTH SYSTEM INC.' UNION ALL&#xA;SELECT 'WACCAMAW COMMUNITY HOSPITAL' UNION ALL&#xA;SELECT 'WAKEMED CARY HOSPITAL' UNION ALL&#xA;SELECT 'WEST FLORIDA REGIONAL MEDICAL CENTER INC.' UNION ALL&#xA;SELECT 'WESTCHESTER-ELLENVILLE HOSPITAL INC.' UNION ALL&#xA;SELECT 'WHC EMERG PHYS' UNION ALL&#xA;SELECT 'WHIDBEYHEALTH MEDICAL CENTER' UNION ALL&#xA;SELECT 'WYOMING COUNTY' UNION ALL&#xA;SELECT 'YUMA REGIONAL MEDICAL CENTER' UNION ALL&#xA;SELECT 'ZEELAND COMMUNITY HOSPITAL' UNION ALL&#xA;SELECT 'ADVOCATE CONDELL MEDICAL CENTER' UNION ALL&#xA;SELECT 'ALLEGANY COUNCIL ON ALCOHOLISM AND SUBSTANCE ABUSE INC.' UNION ALL&#xA;SELECT 'ALLURE DETOX BH LLC' UNION ALL&#xA;SELECT 'ASPENLEITER TAYLOR BETH' UNION ALL&#xA;SELECT 'AUBURN MEMORIAL HOSPITAL' UNION ALL&#xA;SELECT 'BANNER DEL E WEBB MEDICAL CENTER' UNION ALL&#xA;SELECT 'BARTOW REGIONAL MEDICAL CENTER INC.' UNION ALL&#xA;SELECT 'BERTRAND CHAFFEE HOSPITAL' UNION ALL&#xA;SELECT 'BETHESDA NORTH HOSPITAL' UNION ALL&#xA;SELECT 'BON SECOURS-ST. MARYS HOSPITAL OF RICHMOND INC.' UNION ALL&#xA;SELECT 'CAPE COD HOSPITAL' UNION ALL&#xA;SELECT 'CASA-TRINITY INC.' UNION ALL&#xA;SELECT 'CHILDRENS HOSPITAL MEDICAL CENTER' UNION ALL&#xA;SELECT 'CONIFER PARK INC' UNION ALL&#xA;SELECT 'DICK VAN DYKE ADDICTION TREATMENT CENTER' UNION ALL&#xA;SELECT 'DIGNITY HEALTH' UNION ALL&#xA;SELECT 'Eating Disorder Treatment of New York LLC' UNION ALL&#xA;SELECT 'FAIRVIEW RECOVERY SERVICES INC' UNION ALL&#xA;SELECT 'FINGER LAKES AREA COUNSELING AND RECOVERY AGENCY INC.' UNION ALL&#xA;SELECT 'FLORIDA HEALTH SCIENCES CENTER INC' UNION ALL&#xA;SELECT 'FOOTE MICHAEL MARTIN' UNION ALL&#xA;SELECT 'FOUR WINDS OF SARATOGA' UNION ALL&#xA;SELECT 'HARTFORD HOSPITAL' UNION ALL&#xA;SELECT 'HELIO HEALTH INC.' UNION ALL&#xA;SELECT 'HENRICO DOCTORS HOSPITAL' UNION ALL&#xA;SELECT 'INDIAN RIVER MEDICAL CENTER' UNION ALL&#xA;SELECT 'INOVA FAIRFAX HOSPITAL' UNION ALL&#xA;SELECT 'ITHACA ALPHA HOUSE CENTER INC.' UNION ALL&#xA;SELECT 'JOHN L NORRIS ADDICTION TREATMENT CENTER' UNION ALL&#xA;SELECT 'LEESBURG REGIONAL MEDICAL CENTER INC' UNION ALL&#xA;SELECT 'LODI MEMORIAL HOSPITAL' UNION ALL&#xA;SELECT 'MCLEOD REGIONAL MEDICAL CENTER' UNION ALL&#xA;SELECT 'MCPIKE ADDICTION TREATMENT CENTER' UNION ALL&#xA;SELECT 'MEDICAL UNIVERSITY HOSPITAL AUTHORITY' UNION ALL&#xA;SELECT 'MEDINA MEMORIAL HOSPITAL' UNION ALL&#xA;SELECT 'MUSC HEALTH - ORANGEBURG PART OF MUSC MEDICAL CENTER - CHARLESTON' UNION ALL&#xA;SELECT 'NEWYORK-PRESBYTERIAN HOSPITAL' UNION ALL&#xA;SELECT 'PALM BEACH GARDENS MEDICAL CENTER' UNION ALL&#xA;SELECT 'PRESBYTERIAN HOSPITAL' UNION ALL&#xA;SELECT 'PRIME HEALTHCARE CENTINELA LLC' UNION ALL&#xA;SELECT 'RC WARD ADDICTION TREATMENT CENTER' UNION ALL&#xA;SELECT 'RECREATE LIFE COUNSELING SERVICES BH LLC' UNION ALL&#xA;SELECT 'ROCHESTER GENERAL HOSPITAL-PSYCH' UNION ALL&#xA;SELECT 'ROSWELL PARK CANCER INSTITUTE' UNION ALL&#xA;SELECT 'SARASOTA COUNTY PUBLIC HOSPITAL BOARD' UNION ALL&#xA;SELECT 'SEBRING HEALTH SERVICES LLC' UNION ALL&#xA;SELECT 'SINAI-GRACE HOSPITAL' UNION ALL&#xA;SELECT 'SOLDIERS &amp; SAILORS HOSPITAL SWING' UNION ALL&#xA;SELECT 'SOUTH BAY HOSPITAL' UNION ALL&#xA;SELECT 'ST JOSEPHS REHABILITATION CENTER INC' UNION ALL&#xA;SELECT 'ST LAWRENCE ADDICTION TREATMENT CENTER' UNION ALL&#xA;SELECT 'ST. ANTHONYS HOSPITAL' UNION ALL&#xA;SELECT 'ST. JOSEPHS ARU' UNION ALL&#xA;SELECT 'STRONG MEMORIAL HOSPITAL REHAB' UNION ALL&#xA;SELECT 'SUNY HEALTHSCIENCE CENTER AT SYRACUSE' UNION ALL&#xA;SELECT 'THE CLEVELAND CLINIC FOUNDATION' UNION ALL&#xA;SELECT 'TRIHEALTH REHABILITATION HOSPITAL LLC' UNION ALL&#xA;SELECT 'TULLY HILL' UNION ALL&#xA;SELECT 'UCONNECTCARE' UNION ALL&#xA;SELECT 'UNITED HEALTH SERVICES HOSPITALS INC' UNION ALL&#xA;SELECT 'UNITY CHEMICAL DEPENDENCY INPATIENT UNIT' UNION ALL&#xA;SELECT 'UPMC PINNACLE HOSPITALS' UNION ALL&#xA;SELECT 'VALLEY VISTA' UNION ALL&#xA;SELECT 'VILLA OF HOPE' UNION ALL&#xA;SELECT 'WESTSIDE REGIONAL MEDICAL CENTER' UNION ALL&#xA;SELECT 'WYOMING COUNTY COMMUNITY HOSPITAL PSYCH' UNION ALL&#xA;SELECT 'ADVOCATE CONDELL MEDICAL CENTER' UNION ALL&#xA;SELECT 'ALLEGANY COUNCIL ON ALCOHOLISM AND SUBSTANCE ABUSE, INC.' UNION ALL&#xA;SELECT 'ALLURE DETOX BH LLC' UNION ALL&#xA;SELECT 'AUBURN MEMORIAL HOSPITAL' UNION ALL&#xA;SELECT 'BANNER DEL E WEBB MEDICAL CENTER' UNION ALL&#xA;SELECT 'BARTOW REGIONAL MEDICAL CENTER, INC.' UNION ALL&#xA;SELECT 'BERTRAND CHAFFEE HOSPITAL' UNION ALL&#xA;SELECT 'BETHESDA NORTH HOSPITAL' UNION ALL&#xA;SELECT 'BON SECOURS-ST. MARY''S HOSPITAL OF RICHMOND, INC.' UNION ALL&#xA;SELECT 'CAPE COD HOSPITAL' UNION ALL&#xA;SELECT 'CASA-TRINITY, INC.' UNION ALL&#xA;SELECT 'CHILDREN''S HOSPITAL MEDICAL CENTER' UNION ALL&#xA;SELECT 'CONIFER PARK, INC' UNION ALL&#xA;SELECT 'DICK VAN DYKE ADDICTION TREATMENT CENTER' UNION ALL&#xA;SELECT 'DIGNITY HEALTH' UNION ALL&#xA;SELECT 'Eating Disorder Treatment of New York LLC' UNION ALL&#xA;SELECT 'FAIRVIEW RECOVERY SERVICES, INC' UNION ALL&#xA;SELECT 'FINGER LAKES AREA COUNSELING AND RECOVERY AGENCY, INC.' UNION ALL&#xA;SELECT 'FLORIDA HEALTH SCIENCES CENTER INC' UNION ALL&#xA;SELECT 'HARTFORD HOSPITAL' UNION ALL&#xA;SELECT 'HELIO HEALTH, INC.' UNION ALL&#xA;SELECT 'HENRICO DOCTORS'' HOSPITAL' UNION ALL&#xA;SELECT 'INDIAN RIVER MEDICAL CENTER' UNION ALL&#xA;SELECT 'INOVA FAIRFAX HOSPITAL' UNION ALL&#xA;SELECT 'ITHACA ALPHA HOUSE CENTER, INC.' UNION ALL&#xA;SELECT 'JOHN L NORRIS ADDICTION TREATMENT CENTER' UNION ALL&#xA;SELECT 'LEESBURG REGIONAL MEDICAL CENTER INC' UNION ALL&#xA;SELECT 'LODI MEMORIAL HOSPITAL' UNION ALL&#xA;SELECT 'MCLEOD REGIONAL MEDICAL CENTER' UNION ALL&#xA;SELECT 'MCPIKE ADDICTION TREATMENT CENTER' UNION ALL&#xA;SELECT 'MEDICAL UNIVERSITY HOSPITAL AUTHORITY' UNION ALL&#xA;SELECT 'MEDINA MEMORIAL HOSPITAL' UNION ALL&#xA;SELECT 'MUSC HEALTH - ORANGEBURG, PART OF MUSC MEDICAL CENTER - CHARLESTON' UNION ALL&#xA;SELECT 'NEWYORK-PRESBYTERIAN HOSPITAL' UNION ALL&#xA;SELECT 'PALM BEACH GARDENS MEDICAL CENTER' UNION ALL&#xA;SELECT 'PRESBYTERIAN HOSPITAL' UNION ALL&#xA;SELECT 'PRIME HEALTHCARE CENTINELA, LLC' UNION ALL&#xA;SELECT 'RC WARD ADDICTION TREATMENT CENTER' UNION ALL&#xA;SELECT 'RECREATE LIFE COUNSELING SERVICES BH LLC' UNION ALL&#xA;SELECT 'ROCHESTER GENERAL HOSPITAL-PSYCH' UNION ALL&#xA;SELECT 'ROSWELL PARK CANCER INSTITUTE' UNION ALL&#xA;SELECT 'SARASOTA COUNTY PUBLIC HOSPITAL BOARD' UNION ALL&#xA;SELECT 'SEBRING HEALTH SERVICES, LLC' UNION ALL&#xA;SELECT 'SINAI-GRACE HOSPITAL' UNION ALL&#xA;SELECT 'SOLDIERS &amp; SAILORS HOSPITAL SWING' UNION ALL&#xA;SELECT 'SOUTH BAY HOSPITAL' UNION ALL&#xA;SELECT 'ST JOSEPHS REHABILITATION CENTER, INC' UNION ALL&#xA;SELECT 'ST LAWRENCE ADDICTION TREATMENT CENTER' UNION ALL&#xA;SELECT 'ST. ANTHONYS HOSPITAL' UNION ALL&#xA;SELECT 'ST. DAVIDS HEALTHCARE PARTNERSHIP, L.P., LLP' UNION ALL&#xA;SELECT 'ST. JOSEPH''S ARU' UNION ALL&#xA;SELECT 'STRONG MEMORIAL HOSPITAL REHAB' UNION ALL&#xA;SELECT 'SUNY HEALTHSCIENCE CENTER AT SYRACUSE' UNION ALL&#xA;SELECT 'THE CLEVELAND CLINIC FOUNDATION' UNION ALL&#xA;SELECT 'TRIHEALTH REHABILITATION HOSPITAL, LLC' UNION ALL&#xA;SELECT 'TULLY HILL' UNION ALL&#xA;SELECT 'UCONNECTCARE' UNION ALL&#xA;SELECT 'UNITED HEALTH SERVICES HOSPITALS, INC' UNION ALL&#xA;SELECT 'UNITY CHEMICAL DEPENDENCY INPATIENT UNIT' UNION ALL&#xA;SELECT 'UPMC PINNACLE HOSPITALS' UNION ALL&#xA;SELECT 'VALLEY VISTA' UNION ALL&#xA;SELECT 'VILLA OF HOPE' UNION ALL&#xA;SELECT 'WEST FLORIDA - PPH, LLC' UNION ALL&#xA;SELECT 'WESTSIDE REGIONAL MEDICAL CENTER' UNION ALL&#xA;SELECT 'WYOMING COUNTY COMMUNITY HOSPITAL PSYCH' UNION ALL&#xA;SELECT 'BATON ROUGE GENERAL MEDICAL CENTER' UNION ALL&#xA;SELECT 'BROWARD HEALTH CORAL SPRINGS'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Create Claims Data Variable YRMO"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{991A8CB0-016F-48DB-94B5-5C32AA0C5A96}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Create Claims Data Variable YRMO"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{48C3C0DF-C40A-4FD2-8359-DA0D50AF9E29}"
+          SQLTask:SqlStatementSource="DECLARE @CLAIMS_ENDDATE DATETIME&#xA;DECLARE @CLAIMS_ENDDATE_YRMO VARCHAR(6)&#xA;&#xA;SET @CLAIMS_ENDDATE = (SELECT DATEADD(DD,-1,DATEADD(MM,1,CAST(CONCAT(MAX(YEARMO),'01') AS DATE))) FROM [gripa-db-6].[CLAIMS_DM].[DBO].[MEMBMTHSFACT])&#xA;&#xA;SET @CLAIMS_ENDDATE_YRMO =  CONVERT(VARCHAR(6),@CLAIMS_ENDDATE,112)&#xA;&#xA;SELECT FileNameDate = @CLAIMS_ENDDATE_YRMO &#xA;&#xA;&#xA;&#xA;&#xA;&#xA;"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="FileNameDate"
+            SQLTask:DtsVariableName="User::varFileNameDate" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Data into Details sheet"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{B10EB6EC-226B-4641-8983-CBBF92541568}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data into Details sheet"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Data into Details sheet\Data"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Data"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select DISTINCT PATIENTID 
+	,NPI
+    ,Facility
+	,PlaceOfServiceCodeDescription
+    ,OutpatientSurgery_DATE 
+	,Procedure_Code
+	,[ProcedureCodeDescription]
+	,EMPLOYEE_FLAG
+	,Attributed_Provider
+	,Attributed_Provider_Specialty
+	,Attributed_Provider_Practice_Group
+	,Billing_Provider_Description
+	,Billing_Provider_NPI
+	,IN_OUT_Network
+from RRHLeakage_OutpatientSurgery</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data into Details sheet\Data.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[GRIPA-DB-6.Reporting]"
+                  connectionManagerRefId="Package.ConnectionManagers[GRIPA-DB-6.Reporting]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].Columns[PATIENTID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].ExternalColumns[PATIENTID]"
+                      lineageId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].Columns[PATIENTID]"
+                      name="PATIENTID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].Columns[EMPLOYEE_FLAG]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].ExternalColumns[EMPLOYEE_FLAG]"
+                      length="13"
+                      lineageId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].Columns[EMPLOYEE_FLAG]"
+                      name="EMPLOYEE_FLAG"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].Columns[Attributed_Provider]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].ExternalColumns[Attributed_Provider]"
+                      length="101"
+                      lineageId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].Columns[Attributed_Provider]"
+                      name="Attributed_Provider"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].Columns[Attributed_Provider_Specialty]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].ExternalColumns[Attributed_Provider_Specialty]"
+                      length="100"
+                      lineageId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].Columns[Attributed_Provider_Specialty]"
+                      name="Attributed_Provider_Specialty"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].Columns[Attributed_Provider_Practice_Group]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].ExternalColumns[Attributed_Provider_Practice_Group]"
+                      length="100"
+                      lineageId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].Columns[Attributed_Provider_Practice_Group]"
+                      name="Attributed_Provider_Practice_Group"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].Columns[IN_OUT_Network]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].ExternalColumns[IN_OUT_Network]"
+                      length="14"
+                      lineageId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].Columns[IN_OUT_Network]"
+                      name="IN_OUT_Network"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].Columns[Facility]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].ExternalColumns[Facility]"
+                      length="250"
+                      lineageId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].Columns[Facility]"
+                      name="Facility"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].Columns[NPI]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].ExternalColumns[NPI]"
+                      length="50"
+                      lineageId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].Columns[NPI]"
+                      name="NPI"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].Columns[PlaceOfServiceCodeDescription]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].ExternalColumns[PlaceOfServiceCodeDescription]"
+                      length="255"
+                      lineageId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].Columns[PlaceOfServiceCodeDescription]"
+                      name="PlaceOfServiceCodeDescription"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].Columns[Procedure_Code]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].ExternalColumns[Procedure_Code]"
+                      length="10"
+                      lineageId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].Columns[Procedure_Code]"
+                      name="Procedure_Code"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].Columns[ProcedureCodeDescription]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].ExternalColumns[ProcedureCodeDescription]"
+                      length="255"
+                      lineageId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].Columns[ProcedureCodeDescription]"
+                      name="ProcedureCodeDescription"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].Columns[Billing_Provider_Description]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].ExternalColumns[Billing_Provider_Description]"
+                      length="255"
+                      lineageId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].Columns[Billing_Provider_Description]"
+                      name="Billing_Provider_Description"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].Columns[Billing_Provider_NPI]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].ExternalColumns[Billing_Provider_NPI]"
+                      length="50"
+                      lineageId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].Columns[Billing_Provider_NPI]"
+                      name="Billing_Provider_NPI"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].Columns[OutpatientSurgery_DATE]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].ExternalColumns[OutpatientSurgery_DATE]"
+                      lineageId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].Columns[OutpatientSurgery_DATE]"
+                      name="OutpatientSurgery_DATE"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].ExternalColumns[PATIENTID]"
+                      dataType="i4"
+                      name="PATIENTID" />
+                    <externalMetadataColumn
+                      refId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].ExternalColumns[EMPLOYEE_FLAG]"
+                      codePage="1252"
+                      dataType="str"
+                      length="13"
+                      name="EMPLOYEE_FLAG" />
+                    <externalMetadataColumn
+                      refId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].ExternalColumns[Attributed_Provider]"
+                      codePage="1252"
+                      dataType="str"
+                      length="101"
+                      name="Attributed_Provider" />
+                    <externalMetadataColumn
+                      refId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].ExternalColumns[Attributed_Provider_Specialty]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="Attributed_Provider_Specialty" />
+                    <externalMetadataColumn
+                      refId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].ExternalColumns[Attributed_Provider_Practice_Group]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="Attributed_Provider_Practice_Group" />
+                    <externalMetadataColumn
+                      refId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].ExternalColumns[IN_OUT_Network]"
+                      codePage="1252"
+                      dataType="str"
+                      length="14"
+                      name="IN_OUT_Network" />
+                    <externalMetadataColumn
+                      refId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].ExternalColumns[Facility]"
+                      codePage="1252"
+                      dataType="str"
+                      length="250"
+                      name="Facility" />
+                    <externalMetadataColumn
+                      refId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].ExternalColumns[NPI]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="NPI" />
+                    <externalMetadataColumn
+                      refId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].ExternalColumns[PlaceOfServiceCodeDescription]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="PlaceOfServiceCodeDescription" />
+                    <externalMetadataColumn
+                      refId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].ExternalColumns[Procedure_Code]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="Procedure_Code" />
+                    <externalMetadataColumn
+                      refId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].ExternalColumns[ProcedureCodeDescription]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="ProcedureCodeDescription" />
+                    <externalMetadataColumn
+                      refId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].ExternalColumns[Billing_Provider_Description]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="Billing_Provider_Description" />
+                    <externalMetadataColumn
+                      refId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].ExternalColumns[Billing_Provider_NPI]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Billing_Provider_NPI" />
+                    <externalMetadataColumn
+                      refId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].ExternalColumns[OutpatientSurgery_DATE]"
+                      dataType="dbTimeStamp"
+                      name="OutpatientSurgery_DATE" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Error Output].Columns[PATIENTID]"
+                      dataType="i4"
+                      lineageId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Error Output].Columns[PATIENTID]"
+                      name="PATIENTID" />
+                    <outputColumn
+                      refId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Error Output].Columns[NPI]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Error Output].Columns[NPI]"
+                      name="NPI" />
+                    <outputColumn
+                      refId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Error Output].Columns[Facility]"
+                      codePage="1252"
+                      dataType="str"
+                      length="250"
+                      lineageId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Error Output].Columns[Facility]"
+                      name="Facility" />
+                    <outputColumn
+                      refId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Error Output].Columns[PlaceOfServiceCodeDescription]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      lineageId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Error Output].Columns[PlaceOfServiceCodeDescription]"
+                      name="PlaceOfServiceCodeDescription" />
+                    <outputColumn
+                      refId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Error Output].Columns[OutpatientSurgery_DATE]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Error Output].Columns[OutpatientSurgery_DATE]"
+                      name="OutpatientSurgery_DATE" />
+                    <outputColumn
+                      refId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Error Output].Columns[Procedure_Code]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Error Output].Columns[Procedure_Code]"
+                      name="Procedure_Code" />
+                    <outputColumn
+                      refId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Error Output].Columns[ProcedureCodeDescription]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      lineageId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Error Output].Columns[ProcedureCodeDescription]"
+                      name="ProcedureCodeDescription" />
+                    <outputColumn
+                      refId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Error Output].Columns[EMPLOYEE_FLAG]"
+                      codePage="1252"
+                      dataType="str"
+                      length="13"
+                      lineageId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Error Output].Columns[EMPLOYEE_FLAG]"
+                      name="EMPLOYEE_FLAG" />
+                    <outputColumn
+                      refId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Error Output].Columns[Attributed_Provider]"
+                      codePage="1252"
+                      dataType="str"
+                      length="101"
+                      lineageId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Error Output].Columns[Attributed_Provider]"
+                      name="Attributed_Provider" />
+                    <outputColumn
+                      refId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Error Output].Columns[Attributed_Provider_Specialty]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      lineageId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Error Output].Columns[Attributed_Provider_Specialty]"
+                      name="Attributed_Provider_Specialty" />
+                    <outputColumn
+                      refId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Error Output].Columns[Attributed_Provider_Practice_Group]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      lineageId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Error Output].Columns[Attributed_Provider_Practice_Group]"
+                      name="Attributed_Provider_Practice_Group" />
+                    <outputColumn
+                      refId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Error Output].Columns[Billing_Provider_Description]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      lineageId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Error Output].Columns[Billing_Provider_Description]"
+                      name="Billing_Provider_Description" />
+                    <outputColumn
+                      refId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Error Output].Columns[Billing_Provider_NPI]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Error Output].Columns[Billing_Provider_NPI]"
+                      name="Billing_Provider_NPI" />
+                    <outputColumn
+                      refId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Error Output].Columns[IN_OUT_Network]"
+                      codePage="1252"
+                      dataType="str"
+                      length="14"
+                      lineageId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Error Output].Columns[IN_OUT_Network]"
+                      name="IN_OUT_Network" />
+                    <outputColumn
+                      refId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data into Details sheet\Data Conversion"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="Data Conversion"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Data into Details sheet\Data Conversion.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data into Details sheet\Data Conversion.Inputs[Data Conversion Input].Columns[EMPLOYEE_FLAG]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="13"
+                      cachedName="EMPLOYEE_FLAG"
+                      lineageId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].Columns[EMPLOYEE_FLAG]" />
+                    <inputColumn
+                      refId="Package\Data into Details sheet\Data Conversion.Inputs[Data Conversion Input].Columns[Attributed_Provider]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="101"
+                      cachedName="Attributed_Provider"
+                      lineageId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].Columns[Attributed_Provider]" />
+                    <inputColumn
+                      refId="Package\Data into Details sheet\Data Conversion.Inputs[Data Conversion Input].Columns[Attributed_Provider_Specialty]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="Attributed_Provider_Specialty"
+                      lineageId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].Columns[Attributed_Provider_Specialty]" />
+                    <inputColumn
+                      refId="Package\Data into Details sheet\Data Conversion.Inputs[Data Conversion Input].Columns[Attributed_Provider_Practice_Group]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="Attributed_Provider_Practice_Group"
+                      lineageId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].Columns[Attributed_Provider_Practice_Group]" />
+                    <inputColumn
+                      refId="Package\Data into Details sheet\Data Conversion.Inputs[Data Conversion Input].Columns[IN_OUT_Network]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="14"
+                      cachedName="IN_OUT_Network"
+                      lineageId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].Columns[IN_OUT_Network]" />
+                    <inputColumn
+                      refId="Package\Data into Details sheet\Data Conversion.Inputs[Data Conversion Input].Columns[Facility]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="250"
+                      cachedName="Facility"
+                      lineageId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].Columns[Facility]" />
+                    <inputColumn
+                      refId="Package\Data into Details sheet\Data Conversion.Inputs[Data Conversion Input].Columns[NPI]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="NPI"
+                      lineageId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].Columns[NPI]" />
+                    <inputColumn
+                      refId="Package\Data into Details sheet\Data Conversion.Inputs[Data Conversion Input].Columns[PlaceOfServiceCodeDescription]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="PlaceOfServiceCodeDescription"
+                      lineageId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].Columns[PlaceOfServiceCodeDescription]" />
+                    <inputColumn
+                      refId="Package\Data into Details sheet\Data Conversion.Inputs[Data Conversion Input].Columns[Procedure_Code]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="Procedure_Code"
+                      lineageId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].Columns[Procedure_Code]" />
+                    <inputColumn
+                      refId="Package\Data into Details sheet\Data Conversion.Inputs[Data Conversion Input].Columns[ProcedureCodeDescription]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="ProcedureCodeDescription"
+                      lineageId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].Columns[ProcedureCodeDescription]" />
+                    <inputColumn
+                      refId="Package\Data into Details sheet\Data Conversion.Inputs[Data Conversion Input].Columns[Billing_Provider_Description]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="Billing_Provider_Description"
+                      lineageId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].Columns[Billing_Provider_Description]" />
+                    <inputColumn
+                      refId="Package\Data into Details sheet\Data Conversion.Inputs[Data Conversion Input].Columns[Billing_Provider_NPI]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Billing_Provider_NPI"
+                      lineageId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].Columns[Billing_Provider_NPI]" />
+                    <inputColumn
+                      refId="Package\Data into Details sheet\Data Conversion.Inputs[Data Conversion Input].Columns[OutpatientSurgery_DATE]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="OutpatientSurgery_DATE"
+                      lineageId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].Columns[OutpatientSurgery_DATE]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data into Details sheet\Data Conversion.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\Data into Details sheet\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data into Details sheet\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of EMPLOYEE_FLAG]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="13"
+                      lineageId="Package\Data into Details sheet\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of EMPLOYEE_FLAG]"
+                      name="Copy of EMPLOYEE_FLAG"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].Columns[EMPLOYEE_FLAG]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data into Details sheet\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Attributed_Provider]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="101"
+                      lineageId="Package\Data into Details sheet\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Attributed_Provider]"
+                      name="Copy of Attributed_Provider"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].Columns[Attributed_Provider]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data into Details sheet\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Attributed_Provider_Specialty]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="100"
+                      lineageId="Package\Data into Details sheet\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Attributed_Provider_Specialty]"
+                      name="Copy of Attributed_Provider_Specialty"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].Columns[Attributed_Provider_Specialty]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data into Details sheet\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Attributed_Provider_Practice_Group]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="100"
+                      lineageId="Package\Data into Details sheet\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Attributed_Provider_Practice_Group]"
+                      name="Copy of Attributed_Provider_Practice_Group"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].Columns[Attributed_Provider_Practice_Group]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data into Details sheet\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of IN_OUT_Network]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="14"
+                      lineageId="Package\Data into Details sheet\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of IN_OUT_Network]"
+                      name="Copy of IN_OUT_Network"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].Columns[IN_OUT_Network]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data into Details sheet\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Facility]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="250"
+                      lineageId="Package\Data into Details sheet\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Facility]"
+                      name="Copy of Facility"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].Columns[Facility]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data into Details sheet\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of NPI]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="50"
+                      lineageId="Package\Data into Details sheet\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of NPI]"
+                      name="Copy of NPI"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].Columns[NPI]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data into Details sheet\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of PlaceOfServiceCodeDescription]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="255"
+                      lineageId="Package\Data into Details sheet\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of PlaceOfServiceCodeDescription]"
+                      name="Copy of PlaceOfServiceCodeDescription"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].Columns[PlaceOfServiceCodeDescription]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data into Details sheet\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Procedure_Code]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="10"
+                      lineageId="Package\Data into Details sheet\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Procedure_Code]"
+                      name="Copy of Procedure_Code"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].Columns[Procedure_Code]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data into Details sheet\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of ProcedureCodeDescription]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="255"
+                      lineageId="Package\Data into Details sheet\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of ProcedureCodeDescription]"
+                      name="Copy of ProcedureCodeDescription"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].Columns[ProcedureCodeDescription]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data into Details sheet\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Billing_Provider_Description]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="255"
+                      lineageId="Package\Data into Details sheet\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Billing_Provider_Description]"
+                      name="Copy of Billing_Provider_Description"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].Columns[Billing_Provider_Description]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data into Details sheet\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Billing_Provider_NPI]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="50"
+                      lineageId="Package\Data into Details sheet\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Billing_Provider_NPI]"
+                      name="Copy of Billing_Provider_NPI"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].Columns[Billing_Provider_NPI]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data into Details sheet\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of OutpatientSurgery_DATE]"
+                      dataType="date"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Data into Details sheet\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of OutpatientSurgery_DATE]"
+                      name="Copy of OutpatientSurgery_DATE"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].Columns[OutpatientSurgery_DATE]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Data into Details sheet\Data Conversion.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\Data into Details sheet\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data into Details sheet\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data into Details sheet\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data into Details sheet\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data into Details sheet\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data into Details sheet\Excel Destination"
+              componentClassID="Microsoft.ExcelDestination"
+              contactInfo="Excel Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Excel Destination"
+              name="Excel Destination"
+              usesDispositions="true"
+              validateExternalMetadata="False">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">Details$</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data into Details sheet\Excel Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Excel Connection Manager]"
+                  connectionManagerRefId="Package.ConnectionManagers[Excel Connection Manager]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data into Details sheet\Excel Destination.Inputs[Excel Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Excel Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data into Details sheet\Excel Destination.Inputs[Excel Destination Input].Columns[PATIENTID]"
+                      cachedDataType="i4"
+                      cachedName="PATIENTID"
+                      externalMetadataColumnId="Package\Data into Details sheet\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[PATIENTID]"
+                      lineageId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Output].Columns[PATIENTID]" />
+                    <inputColumn
+                      refId="Package\Data into Details sheet\Excel Destination.Inputs[Excel Destination Input].Columns[Copy of NPI]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Copy of NPI"
+                      externalMetadataColumnId="Package\Data into Details sheet\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[NPI]"
+                      lineageId="Package\Data into Details sheet\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of NPI]" />
+                    <inputColumn
+                      refId="Package\Data into Details sheet\Excel Destination.Inputs[Excel Destination Input].Columns[Copy of Facility]"
+                      cachedDataType="wstr"
+                      cachedLength="250"
+                      cachedName="Copy of Facility"
+                      externalMetadataColumnId="Package\Data into Details sheet\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Facility]"
+                      lineageId="Package\Data into Details sheet\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Facility]" />
+                    <inputColumn
+                      refId="Package\Data into Details sheet\Excel Destination.Inputs[Excel Destination Input].Columns[Copy of PlaceOfServiceCodeDescription]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Copy of PlaceOfServiceCodeDescription"
+                      externalMetadataColumnId="Package\Data into Details sheet\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[PlaceOfServiceCodeDescription]"
+                      lineageId="Package\Data into Details sheet\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of PlaceOfServiceCodeDescription]" />
+                    <inputColumn
+                      refId="Package\Data into Details sheet\Excel Destination.Inputs[Excel Destination Input].Columns[Copy of OutpatientSurgery_DATE]"
+                      cachedDataType="date"
+                      cachedName="Copy of OutpatientSurgery_DATE"
+                      externalMetadataColumnId="Package\Data into Details sheet\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[OutpatientSurgery_DATE]"
+                      lineageId="Package\Data into Details sheet\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of OutpatientSurgery_DATE]" />
+                    <inputColumn
+                      refId="Package\Data into Details sheet\Excel Destination.Inputs[Excel Destination Input].Columns[Copy of Procedure_Code]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="Copy of Procedure_Code"
+                      externalMetadataColumnId="Package\Data into Details sheet\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[ProcedureCode]"
+                      lineageId="Package\Data into Details sheet\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Procedure_Code]" />
+                    <inputColumn
+                      refId="Package\Data into Details sheet\Excel Destination.Inputs[Excel Destination Input].Columns[Copy of ProcedureCodeDescription]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Copy of ProcedureCodeDescription"
+                      externalMetadataColumnId="Package\Data into Details sheet\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[ProcedureCodeDescription]"
+                      lineageId="Package\Data into Details sheet\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of ProcedureCodeDescription]" />
+                    <inputColumn
+                      refId="Package\Data into Details sheet\Excel Destination.Inputs[Excel Destination Input].Columns[Copy of EMPLOYEE_FLAG]"
+                      cachedDataType="wstr"
+                      cachedLength="13"
+                      cachedName="Copy of EMPLOYEE_FLAG"
+                      externalMetadataColumnId="Package\Data into Details sheet\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Attributed_Provider_Employee_Flag]"
+                      lineageId="Package\Data into Details sheet\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of EMPLOYEE_FLAG]" />
+                    <inputColumn
+                      refId="Package\Data into Details sheet\Excel Destination.Inputs[Excel Destination Input].Columns[Copy of Attributed_Provider]"
+                      cachedDataType="wstr"
+                      cachedLength="101"
+                      cachedName="Copy of Attributed_Provider"
+                      externalMetadataColumnId="Package\Data into Details sheet\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Attributed_Provider]"
+                      lineageId="Package\Data into Details sheet\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Attributed_Provider]" />
+                    <inputColumn
+                      refId="Package\Data into Details sheet\Excel Destination.Inputs[Excel Destination Input].Columns[Copy of Attributed_Provider_Specialty]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="Copy of Attributed_Provider_Specialty"
+                      externalMetadataColumnId="Package\Data into Details sheet\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Attributed_Provider_Specialty]"
+                      lineageId="Package\Data into Details sheet\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Attributed_Provider_Specialty]" />
+                    <inputColumn
+                      refId="Package\Data into Details sheet\Excel Destination.Inputs[Excel Destination Input].Columns[Copy of Attributed_Provider_Practice_Group]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="Copy of Attributed_Provider_Practice_Group"
+                      externalMetadataColumnId="Package\Data into Details sheet\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Attributed_Provider_Practice_Group]"
+                      lineageId="Package\Data into Details sheet\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Attributed_Provider_Practice_Group]" />
+                    <inputColumn
+                      refId="Package\Data into Details sheet\Excel Destination.Inputs[Excel Destination Input].Columns[Copy of Billing_Provider_Description]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Copy of Billing_Provider_Description"
+                      externalMetadataColumnId="Package\Data into Details sheet\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Bill_Prov_Desc]"
+                      lineageId="Package\Data into Details sheet\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Billing_Provider_Description]" />
+                    <inputColumn
+                      refId="Package\Data into Details sheet\Excel Destination.Inputs[Excel Destination Input].Columns[Copy of Billing_Provider_NPI]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Copy of Billing_Provider_NPI"
+                      externalMetadataColumnId="Package\Data into Details sheet\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Bill_Prov_NPI]"
+                      lineageId="Package\Data into Details sheet\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Billing_Provider_NPI]" />
+                    <inputColumn
+                      refId="Package\Data into Details sheet\Excel Destination.Inputs[Excel Destination Input].Columns[Copy of IN_OUT_Network]"
+                      cachedDataType="wstr"
+                      cachedLength="14"
+                      cachedName="Copy of IN_OUT_Network"
+                      externalMetadataColumnId="Package\Data into Details sheet\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[IN_OUT_Network]"
+                      lineageId="Package\Data into Details sheet\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of IN_OUT_Network]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data into Details sheet\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[PATIENTID]"
+                      dataType="wstr"
+                      length="255"
+                      name="PATIENTID" />
+                    <externalMetadataColumn
+                      refId="Package\Data into Details sheet\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[NPI]"
+                      dataType="wstr"
+                      length="255"
+                      name="NPI" />
+                    <externalMetadataColumn
+                      refId="Package\Data into Details sheet\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Facility]"
+                      dataType="wstr"
+                      length="255"
+                      name="Facility" />
+                    <externalMetadataColumn
+                      refId="Package\Data into Details sheet\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[PlaceOfServiceCodeDescription]"
+                      dataType="wstr"
+                      length="255"
+                      name="PlaceOfServiceCodeDescription" />
+                    <externalMetadataColumn
+                      refId="Package\Data into Details sheet\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[OutpatientSurgery_DATE]"
+                      dataType="wstr"
+                      length="255"
+                      name="OutpatientSurgery_DATE" />
+                    <externalMetadataColumn
+                      refId="Package\Data into Details sheet\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[ProcedureCode]"
+                      dataType="wstr"
+                      length="255"
+                      name="ProcedureCode" />
+                    <externalMetadataColumn
+                      refId="Package\Data into Details sheet\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[ProcedureCodeDescription]"
+                      dataType="wstr"
+                      length="255"
+                      name="ProcedureCodeDescription" />
+                    <externalMetadataColumn
+                      refId="Package\Data into Details sheet\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Attributed_Provider_Employee_Flag]"
+                      dataType="wstr"
+                      length="255"
+                      name="Attributed_Provider_Employee_Flag" />
+                    <externalMetadataColumn
+                      refId="Package\Data into Details sheet\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Attributed_Provider]"
+                      dataType="wstr"
+                      length="255"
+                      name="Attributed_Provider" />
+                    <externalMetadataColumn
+                      refId="Package\Data into Details sheet\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Attributed_Provider_Specialty]"
+                      dataType="wstr"
+                      length="255"
+                      name="Attributed_Provider_Specialty" />
+                    <externalMetadataColumn
+                      refId="Package\Data into Details sheet\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Attributed_Provider_Practice_Group]"
+                      dataType="wstr"
+                      length="255"
+                      name="Attributed_Provider_Practice_Group" />
+                    <externalMetadataColumn
+                      refId="Package\Data into Details sheet\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Bill_Prov_Desc]"
+                      dataType="wstr"
+                      length="255"
+                      name="Bill_Prov_Desc" />
+                    <externalMetadataColumn
+                      refId="Package\Data into Details sheet\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Bill_Prov_NPI]"
+                      dataType="wstr"
+                      length="255"
+                      name="Bill_Prov_NPI" />
+                    <externalMetadataColumn
+                      refId="Package\Data into Details sheet\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[IN_OUT_Network]"
+                      dataType="wstr"
+                      length="255"
+                      name="IN_OUT_Network" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data into Details sheet\Excel Destination.Outputs[Excel Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Excel Destination Error Output"
+                  synchronousInputId="Package\Data into Details sheet\Excel Destination.Inputs[Excel Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data into Details sheet\Excel Destination.Outputs[Excel Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data into Details sheet\Excel Destination.Outputs[Excel Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data into Details sheet\Excel Destination.Outputs[Excel Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data into Details sheet\Excel Destination.Outputs[Excel Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Data into Details sheet.Paths[Data Conversion Output]"
+              endId="Package\Data into Details sheet\Excel Destination.Inputs[Excel Destination Input]"
+              name="Data Conversion Output"
+              startId="Package\Data into Details sheet\Data Conversion.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\Data into Details sheet.Paths[OLE DB Source Output]"
+              endId="Package\Data into Details sheet\Data Conversion.Inputs[Data Conversion Input]"
+              name="OLE DB Source Output"
+              startId="Package\Data into Details sheet\Data.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Data into Details Unique Patients Sheet"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{304d9966-c2bb-483f-b16d-a652044eb0da}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data into Details Unique Patients Sheet"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Data into Details Unique Patients Sheet\Data"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Data"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select DISTINCT PATIENTID 
+    ,OutpatientSurgery_DATE 
+	,IN_OUT_Network
+from RRHLeakage_OutpatientSurgery</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data into Details Unique Patients Sheet\Data.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[GRIPA-DB-6.Reporting]"
+                  connectionManagerRefId="Package.ConnectionManagers[GRIPA-DB-6.Reporting]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Data into Details Unique Patients Sheet\Data.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data into Details Unique Patients Sheet\Data.Outputs[OLE DB Source Output].Columns[PATIENTID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data into Details Unique Patients Sheet\Data.Outputs[OLE DB Source Output].ExternalColumns[PATIENTID]"
+                      lineageId="Package\Data into Details Unique Patients Sheet\Data.Outputs[OLE DB Source Output].Columns[PATIENTID]"
+                      name="PATIENTID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data into Details Unique Patients Sheet\Data.Outputs[OLE DB Source Output].Columns[IN_OUT_Network]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data into Details Unique Patients Sheet\Data.Outputs[OLE DB Source Output].ExternalColumns[IN_OUT_Network]"
+                      length="14"
+                      lineageId="Package\Data into Details Unique Patients Sheet\Data.Outputs[OLE DB Source Output].Columns[IN_OUT_Network]"
+                      name="IN_OUT_Network"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data into Details Unique Patients Sheet\Data.Outputs[OLE DB Source Output].Columns[OutpatientSurgery_DATE]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data into Details Unique Patients Sheet\Data.Outputs[OLE DB Source Output].ExternalColumns[OutpatientSurgery_DATE]"
+                      lineageId="Package\Data into Details Unique Patients Sheet\Data.Outputs[OLE DB Source Output].Columns[OutpatientSurgery_DATE]"
+                      name="OutpatientSurgery_DATE"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data into Details Unique Patients Sheet\Data.Outputs[OLE DB Source Output].ExternalColumns[PATIENTID]"
+                      dataType="i4"
+                      name="PATIENTID" />
+                    <externalMetadataColumn
+                      refId="Package\Data into Details Unique Patients Sheet\Data.Outputs[OLE DB Source Output].ExternalColumns[IN_OUT_Network]"
+                      codePage="1252"
+                      dataType="str"
+                      length="14"
+                      name="IN_OUT_Network" />
+                    <externalMetadataColumn
+                      refId="Package\Data into Details Unique Patients Sheet\Data.Outputs[OLE DB Source Output].ExternalColumns[OutpatientSurgery_DATE]"
+                      dataType="dbTimeStamp"
+                      name="OutpatientSurgery_DATE" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Data into Details Unique Patients Sheet\Data.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data into Details Unique Patients Sheet\Data.Outputs[OLE DB Source Error Output].Columns[PATIENTID]"
+                      dataType="i4"
+                      lineageId="Package\Data into Details Unique Patients Sheet\Data.Outputs[OLE DB Source Error Output].Columns[PATIENTID]"
+                      name="PATIENTID" />
+                    <outputColumn
+                      refId="Package\Data into Details Unique Patients Sheet\Data.Outputs[OLE DB Source Error Output].Columns[OutpatientSurgery_DATE]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Data into Details Unique Patients Sheet\Data.Outputs[OLE DB Source Error Output].Columns[OutpatientSurgery_DATE]"
+                      name="OutpatientSurgery_DATE" />
+                    <outputColumn
+                      refId="Package\Data into Details Unique Patients Sheet\Data.Outputs[OLE DB Source Error Output].Columns[IN_OUT_Network]"
+                      codePage="1252"
+                      dataType="str"
+                      length="14"
+                      lineageId="Package\Data into Details Unique Patients Sheet\Data.Outputs[OLE DB Source Error Output].Columns[IN_OUT_Network]"
+                      name="IN_OUT_Network" />
+                    <outputColumn
+                      refId="Package\Data into Details Unique Patients Sheet\Data.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data into Details Unique Patients Sheet\Data.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data into Details Unique Patients Sheet\Data.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data into Details Unique Patients Sheet\Data.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data into Details Unique Patients Sheet\Data Conversion"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="Data Conversion"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Data into Details Unique Patients Sheet\Data Conversion.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data into Details Unique Patients Sheet\Data Conversion.Inputs[Data Conversion Input].Columns[IN_OUT_Network]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="14"
+                      cachedName="IN_OUT_Network"
+                      lineageId="Package\Data into Details Unique Patients Sheet\Data.Outputs[OLE DB Source Output].Columns[IN_OUT_Network]" />
+                    <inputColumn
+                      refId="Package\Data into Details Unique Patients Sheet\Data Conversion.Inputs[Data Conversion Input].Columns[OutpatientSurgery_DATE]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="OutpatientSurgery_DATE"
+                      lineageId="Package\Data into Details Unique Patients Sheet\Data.Outputs[OLE DB Source Output].Columns[OutpatientSurgery_DATE]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data into Details Unique Patients Sheet\Data Conversion.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\Data into Details Unique Patients Sheet\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data into Details Unique Patients Sheet\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of IN_OUT_Network]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="14"
+                      lineageId="Package\Data into Details Unique Patients Sheet\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of IN_OUT_Network]"
+                      name="Copy of IN_OUT_Network"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data into Details Unique Patients Sheet\Data.Outputs[OLE DB Source Output].Columns[IN_OUT_Network]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data into Details Unique Patients Sheet\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of OutpatientSurgery_DATE]"
+                      dataType="date"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Data into Details Unique Patients Sheet\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of OutpatientSurgery_DATE]"
+                      name="Copy of OutpatientSurgery_DATE"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data into Details Unique Patients Sheet\Data.Outputs[OLE DB Source Output].Columns[OutpatientSurgery_DATE]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Data into Details Unique Patients Sheet\Data Conversion.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\Data into Details Unique Patients Sheet\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data into Details Unique Patients Sheet\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data into Details Unique Patients Sheet\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data into Details Unique Patients Sheet\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data into Details Unique Patients Sheet\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data into Details Unique Patients Sheet\Excel Destination"
+              componentClassID="Microsoft.ExcelDestination"
+              contactInfo="Excel Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Excel Destination"
+              name="Excel Destination"
+              usesDispositions="true"
+              validateExternalMetadata="False">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">Details_UniquePat_DOS$</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data into Details Unique Patients Sheet\Excel Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Excel Connection Manager]"
+                  connectionManagerRefId="Package.ConnectionManagers[Excel Connection Manager]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data into Details Unique Patients Sheet\Excel Destination.Inputs[Excel Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Excel Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data into Details Unique Patients Sheet\Excel Destination.Inputs[Excel Destination Input].Columns[PATIENTID]"
+                      cachedDataType="i4"
+                      cachedName="PATIENTID"
+                      externalMetadataColumnId="Package\Data into Details Unique Patients Sheet\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[PATIENTID]"
+                      lineageId="Package\Data into Details Unique Patients Sheet\Data.Outputs[OLE DB Source Output].Columns[PATIENTID]" />
+                    <inputColumn
+                      refId="Package\Data into Details Unique Patients Sheet\Excel Destination.Inputs[Excel Destination Input].Columns[Copy of OutpatientSurgery_DATE]"
+                      cachedDataType="date"
+                      cachedName="Copy of OutpatientSurgery_DATE"
+                      externalMetadataColumnId="Package\Data into Details Unique Patients Sheet\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[OutpatientSurgery_DATE]"
+                      lineageId="Package\Data into Details Unique Patients Sheet\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of OutpatientSurgery_DATE]" />
+                    <inputColumn
+                      refId="Package\Data into Details Unique Patients Sheet\Excel Destination.Inputs[Excel Destination Input].Columns[Copy of IN_OUT_Network]"
+                      cachedDataType="wstr"
+                      cachedLength="14"
+                      cachedName="Copy of IN_OUT_Network"
+                      externalMetadataColumnId="Package\Data into Details Unique Patients Sheet\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[IN_OUT_Network]"
+                      lineageId="Package\Data into Details Unique Patients Sheet\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of IN_OUT_Network]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data into Details Unique Patients Sheet\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[PATIENTID]"
+                      dataType="wstr"
+                      length="255"
+                      name="PATIENTID" />
+                    <externalMetadataColumn
+                      refId="Package\Data into Details Unique Patients Sheet\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[OutpatientSurgery_DATE]"
+                      dataType="wstr"
+                      length="255"
+                      name="OutpatientSurgery_DATE" />
+                    <externalMetadataColumn
+                      refId="Package\Data into Details Unique Patients Sheet\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[IN_OUT_Network]"
+                      dataType="wstr"
+                      length="255"
+                      name="IN_OUT_Network" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data into Details Unique Patients Sheet\Excel Destination.Outputs[Excel Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Excel Destination Error Output"
+                  synchronousInputId="Package\Data into Details Unique Patients Sheet\Excel Destination.Inputs[Excel Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data into Details Unique Patients Sheet\Excel Destination.Outputs[Excel Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data into Details Unique Patients Sheet\Excel Destination.Outputs[Excel Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data into Details Unique Patients Sheet\Excel Destination.Outputs[Excel Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data into Details Unique Patients Sheet\Excel Destination.Outputs[Excel Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Data into Details Unique Patients Sheet.Paths[Data Conversion Output]"
+              endId="Package\Data into Details Unique Patients Sheet\Excel Destination.Inputs[Excel Destination Input]"
+              name="Data Conversion Output"
+              startId="Package\Data into Details Unique Patients Sheet\Data Conversion.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\Data into Details Unique Patients Sheet.Paths[OLE DB Source Output]"
+              endId="Package\Data into Details Unique Patients Sheet\Data Conversion.Inputs[Data Conversion Input]"
+              name="OLE DB Source Output"
+              startId="Package\Data into Details Unique Patients Sheet\Data.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Execute Stored Procedure"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{0C0636C0-3C4D-47C7-89BD-FB98A6ACE1BE}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute Stored Procedure"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{DF0A83F4-9071-4A5B-B95F-C0CF40842962}"
+          SQLTask:SqlStatementSource="EXEC [dbo].[EmployedPCP_Outpatient_Procedures]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Rename Copy File"
+      DTS:CreationName="Microsoft.FileSystemTask"
+      DTS:Description="File System Task"
+      DTS:DTSID="{B85E7B03-61D5-4D04-8EC3-0C6203BA2D0E}"
+      DTS:ExecutableType="Microsoft.FileSystemTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Rename Copy File"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <FileSystemData
+          TaskOperationType="RenameFile"
+          TaskOverwriteDestFile="True"
+          TaskSourcePath="User::varBlankTemplateFileCopy"
+          TaskIsSourceVariable="True"
+          TaskDestinationPath="User::varBlankTemplateFile"
+          TaskIsDestinationVariable="True" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Rename Export File"
+      DTS:CreationName="Microsoft.FileSystemTask"
+      DTS:Description="File System Task"
+      DTS:DTSID="{D04F0210-039F-4C11-AC4E-B652A4148619}"
+      DTS:ExecutableType="Microsoft.FileSystemTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Rename Export File"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <FileSystemData
+          TaskOperationType="RenameFile"
+          TaskOverwriteDestFile="True"
+          TaskSourcePath="User::varBlankTemplateFile"
+          TaskIsSourceVariable="True"
+          TaskDestinationPath="User::varReportFileNameFullPath"
+          TaskIsDestinationVariable="True" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Send Mail Task"
+      DTS:CreationName="Microsoft.SendMailTask"
+      DTS:Description="Send Mail Task"
+      DTS:Disabled="True"
+      DTS:DTSID="{92319A90-1A55-41E4-BE63-CE7C3380ECA5}"
+      DTS:ExecutableType="Microsoft.SendMailTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Send Mail Task"
+      DTS:ThreadHint="1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SendMailTask:SendMailTaskData
+          SendMailTask:SMTPServer="{BE27020D-2BEA-4958-AC19-E64DA79B7D9B}"
+          SendMailTask:From="SQLGRIPA10@rochesterregional.org"
+          SendMailTask:To="GRIPADBA@rochesterregional.org"
+          SendMailTask:Subject="Employed PCP Specialty Visit Usage Report"
+          SendMailTask:MessageSource="A new report is ready to be reviewed.  Create a ticket for any updates that need to be made.  Email Kelly Taddeo for latest export from MSOW" xmlns:SendMailTask="www.microsoft.com/sqlserver/dts/tasks/sendmailtask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Send Mail Task 1"
+      DTS:CreationName="Microsoft.SendMailTask"
+      DTS:Description="Send Mail Task"
+      DTS:Disabled="True"
+      DTS:DTSID="{3A136572-E792-435D-86F4-BEA6FD1774B6}"
+      DTS:ExecutableType="Microsoft.SendMailTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Send Mail Task 1"
+      DTS:ThreadHint="2">
+      <DTS:Variables />
+      <DTS:PropertyExpression
+        DTS:Name="MessageSource">"The latest report can be found here: " +    @[User::varReportFileNameFullPath]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <SendMailTask:SendMailTaskData
+          SendMailTask:SMTPServer="{BE27020D-2BEA-4958-AC19-E64DA79B7D9B}"
+          SendMailTask:From="SQLGRIPA10@rochesterregional.org"
+          SendMailTask:To="Kelly.Taddeo@rochesterregional.org;Jennifer.Hajecki@rochesterregional.org"
+          SendMailTask:CC="GRIPADBA@rochesterregional.org"
+          SendMailTask:Subject="Employed PCP Specialty Visit Usage Report"
+          SendMailTask:MessageSource="The latest report can be found here: \\humboldt73.viahealth.org\ManagedCare\Shared\Care Management\Information Requests\RRH Leakage Report\Outpatient Surgery\Employed_PCP_Outpatient Procedures__Paid_Claims.xlsx" xmlns:SendMailTask="www.microsoft.com/sqlserver/dts/tasks/sendmailtask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{11E8F55C-F08C-45FA-AA6C-1B363BFD2F16}"
+      DTS:From="Package\Execute Stored Procedure"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Data into Details sheet" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{F03AB003-531A-4B13-961A-607CC6BDEB6C}"
+      DTS:From="Package\Create ##Facilities table"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Create Claims Data Variable YRMO" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{9623CFF2-7F5B-4772-BED4-0F90EE9C53D4}"
+      DTS:From="Package\Copy Export File"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Execute Stored Procedure" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{1FD4D57C-1ACD-4524-B3BE-9BFAFF50E94B}"
+      DTS:From="Package\Data into Details sheet"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Data into Details Unique Patients Sheet" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{7BF0A252-B4FD-49D2-A4C6-65D1B3D9C843}"
+      DTS:From="Package\Rename Export File"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\Rename Copy File" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
+      DTS:CreationName=""
+      DTS:DTSID="{88CDC60D-2EDE-4CF3-B843-FD8FDB0EE9B2}"
+      DTS:From="Package\Data into Details Unique Patients Sheet"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 5"
+      DTS:To="Package\Rename Export File" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 7]"
+      DTS:CreationName=""
+      DTS:DTSID="{144BA213-F323-4DB0-952E-6F3B32A0476C}"
+      DTS:From="Package\Create Claims Data Variable YRMO"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 7"
+      DTS:To="Package\Copy Export File" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="155,42"
+          Id="Package\Copy Export File"
+          TopLeft="420,258" />
+        <NodeLayout
+          Size="195,42"
+          Id="Package\Create ##Facilities table"
+          TopLeft="354,82" />
+        <NodeLayout
+          Size="242,42"
+          Id="Package\Create Claims Data Variable YRMO"
+          TopLeft="373,166" />
+        <NodeLayout
+          Size="186,42"
+          Id="Package\Data into Details sheet"
+          TopLeft="400,416" />
+        <NodeLayout
+          Size="264,42"
+          Id="Package\Data into Details Unique Patients Sheet"
+          TopLeft="402,508" />
+        <NodeLayout
+          Size="201,42"
+          Id="Package\Execute Stored Procedure"
+          TopLeft="392,341" />
+        <NodeLayout
+          Size="163,42"
+          Id="Package\Rename Copy File"
+          TopLeft="409,709" />
+        <NodeLayout
+          Size="170,42"
+          Id="Package\Rename Export File"
+          TopLeft="410,617" />
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Send Mail Task"
+          TopLeft="390,807" />
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Send Mail Task 1"
+          TopLeft="600,799" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="492.75,383">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,33"
+              Start="0,0"
+              End="0,25.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="451.5,124">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="42.5,42"
+              Start="0,0"
+              End="42.5,34.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,17"
+                    Point2="0,21"
+                    Point3="4,21" />
+                  <mssgle:LineSegment
+                    End="38.5,21" />
+                  <mssgle:CubicBezierSegment
+                    Point1="38.5,21"
+                    Point2="42.5,21"
+                    Point3="42.5,25" />
+                  <mssgle:LineSegment
+                    End="42.5,34.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="495,300">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,41"
+              Start="0,0"
+              End="0,33.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,33.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="493,458">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="41,50"
+              Start="0,0"
+              End="41,42.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,21"
+                    Point2="0,25"
+                    Point3="4,25" />
+                  <mssgle:LineSegment
+                    End="37,25" />
+                  <mssgle:CubicBezierSegment
+                    Point1="37,25"
+                    Point2="41,25"
+                    Point3="41,29" />
+                  <mssgle:LineSegment
+                    End="41,42.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="492.75,659">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,50"
+              Start="0,0"
+              End="0,42.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,42.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="534,550">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-39,67"
+              Start="0,0"
+              End="-39,59.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,29.5"
+                    Point2="0,33.5"
+                    Point3="-4,33.5" />
+                  <mssgle:LineSegment
+                    End="-35,33.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-35,33.5"
+                    Point2="-39,33.5"
+                    Point3="-39,37.5" />
+                  <mssgle:LineSegment
+                    End="-39,59.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 7]"
+          TopLeft="495.75,208">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,50"
+              Start="0,0"
+              End="0,42.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,42.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <AnnotationLayout
+          Text="08/13/2025: Copied SSIS package from RRHLeakage_Radiology(1).dtsx"
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="401,40"
+          Id="eeb64f7c-f77c-4e1b-a323-02556f958923"
+          TopLeft="710.880953649325,83.190476079782" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Data into Details sheet">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="159,42"
+          Id="Package\Data into Details sheet\Excel Destination"
+          TopLeft="434,379" />
+        <NodeLayout
+          Size="156,42"
+          Id="Package\Data into Details sheet\Data Conversion"
+          TopLeft="438,198" />
+        <NodeLayout
+          Size="101,42"
+          Id="Package\Data into Details sheet\Data"
+          TopLeft="440,111" />
+        <EdgeLayout
+          Id="Package\Data into Details sheet.Paths[Data Conversion Output]"
+          TopLeft="514.75,240">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,139"
+              Start="0,0"
+              End="0,131.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,131.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data into Details sheet.Paths[OLE DB Source Output]"
+          TopLeft="490.5,153">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="25.5,45"
+              Start="0,0"
+              End="25.5,37.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,18.5"
+                    Point2="0,22.5"
+                    Point3="4,22.5" />
+                  <mssgle:LineSegment
+                    End="21.5,22.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="21.5,22.5"
+                    Point2="25.5,22.5"
+                    Point3="25.5,26.5" />
+                  <mssgle:LineSegment
+                    End="25.5,37.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data into Details sheet\Excel Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data into Details sheet\Data">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Data into Details Unique Patients Sheet">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="156,42"
+          Id="Package\Data into Details Unique Patients Sheet\Data Conversion"
+          TopLeft="442,229" />
+        <NodeLayout
+          Size="101,42"
+          Id="Package\Data into Details Unique Patients Sheet\Data"
+          TopLeft="440,111" />
+        <NodeLayout
+          Size="159,42"
+          Id="Package\Data into Details Unique Patients Sheet\Excel Destination"
+          TopLeft="434,379" />
+        <EdgeLayout
+          Id="Package\Data into Details Unique Patients Sheet.Paths[OLE DB Source Output]"
+          TopLeft="490.5,153">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="29.5,76"
+              Start="0,0"
+              End="29.5,68.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,34" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,34"
+                    Point2="0,38"
+                    Point3="4,38" />
+                  <mssgle:LineSegment
+                    End="25.5,38" />
+                  <mssgle:CubicBezierSegment
+                    Point1="25.5,38"
+                    Point2="29.5,38"
+                    Point3="29.5,42" />
+                  <mssgle:LineSegment
+                    End="29.5,68.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data into Details Unique Patients Sheet.Paths[Data Conversion Output]"
+          TopLeft="516.75,271">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,108"
+              Start="0,0"
+              End="0,100.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,100.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data into Details Unique Patients Sheet\Data">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data into Details Unique Patients Sheet\Excel Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

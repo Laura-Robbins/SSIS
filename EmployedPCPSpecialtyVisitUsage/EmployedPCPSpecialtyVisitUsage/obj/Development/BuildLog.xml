@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<BuildLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ProjectInfo>
+    <Name>EmployedPCPSpecialtyVisitUsage</Name>
+    <LastWriteTime>2025-08-28T16:00:40.0148471Z</LastWriteTime>
+    <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+  </ProjectInfo>
+  <LastBuildInfos>
+    <ProjectBuildItemInfo>
+      <Name>EmployedPCPSpecialtyVisitUsage.dtsx</Name>
+      <LastWriteTime>2025-08-13T15:25:59.1197498Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>RRHLeakage_OfficeVisits.dtsx</Name>
+      <LastWriteTime>2025-08-13T15:26:11.1887514Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>RRHLeakage_ED_OBs.dtsx</Name>
+      <LastWriteTime>2025-08-13T15:26:05.4041823Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>RRHLeakage_Inpatient.dtsx</Name>
+      <LastWriteTime>2025-08-13T15:26:08.3303723Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>RRHLeakage_Radiology (1).dtsx</Name>
+      <LastWriteTime>2025-08-13T15:26:15.0969057Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>RRHLeakage_Bronchoscopy.dtsx</Name>
+      <LastWriteTime>2025-08-13T15:26:02.29983Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>RRHLeakage_OutpatientProcedures.dtsx</Name>
+      <LastWriteTime>2025-08-28T16:00:20.4578893Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+  </LastBuildInfos>
+</BuildLog>
